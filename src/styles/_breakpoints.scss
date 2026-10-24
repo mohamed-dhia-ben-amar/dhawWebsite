@@ -1,0 +1,5 @@
+// Shared breakpoints. Keep in sync with src/app/core/breakpoints.ts (media queries cannot read
+// custom properties, so these live in Sass).
+
+// Editor panes put the explorer beside the code from this width; below it, above.
+$editor-wide: 840px;
