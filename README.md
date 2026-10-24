@@ -4,7 +4,7 @@ Bilingual (English / French) portfolio of a full-stack software engineer, built 
 prerendered Angular site. The repository is part of the portfolio: it is meant to show clean
 Angular architecture, tests, CI and accessibility, not just the result.
 
-**Live:** https://dhaw-website.vercel.app (`/en/` and `/fr/`)
+**Live:** https://mohameddhia.dev (`/en/` and `/fr/`)
 
 ![Homepage on desktop](docs/screenshot.png)
 
@@ -75,10 +75,12 @@ Design decisions worth knowing:
 
 ## Quality
 
+PageSpeed Insights on production (Oct 2026): **mobile 98 / 100 / 100 / 100** and **desktop
+100 / 100 / 100 / 100** (performance / accessibility / best practices / SEO).
+
 - **Accessibility:** WCAG 2.2 AA target. axe scans run in e2e on every page (desktop and mobile,
   both locales, error and success states of the form). Skip link, landmarks, visible accent focus,
   keyboard-operable tabs, an error summary that takes focus, `prefers-reduced-motion` respected.
-  Lighthouse accessibility: 100.
 - **Responsive:** every page is checked from 320 px with no horizontal page scroll.
 - **Performance:** prerendered HTML, ~85 KB of compressed initial JavaScript, self-hosted fonts
   with metric-matched fallbacks (no layout shift on swap), no third-party scripts besides

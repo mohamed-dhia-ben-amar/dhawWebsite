@@ -71,7 +71,7 @@ describe('CaseStudy', () => {
     const meta = TestBed.inject(Meta);
     expect(meta.getTag('property="og:type"')?.content).toBe('article');
     expect(meta.getTag('property="og:image"')?.content).toBe(
-      'https://dhaw-website.vercel.app/en/og/nova.png',
+      'https://mohameddhia.dev/en/og/nova.png',
     );
     // Noindex while placeholders remain, so no canonical URL.
     expect(document.head.querySelector('link[rel="canonical"]')).toBeNull();

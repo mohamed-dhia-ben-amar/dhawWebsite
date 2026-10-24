@@ -19,7 +19,7 @@ describe('Seo', () => {
   afterEach(() => TestBed.inject(DOCUMENT).head.querySelector('link[rel="canonical"]')?.remove());
 
   it('builds absolute share image URLs per locale', () => {
-    expect(ogImageUrl('fr', 'nova')).toBe('https://dhaw-website.vercel.app/fr/og/nova.png');
+    expect(ogImageUrl('fr', 'nova')).toBe('https://mohameddhia.dev/fr/og/nova.png');
   });
 
   it('sets title, description, canonical, Open Graph and Twitter tags', () => {
@@ -36,26 +36,26 @@ describe('Seo', () => {
     expect(name('description')).toBe('D');
     expect(name('robots')).toBeUndefined();
     expect(head.querySelector('link[rel="canonical"]')?.getAttribute('href')).toBe(
-      'https://dhaw-website.vercel.app/en/work/nova',
+      'https://mohameddhia.dev/en/work/nova',
     );
     expect(prop('og:type')).toBe('article');
     expect(prop('og:site_name')).toBe('Mohamed Dhia Ben Amar');
     expect(prop('og:title')).toBe('T');
     expect(prop('og:description')).toBe('D');
-    expect(prop('og:url')).toBe('https://dhaw-website.vercel.app/en/work/nova');
+    expect(prop('og:url')).toBe('https://mohameddhia.dev/en/work/nova');
     expect(prop('og:locale')).toBe('en_US');
     expect(prop('og:locale:alternate')).toBe('fr_FR');
-    expect(prop('og:image')).toBe('https://dhaw-website.vercel.app/en/og/nova.png');
+    expect(prop('og:image')).toBe('https://mohameddhia.dev/en/og/nova.png');
     expect(prop('og:image:width')).toBe('1200');
     expect(prop('og:image:height')).toBe('630');
     expect(name('twitter:card')).toBe('summary_large_image');
-    expect(name('twitter:image')).toBe('https://dhaw-website.vercel.app/en/og/nova.png');
+    expect(name('twitter:image')).toBe('https://mohameddhia.dev/en/og/nova.png');
   });
 
   it('defaults to the homepage image and website type, in French for the fr build', () => {
     const { seo, prop } = setup('fr');
     seo.setPage({ title: 'T', description: 'D', path: '/' });
-    expect(prop('og:image')).toBe('https://dhaw-website.vercel.app/fr/og/home.png');
+    expect(prop('og:image')).toBe('https://mohameddhia.dev/fr/og/home.png');
     expect(prop('og:type')).toBe('website');
     expect(prop('og:locale')).toBe('fr_FR');
     expect(prop('og:locale:alternate')).toBe('en_US');

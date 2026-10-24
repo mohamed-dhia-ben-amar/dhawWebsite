@@ -17,11 +17,11 @@ const VALID = {
 };
 
 function post(body: unknown, headers: Record<string, string> = {}) {
-  return new Request('https://dhaw-website.vercel.app/api/contact', {
+  return new Request('https://mohameddhia.dev/api/contact', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      Host: 'dhaw-website.vercel.app',
+      Host: 'mohameddhia.dev',
       'X-Forwarded-For': '203.0.113.7',
       ...headers,
     },
@@ -85,7 +85,7 @@ describe('POST /api/contact', () => {
   });
 
   it('accepts same-origin posts', async () => {
-    const response = await handler()(post(VALID, { Origin: 'https://dhaw-website.vercel.app' }));
+    const response = await handler()(post(VALID, { Origin: 'https://mohameddhia.dev' }));
     expect(response.status).toBe(200);
   });
 
