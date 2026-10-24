@@ -2,6 +2,33 @@ import type { SiteContent } from '../types';
 
 export const site: SiteContent = {
   locale: 'en',
+  seo: {
+    siteName: 'Mohamed Dhia Ben Amar',
+    person: {
+      name: 'Mohamed Dhia Ben Amar',
+      jobTitle: 'Full-Stack Software Engineer',
+      email: 'mohameddhiabenamar@gmail.com',
+      locality: 'Tunis',
+      countryCode: 'TN',
+      worksFor: 'Minotore',
+      knowsAbout: [
+        'Angular',
+        'Nx',
+        'TypeScript',
+        'RxJS',
+        'Node.js',
+        'React',
+        'React Native',
+        'Golang',
+        'Vitest',
+        'Accessibility',
+      ],
+      sameAs: [
+        'https://github.com/mohamed-dhia-ben-amar',
+        'https://linkedin.com/in/mohameddhia-benamar',
+      ],
+    },
+  },
   skipLink: 'Skip to content',
   logo: {
     text: 'mdba',

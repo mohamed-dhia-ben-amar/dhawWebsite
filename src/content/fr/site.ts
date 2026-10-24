@@ -3,6 +3,33 @@ import type { SiteContent } from '../types';
 // French typography: \u00a0 is a no-break space (before : ; ! ? and %).
 export const site: SiteContent = {
   locale: 'fr',
+  seo: {
+    siteName: 'Mohamed Dhia Ben Amar',
+    person: {
+      name: 'Mohamed Dhia Ben Amar',
+      jobTitle: 'Ingénieur logiciel full-stack',
+      email: 'mohameddhiabenamar@gmail.com',
+      locality: 'Tunis',
+      countryCode: 'TN',
+      worksFor: 'Minotore',
+      knowsAbout: [
+        'Angular',
+        'Nx',
+        'TypeScript',
+        'RxJS',
+        'Node.js',
+        'React',
+        'React Native',
+        'Golang',
+        'Vitest',
+        'Accessibility',
+      ],
+      sameAs: [
+        'https://github.com/mohamed-dhia-ben-amar',
+        'https://linkedin.com/in/mohameddhia-benamar',
+      ],
+    },
+  },
   skipLink: 'Aller au contenu',
   logo: {
     text: 'mdba',

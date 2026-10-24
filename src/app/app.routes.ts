@@ -7,7 +7,7 @@ const knownCaseStudy = (_route: unknown, segments: UrlSegment[]) =>
 
 export const routes: Routes = [
   {
-    // Title and description come from the locale's home content (see Home).
+    // Every page sets its own title, description and share tags through Seo.
     path: '',
     loadComponent: () => import('./pages/home/home').then((m) => m.Home),
   },
@@ -19,7 +19,6 @@ export const routes: Routes = [
   {
     // Internal component showcase (noindex). Revisit in milestone 9.
     path: 'styleguide',
-    title: 'Styleguide · mdba',
     loadComponent: () => import('./pages/styleguide/styleguide').then((m) => m.Styleguide),
   },
   {

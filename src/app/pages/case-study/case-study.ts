@@ -1,16 +1,8 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  DestroyRef,
-  computed,
-  effect,
-  inject,
-  input,
-} from '@angular/core';
-import { Meta, Title } from '@angular/platform-browser';
+import { ChangeDetectionStrategy, Component, computed, effect, inject, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { CASE_STUDY_SLUGS, hasOwnerPlaceholders } from '../../../content/case-studies';
 import { isOwnerPlaceholder } from '../../../content/types';
+import { Seo } from '../../core/seo';
 import { WORK_CONTENT } from '../../core/work-content';
 import { EditorPane } from '../../ui/editor-pane/editor-pane';
 import { FactText } from '../../ui/fact-text/fact-text';
@@ -69,18 +61,18 @@ export class CaseStudy {
   });
 
   constructor() {
-    const title = inject(Title);
-    const meta = inject(Meta);
+    const seo = inject(Seo);
     effect(() => {
       const study = this.study();
-      title.setTitle(study.meta.title);
-      meta.updateTag({ name: 'description', content: study.meta.description });
-      if (hasOwnerPlaceholders(study)) {
-        meta.updateTag({ name: 'robots', content: 'noindex, follow' });
-      } else {
-        meta.removeTag('name="robots"');
-      }
+      seo.setPage({
+        title: study.meta.title,
+        description: study.meta.description,
+        path: `/work/${study.slug}`,
+        image: study.slug,
+        type: 'article',
+        // Incomplete pages (owner placeholders left) stay out of search results.
+        robots: hasOwnerPlaceholders(study) ? 'noindex, follow' : undefined,
+      });
     });
-    inject(DestroyRef).onDestroy(() => meta.removeTag('name="robots"'));
   }
 }
