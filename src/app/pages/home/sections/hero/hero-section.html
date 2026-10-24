@@ -1,0 +1,35 @@
+@let c = content();
+<section class="hero" aria-labelledby="hero-title">
+  <div class="hero__text">
+    <p class="hero__badge">
+      <span class="hero__dot" aria-hidden="true"></span>{{ c.availability }}
+    </p>
+    <h1 id="hero-title" class="hero__title">
+      {{ c.headline.before }}<span class="hero__accent">{{ c.headline.accent }}</span
+      >{{ c.headline.after }}
+    </h1>
+    <p class="hero__intro">{{ c.intro }}</p>
+    <div class="hero__actions">
+      <a class="button button--primary" routerLink="/" fragment="contact">{{ c.cta.contact }}</a>
+      <div class="hero__cv button button--outline">
+        <span aria-hidden="true">{{ c.cta.cv.label }}</span>
+        @for (file of c.cta.cv.files; track file.href; let last = $last) {
+          <a class="hero__cv-link" [href]="file.href" [attr.hreflang]="file.hreflang" download
+            ><span class="visually-hidden">{{ file.srLabel }} </span>{{ file.short }}</a
+          >
+          @if (!last) {
+            <span class="hero__cv-sep" aria-hidden="true">/</span>
+          }
+        }
+      </div>
+      @for (profile of c.cta.profiles; track profile.href) {
+        <a class="button button--quiet" [href]="profile.href" rel="me"
+          >{{ profile.label }} <span aria-hidden="true">↗</span></a
+        >
+      }
+    </div>
+  </div>
+  <app-terminal-window class="hero__terminal" [title]="c.terminal.title" [label]="c.terminal.label">
+    <app-terminal-session [entries]="c.terminal.entries" [animate]="true" />
+  </app-terminal-window>
+</section>

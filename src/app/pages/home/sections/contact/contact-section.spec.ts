@@ -1,0 +1,26 @@
+import { TestBed } from '@angular/core/testing';
+import { home } from '../../../../../content/en/home';
+import { ContactSection } from './contact-section';
+
+describe('ContactSection', () => {
+  function render() {
+    const fixture = TestBed.createComponent(ContactSection);
+    fixture.componentRef.setInput('content', home.contact);
+    fixture.detectChanges();
+    return fixture.nativeElement as HTMLElement;
+  }
+
+  it('is the #contact section inside a contact window', () => {
+    const el = render();
+    expect(el.querySelector('section')?.id).toBe('contact');
+    expect(el.querySelector('app-terminal-window')?.classList).toContain('terminal--contact');
+    expect(el.querySelector('.terminal__title')?.textContent).toBe('~/contact.sh');
+    expect(el.querySelector('h2')?.textContent).toBe("Let's build something.");
+  });
+
+  it('links the email address with mailto', () => {
+    const email = render().querySelector('.contact__email');
+    expect(email?.getAttribute('href')).toBe('mailto:mohameddhiabenamar@gmail.com');
+    expect(email?.textContent).toBe('mohameddhiabenamar@gmail.com');
+  });
+});

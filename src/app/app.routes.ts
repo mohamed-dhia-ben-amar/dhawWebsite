@@ -2,8 +2,8 @@ import { Routes } from '@angular/router';
 
 export const routes: Routes = [
   {
+    // Title and description come from the locale's home content (see Home).
     path: '',
-    title: 'Mohamed Dhia Ben Amar',
     loadComponent: () => import('./pages/home/home').then((m) => m.Home),
   },
   {
