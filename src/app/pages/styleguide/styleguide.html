@@ -40,40 +40,34 @@
   <section class="guide__section" aria-labelledby="sg-terminal">
     <app-prompt-label command="./terminal-window --variant terminal" />
     <h2 id="sg-terminal">TerminalWindow</h2>
-    <app-terminal-window class="guide__narrow" title="mohamed@tunis — zsh" label="Terminal summary">
-      @for (line of data.terminalLines; track line.command) {
-        <p class="term__cmd">
-          <span class="term__sign" aria-hidden="true">$</span> {{ line.command }}
-        </p>
-        <p class="term__out">
-          @if (line.warm) {
-            <span class="term__warm" aria-hidden="true">●</span>
-          }
-          {{ line.output }}
-        </p>
-      }
+    <app-terminal-window
+      class="guide__narrow"
+      [title]="home.hero.terminal.title"
+      [label]="home.hero.terminal.label"
+    >
+      <app-terminal-session [entries]="home.hero.terminal.entries" />
     </app-terminal-window>
   </section>
 
   <section class="guide__section" aria-labelledby="sg-stats">
     <app-prompt-label command="./stat-strip" />
     <h2 id="sg-stats">StatStrip</h2>
-    <app-stat-strip [stats]="data.stats" />
+    <app-stat-strip [stats]="home.highlights.stats" />
   </section>
 
   <section class="guide__section" aria-labelledby="sg-projects">
     <app-prompt-label command="ls ~/featured-work" />
     <h2 id="sg-projects">ProjectCard</h2>
-    @for (project of data.projects; track project.file) {
-      <!-- Case-study routes arrive in milestone 6; demo links point back here. -->
+    @for (project of home.work.projects; track project.slug; let first = $first) {
+      <!-- The first card shows the optional case-study link (routes arrive in milestone 6). -->
       <app-project-card
         [title]="project.title"
         [summary]="project.summary"
         [file]="project.file"
         [stack]="project.stack"
         [stats]="project.stats"
-        href="/styleguide"
-        linkLabel="Read case study"
+        [href]="first ? '/styleguide' : undefined"
+        [linkLabel]="home.work.caseStudyLabel"
       />
     }
   </section>
@@ -81,19 +75,15 @@
   <section class="guide__section" aria-labelledby="sg-editor">
     <app-prompt-label command="code experience.json" />
     <h2 id="sg-editor">EditorPane + CodeView</h2>
-    <app-editor-pane [tabs]="[{ label: 'minotore.json', active: true }]">
-      <nav paneExplorer class="explorer" aria-label="Experience files">
-        <p class="explorer__heading" aria-hidden="true">EXPLORER</p>
-        <ul class="explorer__files" role="list">
-          @for (file of data.explorerFiles; track file; let first = $first) {
-            <li class="explorer__file" [class.explorer__file--active]="first">
-              <span class="explorer__icon" aria-hidden="true">{{ '{}' }}</span
-              >{{ file }}
-            </li>
-          }
-        </ul>
-      </nav>
-      <app-code-view [lines]="data.minotoreLines" label="minotore.json" />
+    <app-editor-pane [tabs]="[{ label: experience.file, active: true }]">
+      <app-file-explorer
+        paneExplorer
+        [files]="experienceFiles"
+        [active]="experience.file"
+        [label]="home.experience.explorerLabel"
+        [heading]="home.experience.explorerHeading"
+      />
+      <app-code-view [lines]="experienceLines" [label]="experience.file" />
     </app-editor-pane>
   </section>
 
