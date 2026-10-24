@@ -4,8 +4,8 @@ const PORT = 4300;
 const isCI = !!process.env['CI'];
 
 /**
- * E2E tests run against the prerendered build in dist/ (run `pnpm build` first),
- * served as plain static files, the same way Vercel serves them.
+ * E2E tests run against the prerendered build in dist/ (run `pnpm build` first), served
+ * statically with the redirects and rewrites from vercel.json (scripts/serve-dist.mjs).
  */
 export default defineConfig({
   testDir: './e2e',
@@ -20,8 +20,8 @@ export default defineConfig({
   },
   projects: [{ name: 'chromium', use: { ...devices['Desktop Chrome'] } }],
   webServer: {
-    command: `pnpm exec serve dist/dhaw-portfolio/browser --listen ${PORT} --no-clipboard`,
-    url: `http://localhost:${PORT}`,
+    command: `node scripts/serve-dist.mjs ${PORT}`,
+    url: `http://localhost:${PORT}/en/`,
     reuseExistingServer: !isCI,
   },
 });
