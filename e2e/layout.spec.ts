@@ -1,11 +1,11 @@
 import { expect, test } from '@playwright/test';
 import { expectNoHorizontalScroll } from './support/a11y';
 
-const ROUTES = ['/', '/styleguide'];
+const ROUTES = ['/en/', '/en/styleguide', '/fr/', '/fr/styleguide'];
 
 test.describe('site layout', () => {
   test('has header, main and footer landmarks', async ({ page }) => {
-    await page.goto('/');
+    await page.goto('/en/');
     await expect(page.getByRole('banner')).toBeVisible();
     await expect(page.getByRole('navigation', { name: 'Main' })).toBeVisible();
     await expect(page.getByRole('main')).toBeVisible();
@@ -13,7 +13,7 @@ test.describe('site layout', () => {
   });
 
   test('skip link is the first tab stop and moves focus to main', async ({ page }) => {
-    await page.goto('/styleguide');
+    await page.goto('/en/styleguide');
     await page.keyboard.press('Tab');
     const skip = page.getByRole('link', { name: 'Skip to content' });
     await expect(skip).toBeFocused();
@@ -21,7 +21,7 @@ test.describe('site layout', () => {
 
     await page.keyboard.press('Enter');
     await expect(page.getByRole('main')).toBeFocused();
-    await expect(page).toHaveURL(/\/styleguide$/);
+    await expect(page).toHaveURL(/\/en\/styleguide$/);
   });
 
   test('loads the self-hosted fonts from /fonts', async ({ page }) => {
@@ -29,7 +29,7 @@ test.describe('site layout', () => {
     page.on('request', (req) => {
       if (req.resourceType() === 'font') fontRequests.push(new URL(req.url()).pathname);
     });
-    await page.goto('/styleguide');
+    await page.goto('/en/styleguide');
     await page.evaluate(() => document.fonts.ready);
 
     const loaded = await page.evaluate(() =>
