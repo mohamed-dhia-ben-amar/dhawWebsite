@@ -1,0 +1,21 @@
+@for (line of timeline().lines; track $index) {
+  <p class="session__cmd">
+    <span class="session__sign" aria-hidden="true">$&nbsp;</span>
+    <span
+      class="session__typed"
+      [style.--chars]="line.typed.chars"
+      [style.--delay]="line.typed.delay + 'ms'"
+      [style.--duration]="line.typed.duration + 'ms'"
+      >{{ line.entry.command }}</span
+    >
+  </p>
+  <p class="session__out" [style.--delay]="line.outputDelay + 'ms'">
+    @if (line.entry.status) {
+      <span class="session__status" aria-hidden="true"></span>
+    }
+    {{ line.entry.output }}
+  </p>
+}
+<p class="session__cmd session__prompt" aria-hidden="true" [style.--delay]="timeline().end + 'ms'">
+  <span class="session__sign">$&nbsp;</span><span class="session__cursor"></span>
+</p>
