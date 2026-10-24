@@ -167,5 +167,45 @@ export const home: HomeContent = {
     windowTitle: '~/contact.sh',
     body: 'Open to full-stack and frontend roles in Tunisia and the EU, remote or hybrid.',
     email: 'mohameddhiabenamar@gmail.com',
+    form: {
+      label: 'Contact form',
+      labels: { name: 'name:', email: 'email:', message: 'message:' },
+      requiredNote: 'All fields are required.',
+      honeypotLabel: 'Leave this field empty',
+      submit: 'Send message',
+      sending: 'Sending…',
+      summaryTitle: 'Please fix the following:',
+      errors: {
+        name: {
+          required: 'Enter your name.',
+          too_short: 'Your name needs at least 2 characters.',
+          too_long: 'Keep your name under 100 characters.',
+          invalid: 'Enter your name.',
+        },
+        email: {
+          required: 'Enter your email address.',
+          too_short: 'Enter a valid email address, like name@example.com.',
+          too_long: 'Enter a valid email address, like name@example.com.',
+          invalid: 'Enter a valid email address, like name@example.com.',
+        },
+        message: {
+          required: 'Enter a message.',
+          too_short: 'Your message needs at least 10 characters.',
+          too_long: 'Keep your message under 5,000 characters.',
+          invalid: 'Enter a message.',
+        },
+      },
+      success: {
+        title: 'Message sent.',
+        body: 'Thanks for reaching out. I’ll reply to the email address you gave.',
+        again: 'Send another message',
+      },
+      failure: {
+        generic:
+          'Your message wasn’t sent. Please try again, or email me at mohameddhiabenamar@gmail.com.',
+        rateLimited:
+          'Too many messages in a short time. Please try again in a few minutes, or email me at mohameddhiabenamar@gmail.com.',
+      },
+    },
   },
 };

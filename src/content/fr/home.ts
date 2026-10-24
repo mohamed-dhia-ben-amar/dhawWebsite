@@ -169,5 +169,45 @@ export const home: HomeContent = {
     windowTitle: '~/contact.sh',
     body: 'Ouvert aux postes full-stack et frontend en Tunisie et en Europe, en remote ou en hybride.',
     email: 'mohameddhiabenamar@gmail.com',
+    form: {
+      label: 'Formulaire de contact',
+      labels: { name: 'nom\u00a0:', email: 'email\u00a0:', message: 'message\u00a0:' },
+      requiredNote: 'Tous les champs sont obligatoires.',
+      honeypotLabel: 'Laissez ce champ vide',
+      submit: 'Envoyer le message',
+      sending: 'Envoi…',
+      summaryTitle: 'Merci de corriger les points suivants\u00a0:',
+      errors: {
+        name: {
+          required: 'Indiquez votre nom.',
+          too_short: 'Votre nom doit compter au moins 2 caractères.',
+          too_long: 'Votre nom doit compter moins de 100 caractères.',
+          invalid: 'Indiquez votre nom.',
+        },
+        email: {
+          required: 'Indiquez votre adresse email.',
+          too_short: 'Indiquez une adresse email valide, par exemple nom@exemple.com.',
+          too_long: 'Indiquez une adresse email valide, par exemple nom@exemple.com.',
+          invalid: 'Indiquez une adresse email valide, par exemple nom@exemple.com.',
+        },
+        message: {
+          required: 'Écrivez votre message.',
+          too_short: 'Votre message doit compter au moins 10 caractères.',
+          too_long: 'Votre message doit compter moins de 5\u202f000 caractères.',
+          invalid: 'Écrivez votre message.',
+        },
+      },
+      success: {
+        title: 'Message envoyé.',
+        body: 'Merci pour votre message. Je vous répondrai à l’adresse email indiquée.',
+        again: 'Envoyer un autre message',
+      },
+      failure: {
+        generic:
+          'Votre message n’a pas été envoyé. Réessayez, ou écrivez-moi à mohameddhiabenamar@gmail.com.',
+        rateLimited:
+          'Trop de messages en peu de temps. Réessayez dans quelques minutes, ou écrivez-moi à mohameddhiabenamar@gmail.com.',
+      },
+    },
   },
 };
