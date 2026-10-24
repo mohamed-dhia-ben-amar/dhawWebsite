@@ -1,10 +1,10 @@
-import { DOCUMENT } from '@angular/common';
+import { DOCUMENT, LocationStrategy } from '@angular/common';
 import { ChangeDetectionStrategy, Component, computed, inject, input } from '@angular/core';
-import { Router } from '@angular/router';
+import { injectCurrentPath } from '../../core/current-path';
 
 /**
  * "Skip to content" link, visible on focus. It moves focus to the target itself, because a bare
- * `#main` href resolves against `<base href="/">` and would navigate to the homepage.
+ * `#main` href resolves against `<base href>` and would navigate to the locale's homepage.
  */
 @Component({
   selector: 'app-skip-link',
@@ -17,10 +17,14 @@ export class SkipLink {
   /** Id of the element to skip to. */
   readonly target = input('main');
 
-  private readonly router = inject(Router);
   private readonly document = inject(DOCUMENT);
+  private readonly locationStrategy = inject(LocationStrategy);
+  private readonly path = injectCurrentPath();
 
-  protected readonly href = computed(() => `${this.router.url.split('#')[0]}#${this.target()}`);
+  /** Current page including the locale base href, e.g. `/fr/styleguide#main`. */
+  protected readonly href = computed(
+    () => `${this.locationStrategy.prepareExternalUrl(this.path())}#${this.target()}`,
+  );
 
   protected skip(event: Event): void {
     const target = this.document.getElementById(this.target());

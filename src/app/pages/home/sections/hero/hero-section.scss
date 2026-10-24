@@ -59,6 +59,12 @@
   gap: var(--space-3) var(--space-2);
 }
 
+// GitHub and LinkedIn wrap together rather than leaving one alone on a line.
+.hero__profiles {
+  display: flex;
+  gap: var(--space-2);
+}
+
 // One outlined pill holding two download links (EN / FR), each a full-height touch target.
 .hero__cv {
   gap: 0;

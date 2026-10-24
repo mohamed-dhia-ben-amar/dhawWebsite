@@ -3,5 +3,22 @@
   "framework": "angular",
   "installCommand": "pnpm install --frozen-lockfile",
   "buildCommand": "pnpm build",
-  "outputDirectory": "dist/dhaw-portfolio/browser"
+  "outputDirectory": "dist/dhaw-portfolio/browser",
+  "redirects": [
+    {
+      "source": "/",
+      "destination": "/en/",
+      "permanent": false
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/cv/:file",
+      "destination": "/en/cv/:file"
+    },
+    {
+      "source": "/fonts/:file",
+      "destination": "/en/fonts/:file"
+    }
+  ]
 }

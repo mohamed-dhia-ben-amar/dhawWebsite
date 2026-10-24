@@ -22,11 +22,13 @@
           }
         }
       </div>
-      @for (profile of c.cta.profiles; track profile.href) {
-        <a class="button button--quiet" [href]="profile.href" rel="me"
-          >{{ profile.label }} <span aria-hidden="true">↗</span></a
-        >
-      }
+      <div class="hero__profiles">
+        @for (profile of c.cta.profiles; track profile.href) {
+          <a class="button button--quiet" [href]="profile.href" rel="me"
+            >{{ profile.label }} <span aria-hidden="true">↗</span></a
+          >
+        }
+      </div>
     </div>
   </div>
   <app-terminal-window class="hero__terminal" [title]="c.terminal.title" [label]="c.terminal.label">

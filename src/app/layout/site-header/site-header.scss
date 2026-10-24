@@ -25,6 +25,31 @@
   color: var(--accent);
 }
 
+// Narrow: logo and language switch on the first row, navigation below.
+// From 640px: logo, navigation and language switch on one row.
+.header__langs {
+  order: 2;
+  margin-left: auto;
+}
+
+.header__nav {
+  flex-basis: 100%;
+  order: 3;
+}
+
+@media (width >= 640px) {
+  .header__nav {
+    flex-basis: auto;
+    order: 2;
+    margin-left: auto;
+  }
+
+  .header__langs {
+    order: 3;
+    margin-left: 0;
+  }
+}
+
 .header__links {
   display: flex;
   flex-wrap: wrap;
