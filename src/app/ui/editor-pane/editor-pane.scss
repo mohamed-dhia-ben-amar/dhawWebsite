@@ -1,0 +1,57 @@
+:host {
+  display: block;
+  min-width: 0;
+}
+
+.pane {
+  display: flex;
+  flex-wrap: wrap;
+  overflow: hidden;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+}
+
+.pane__explorer {
+  flex: 1 1 220px;
+  background: var(--surface-sunken);
+  border-right: 1px solid var(--border);
+
+  &:empty {
+    display: none;
+  }
+}
+
+.pane__main {
+  display: flex;
+  flex: 999 1 560px;
+  flex-direction: column;
+  min-width: 0;
+}
+
+// Tabs wrap rather than scroll: a scrolling strip of plain text cannot be reached by keyboard.
+.pane__tabs {
+  display: flex;
+  flex-wrap: wrap;
+  background: var(--surface-sunken);
+  border-bottom: 1px solid var(--border);
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+}
+
+.pane__tab {
+  padding: 11px 18px;
+  color: var(--text-faint);
+  border-top: 2px solid transparent;
+  white-space: nowrap;
+}
+
+.pane__tab--active {
+  color: var(--text-strong);
+  background: var(--surface);
+  border-top-color: var(--accent);
+}
+
+.pane__body {
+  min-width: 0;
+}
