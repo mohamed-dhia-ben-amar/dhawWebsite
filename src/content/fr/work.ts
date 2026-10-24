@@ -29,14 +29,15 @@ export const work: WorkContent = {
     {
       slug: 'widget-library',
       meta: {
-        title: 'Bibliothèque de widgets pour la finance de marché · Mohamed Dhia Ben Amar',
+        title:
+          'Bibliothèque de widgets configurables pour le page builder d’un CMS · Mohamed Dhia Ben Amar',
         description:
-          'Étude de cas\u00a0: 76 widgets Angular accessibles partagés entre 8 projets de finance de marché, une migration Angular 18 → 21 / Nx 22 en un sprint et ~9\u202f000 tests Vitest.',
+          'Étude de cas\u00a0: auteur de 21 des 81 widgets Angular configurables de la bibliothèque du CMS de Minotore, participation à la migration de la configuration du XML au JSON, adoption de Vitest pilotée (~9\u202f000 tests) et migration Angular 18 → 21 / Nx 22 supervisée en un sprint.',
       },
       file: 'widget-library/README.md',
-      title: 'Bibliothèque de widgets pour la finance de marché',
+      title: 'Bibliothèque de widgets configurables pour le page builder d’un CMS',
       summary:
-        'Des widgets accessibles et réactifs, en RxJS et Signals, partagés entre 8 projets chez Minotore, et la migration Angular 18 → 21 / Nx 22 menée en un seul sprint.',
+        'J’ai développé 21 des 81 widgets Angular accessibles (produit, contenu, document, recherche) de la bibliothèque de l’équipe. Les webmasters les configurent via des formulaires générés depuis un schéma JSON et les ajoutent à leurs sites. J’ai aussi supervisé la migration Angular 18 → 21 / Nx 22 en un sprint.',
       facts: {
         role: 'Développeur frontend',
         company: 'Minotore',
@@ -45,30 +46,29 @@ export const work: WorkContent = {
       },
       stack: ['Angular', 'Nx', 'RxJS', 'Signals', 'Vitest', 'Storybook', 'Keycloak'],
       context: [
-        'Minotore conçoit des logiciels pour la finance de marché. Je fais partie de l’équipe frontend, où une bibliothèque de widgets partagée alimente 8 projets depuis un monorepo Nx.',
+        'Le CMS de Minotore permet à chaque client de configurer un espace de travail et d’y créer autant de projets qu’il le souhaite, chacun étant un site web indépendant. Les webmasters construisent leurs pages en insérant des widgets depuis un éditeur de pages, sans écrire de code. Notre équipe frontend développe ces widgets\u00a0: standards, réutilisables et configurables. Chaque widget est livré avec un fichier de configuration JSON, codé avec sa logique, à partir duquel le CMS génère son formulaire de paramétrage. Pendant mon passage, ce contrat est passé du XML au JSON\u00a0; le nouveau contrat a été défini par les tech leads backend, frontend et studio, et j’ai participé à la migration.',
       ],
       problem: [],
       approach: [
-        'Développé 76 widgets réutilisables et accessibles, en RxJS et Signals, partagés entre les 8 projets.',
-        'Réduit la taille des widgets de 30 à 50\u00a0%.',
-        'Supervisé la migration de 68 widgets et 8 bibliothèques d’Angular 18 vers Angular 21 / Nx 22 en un sprint de 3 semaines, à la tête de 3 développeurs, et contribué à la migration vers Angular 22 / Nx 23.',
-        'Introduit Vitest\u00a0: environ 9\u202f000 tests, avec 80 à 96\u00a0% de couverture.',
-        'Créé une bibliothèque de skeletons sous Storybook et les écrans d’authentification Keycloak.',
-        'Accompagné 2 nouveaux membres de l’équipe et 1 stagiaire.',
+        'Développé 21 des 81 widgets de la bibliothèque de l’équipe, utilisés sur 8 projets\u00a0: des widgets Angular accessibles, en RxJS et Signals, livrés chacun avec la configuration JSON à partir de laquelle le CMS génère leur formulaire de paramétrage.',
+        'Participé à la migration du contrat de configuration des widgets du XML au JSON (contrat défini par les tech leads backend, frontend et studio).',
+        'Piloté l’adoption de Vitest\u00a0: environ 9\u202f000 tests unitaires, avec 80 à 96\u00a0% de couverture.',
+        'Supervisé la migration de 68 widgets et 8 bibliothèques d’Angular 18 vers Angular 21 / Nx 22 en un sprint de 3 semaines, à la tête de 3 développeurs.',
+        'Créé les pages d’authentification Keycloak, développées et lancées dans Storybook.',
       ],
       diagram: {
-        caption: 'Comment les widgets partagés arrivent dans les produits',
+        caption: 'Du widget au site du client',
         steps: [
-          { label: 'Monorepo Nx', detail: '8 bibliothèques' },
-          { label: 'Bibliothèque de widgets', detail: '76 widgets accessibles' },
-          { label: 'Tests', detail: 'Vitest · ~9\u202f000' },
-          { label: 'Produits', detail: '8 projets' },
+          { label: 'Widget', detail: 'logique Angular + config JSON' },
+          { label: 'Formulaire de paramétrage', detail: 'généré par le CMS' },
+          { label: 'Éditeur de pages', detail: 'les webmasters l’insèrent' },
+          { label: 'Sites des clients', detail: 'un par projet' },
         ],
       },
       results: {
         metrics: [
-          { label: 'widgets', value: '76' },
-          { label: 'size_cut', value: '30–50\u00a0%' },
+          { label: 'my_widgets', value: '21' },
+          { label: 'team_widgets', value: '81' },
           { label: 'tests', value: '~9\u202f000' },
           { label: 'coverage', value: '80–96\u00a0%' },
         ],

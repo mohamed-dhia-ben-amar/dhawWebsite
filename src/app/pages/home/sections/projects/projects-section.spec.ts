@@ -22,7 +22,7 @@ describe('ProjectsSection', () => {
   it('renders the three project cards, each linking to its case study', () => {
     const el = render();
     expect([...el.querySelectorAll('h3')].map((h) => h.textContent)).toEqual([
-      'Shared widget library for market finance',
+      'Configurable widget library for a CMS page builder',
       'NOVA: AI-assisted development workflow',
       'Converty Shop merchant app',
     ]);

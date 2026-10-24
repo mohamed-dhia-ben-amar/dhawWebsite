@@ -70,10 +70,12 @@ describe('CaseStudy', () => {
   it('sets title and description, and is indexable', () => {
     render('widget-library');
     expect(TestBed.inject(Title).getTitle()).toBe(
-      'Shared widget library for market finance · Mohamed Dhia Ben Amar',
+      'Configurable widget library for a CMS page builder · Mohamed Dhia Ben Amar',
     );
     const meta = TestBed.inject(Meta);
-    expect(meta.getTag('name="description"')?.content).toContain('76 accessible Angular widgets');
+    expect(meta.getTag('name="description"')?.content).toContain(
+      '21 of the 81 configurable Angular widgets',
+    );
     expect(meta.getTag('name="robots"')).toBeNull();
   });
 

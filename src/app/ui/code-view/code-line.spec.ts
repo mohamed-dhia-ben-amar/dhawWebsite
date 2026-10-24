@@ -6,7 +6,7 @@ describe('jsonToCodeLines', () => {
   const value = {
     role: 'Frontend Developer',
     period: 'Dec 2024 – present',
-    highlights: ['76 widgets shared across 8 projects', 'Vitest'],
+    highlights: ['Author of 21 of the 81 team widgets', 'Vitest'],
     remote: true,
   };
 
