@@ -1,0 +1,16 @@
+{
+  // Used by Vercel to compile the functions in this folder (it picks the nearest tsconfig.json).
+  // NodeNext + a package without "type": "module" emits CommonJS, which is what the Vercel Node
+  // launcher loads; the root tsconfig's "module": "preserve" would emit ES modules it cannot run.
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "types": ["node"],
+    // api/ imports server/ and src/shared/, so the sources start at the repo root.
+    "rootDir": ".."
+  }
+}

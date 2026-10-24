@@ -75,9 +75,11 @@ E2E serves the built output in `dist/` with the redirects and rewrites from `ver
 - Server: `api/contact.ts` is the Vercel Function; the logic is in `server/contact-handler.ts`
   (method → same-origin → JSON → size → per-IP rate limit → honeypot → Zod → send via Resend as
   plain text). Errors are JSON codes; submitted values are never echoed.
-- Vercel emits `api/` as ES modules run by plain Node: relative imports in `api/`, `server/` and
-  `src/shared/` must end in `.js` (e.g. `'./rate-limit.js'`). `server/function-smoke.spec.ts`
-  compiles the function like Vercel and loads it with Node to catch this.
+- Vercel compiles `api/` with the nearest tsconfig, `api/tsconfig.json` (NodeNext → CommonJS,
+  which its launcher loads). Keep it: the root tsconfig's `"module": "preserve"` emits ES modules
+  that crash with FUNCTION_INVOCATION_FAILED. Relative imports in `api/`, `server/` and
+  `src/shared/` must end in `.js`. `server/function-smoke.spec.ts` compiles with that tsconfig and
+  loads the output with Node's ES-module detection off, the way Vercel runs it.
 - Server code is tested with plain Vitest (`pnpm test:server`, `vitest.server.config.ts`) and
   type-checked by `pnpm lint` (`tsconfig.server.json`). E2E mocks `/api/contact`.
 - Secrets: `RESEND_API_KEY`, `CONTACT_TO_EMAIL`, `CONTACT_FROM_EMAIL` live only in Vercel

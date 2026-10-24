@@ -16,7 +16,7 @@
     "e2e": "playwright test",
     "lint:styles": "stylelint \"src/**/*.scss\"",
     "test:server": "vitest run --config vitest.server.config.ts",
-    "typecheck:server": "tsc -p tsconfig.server.json"
+    "typecheck:server": "tsc -p tsconfig.server.json && tsc -p api/tsconfig.json --noEmit"
   },
   "private": true,
   "packageManager": "pnpm@12.15.0",
