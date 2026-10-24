@@ -110,7 +110,8 @@
               "e2e/**/*.ts",
               "playwright.config.ts",
               "api/**/*.ts",
-              "server/**/*.ts"
+              "server/**/*.ts",
+              "scripts/**/*.mts"
             ]
           }
         }
