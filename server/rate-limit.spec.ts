@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { createRateLimiter } from './rate-limit';
+import { createRateLimiter } from './rate-limit.js';
 
 describe('createRateLimiter', () => {
   it('allows `limit` hits per window, then reports the wait', () => {

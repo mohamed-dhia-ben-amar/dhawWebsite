@@ -6,9 +6,9 @@ import {
   type ContactResponse,
   EMAIL_PATTERN,
   HONEYPOT_FIELD,
-} from '../src/shared/contact';
-import { type RateLimiter, createRateLimiter } from './rate-limit';
-import { type SendEmail, resendSender } from './send-email';
+} from '../src/shared/contact.js';
+import { type RateLimiter, createRateLimiter } from './rate-limit.js';
+import { type SendEmail, resendSender } from './send-email.js';
 
 const MAX_BODY_BYTES = 16 * 1024;
 const FIELDS: readonly ContactField[] = ['name', 'email', 'message'];

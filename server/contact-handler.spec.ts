@@ -1,8 +1,8 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-import { type ContactEnv, createContactHandler } from './contact-handler';
-import { createRateLimiter } from './rate-limit';
-import type { OutgoingEmail } from './send-email';
-import { resendSender } from './send-email';
+import { type ContactEnv, createContactHandler } from './contact-handler.js';
+import { createRateLimiter } from './rate-limit.js';
+import type { OutgoingEmail } from './send-email.js';
+import { resendSender } from './send-email.js';
 
 const ENV: ContactEnv = {
   RESEND_API_KEY: 're_test',

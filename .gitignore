@@ -54,3 +54,6 @@ Thumbs.db
 .env.*
 !.env.example
 .vercel
+
+# Scratch output (e.g. the compiled-function smoke test)
+/.tmp
