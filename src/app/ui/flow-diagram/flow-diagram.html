@@ -1,0 +1,13 @@
+<figure class="flow">
+  <ol class="flow__steps" role="list">
+    @for (step of steps(); track $index; let last = $last) {
+      <li class="flow__step" [class.flow__step--last]="last">
+        <span class="flow__label">{{ step.label }}</span>
+        @if (step.detail) {
+          <span class="flow__detail">{{ step.detail }}</span>
+        }
+      </li>
+    }
+  </ol>
+  <figcaption class="flow__caption">{{ caption() }}</figcaption>
+</figure>

@@ -84,6 +84,24 @@
     />
   </section>
 
+  <section class="guide__section" aria-labelledby="sg-flow">
+    <app-prompt-label command="./flow-diagram" />
+    <h2 id="sg-flow">FlowDiagram</h2>
+    @if (flowDemo; as d) {
+      <app-flow-diagram [caption]="d.caption" [steps]="d.steps" />
+    }
+  </section>
+
+  <section class="guide__section" aria-labelledby="sg-owner">
+    <app-prompt-label command="grep -r OWNER src/content" />
+    <h2 id="sg-owner">OwnerNote</h2>
+    <p>
+      Missing facts render as
+      <app-owner-note note="add architecture diagram" />
+      and keep their page out of search results.
+    </p>
+  </section>
+
   <section class="guide__section" aria-labelledby="sg-contact">
     <app-prompt-label command="./terminal-window --variant contact" />
     <h2 id="sg-contact">TerminalWindow (contact)</h2>

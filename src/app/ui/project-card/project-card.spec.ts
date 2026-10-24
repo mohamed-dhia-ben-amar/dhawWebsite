@@ -46,7 +46,7 @@ describe('ProjectCard', () => {
       .map((node) => node.textContent)
       .join('')
       .trim();
-    expect(accessibleText).toBe('Read case study: Shared widget library for market finance');
+    expect(accessibleText).toBe('Read case study — Shared widget library for market finance');
     expect(link?.querySelector('[aria-hidden="true"]')?.textContent).toBe('→');
   });
 

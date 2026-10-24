@@ -1,0 +1,18 @@
+:host {
+  display: inline;
+}
+
+.owner {
+  padding: 0.1em 0.4em;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 0.875em;
+  border: 1px dashed var(--border-strong);
+  border-radius: var(--radius-sm);
+  box-decoration-break: clone;
+}
+
+.owner__label {
+  color: var(--text-strong);
+  font-weight: 700;
+}
