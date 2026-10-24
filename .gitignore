@@ -57,3 +57,8 @@ Thumbs.db
 
 # Scratch output (e.g. the compiled-function smoke test)
 /.tmp
+
+# Compiled output must never sit next to the TypeScript sources
+/api/**/*.js
+/server/**/*.js
+/src/shared/**/*.js
