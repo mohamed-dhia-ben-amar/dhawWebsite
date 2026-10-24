@@ -33,10 +33,15 @@ $families: (
 }
 
 // Metric-matched fallbacks so the swap does not shift layout. Values computed with
-// @capsizecss from the latin woff2 files (size-adjust = avg char width ratio).
+// @capsizecss from the latin woff2 files against Arial (size-adjust = avg char width ratio).
+// Liberation Sans and Arimo are Arial-metric clones (Linux, ChromeOS); Roboto (Android) is
+// within 0.3% of Arial for these values, so one face covers all of them. Without these, Linux
+// and Android fell through to an unmatched system font and the headline re-wrapped on swap.
 @font-face {
   font-family: 'Inter Fallback';
-  src: local('Arial'), local('ArialMT');
+  src:
+    local('Arial'), local('ArialMT'), local('Liberation Sans'), local('LiberationSans'),
+    local('Arimo'), local('Roboto');
   size-adjust: 107.12%;
   ascent-override: 90.44%;
   descent-override: 22.52%;
@@ -45,7 +50,9 @@ $families: (
 
 @font-face {
   font-family: 'Space Grotesk Fallback';
-  src: local('Arial'), local('ArialMT');
+  src:
+    local('Arial'), local('ArialMT'), local('Liberation Sans'), local('LiberationSans'),
+    local('Arimo'), local('Roboto');
   size-adjust: 109.47%;
   ascent-override: 89.89%;
   descent-override: 26.67%;
@@ -54,7 +61,9 @@ $families: (
 
 @font-face {
   font-family: 'JetBrains Mono Fallback';
-  src: local('Courier New'), local('CourierNewPSMT');
+  src:
+    local('Courier New'), local('CourierNewPSMT'), local('Liberation Mono'),
+    local('LiberationMono'), local('Cousine');
   size-adjust: 99.98%;
   ascent-override: 102.02%;
   descent-override: 30%;
