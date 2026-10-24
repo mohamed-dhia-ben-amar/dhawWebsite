@@ -55,6 +55,7 @@ export const work: WorkContent = {
         'Took part in migrating the widget configuration contract from XML to JSON (the contract was defined by the backend, frontend and studio tech leads).',
         'Led the adoption of Vitest: about 9,000 unit tests with 80–96% coverage.',
         'Supervised the migration of 68 widgets and 8 libraries from Angular 18 to Angular 21 / Nx 22 in one 3-week sprint, leading 3 developers.',
+        'Built the Keycloak authentication pages, developed and run in Storybook.',
       ],
       diagram: {
         caption: 'From a widget to a client’s website',
