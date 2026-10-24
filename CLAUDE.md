@@ -42,8 +42,9 @@ E2E serves the built output in `dist/` with the redirects and rewrites from `ver
   (Sass breakpoints, mirrored in `src/app/core/breakpoints.ts`), `_fonts.scss`
   (self-hosted variable fonts and metric-matched fallbacks), `_base.scss` (reset, focus, `.container`,
   `.visually-hidden`, reduced motion).
-- `src/content/`: typed copy per locale (`en/`, `fr/`): `site.ts` (shell) and
-  `home.ts` (homepage), read through the `SITE_CONTENT` / `HOME_CONTENT` tokens in `src/app/core/`.
+- `src/content/`: typed copy per locale (`en/`, `fr/`): `site.ts` (shell), `home.ts` (homepage),
+  `work.ts` (case studies) and `not-found.ts`, read through the `*_CONTENT` tokens in
+  `src/app/core/`. Case-study slugs live in `src/content/case-studies.ts`.
 - `src/app/ui/`: signature components (TerminalWindow, TerminalSession, PromptLabel, EditorPane,
   FileExplorer, CodeView, StatStrip, ProjectCard, StatusBar).
 - `src/app/layout/`: app shell (SkipLink, SiteHeader, SiteFooter, LanguageSwitch).
@@ -52,6 +53,18 @@ E2E serves the built output in `dist/` with the redirects and rewrites from `ver
   WAI-ARIA tab list (roving tabindex, arrows/Home/End, automatic activation) and every panel is
   prerendered, only the open one visible. `/styleguide` is an internal noindex showcase of the components;
   keep it out of the sitemap.
+
+## Case studies and 404
+
+- `/work/:slug` is prerendered for every slug (`getPrerenderParams`); unknown slugs fall through
+  to the 404 page. Structure: Context → Problem → What I did → Stack → Results → What I'd do next.
+- Facts only from the brief. A missing fact is an `{ owner: '…' }` placeholder (`Fact` type):
+  rendered as a visible `[OWNER: …]` marker, and any page that still has one is `noindex`.
+  `src/content/case-studies.spec.ts` counts the open placeholders; update it as they are filled.
+- Confidentiality: no Minotore code, screenshots, client names or internal URLs. Diagrams are
+  `FlowDiagram` steps built from facts.
+- `/404` is prerendered per locale; `pnpm build` copies the English one to the root `404.html`,
+  which Vercel serves (with a 404 status) for any unknown URL, French ones included.
 
 ## i18n
 
