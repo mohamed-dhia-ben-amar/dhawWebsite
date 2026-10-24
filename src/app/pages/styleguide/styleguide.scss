@@ -1,0 +1,149 @@
+.guide {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-section);
+  padding-block: var(--space-16) var(--space-section);
+}
+
+.guide__intro,
+.guide__section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.guide__title {
+  font-size: var(--text-hero);
+  line-height: var(--leading-hero);
+  letter-spacing: var(--tracking-hero);
+}
+
+.guide__section h2 {
+  font-size: var(--text-h2);
+}
+
+.guide__lede {
+  color: var(--text-muted);
+}
+
+.guide__narrow {
+  max-width: 480px;
+}
+
+.swatches {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: var(--space-4);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.swatch {
+  display: grid;
+  gap: var(--space-1);
+  font-size: var(--text-sm);
+}
+
+.swatch__chip {
+  height: 56px;
+  margin-bottom: var(--space-2);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-md);
+}
+
+.swatch__token {
+  color: var(--text-strong);
+}
+
+.swatch__value {
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+}
+
+.type-hero {
+  color: var(--text-strong);
+  font-family: var(--font-heading);
+  font-size: var(--text-hero);
+  font-weight: 700;
+  line-height: var(--leading-hero);
+  letter-spacing: var(--tracking-hero);
+}
+
+.type-hero__accent {
+  color: var(--accent);
+}
+
+.type-h3 {
+  color: var(--text-strong);
+  font-family: var(--font-heading);
+  font-size: var(--text-h3);
+  font-weight: 600;
+}
+
+.type-mono {
+  font-family: var(--font-mono);
+  font-size: var(--text-md);
+}
+
+.term__cmd {
+  color: var(--text-muted);
+}
+
+.term__out {
+  margin-bottom: 10px;
+  color: var(--text-strong);
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.term__sign {
+  color: var(--accent);
+}
+
+.term__warm {
+  color: var(--warm);
+}
+
+.explorer {
+  padding: var(--space-4) 10px;
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+}
+
+.explorer__heading {
+  margin: 0 0 10px 10px;
+  color: var(--text-muted);
+  font-size: 0.6875rem;
+  letter-spacing: 0.1em;
+}
+
+.explorer__files {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.explorer__file {
+  display: flex;
+  align-items: center;
+  min-height: var(--touch-target);
+  padding: 0 10px;
+  color: var(--text-muted);
+  border-radius: var(--radius-sm);
+}
+
+.explorer__file--active {
+  background: var(--surface-raised);
+  color: var(--text-strong);
+}
+
+.explorer__icon {
+  margin-right: 10px;
+  color: var(--warm);
+}
