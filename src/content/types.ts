@@ -121,3 +121,93 @@ export interface HomeContent {
     readonly email: string;
   };
 }
+
+/**
+ * A fact the owner still has to supply. Rendered as a visible `[OWNER: …]` marker, and any page
+ * containing one is noindex until it is replaced (brief §6).
+ */
+export interface OwnerPlaceholder {
+  readonly owner: string;
+}
+
+/** Text, or a placeholder where a fact is missing. */
+export type Fact = string | OwnerPlaceholder;
+
+export function isOwnerPlaceholder(value: unknown): value is OwnerPlaceholder {
+  return typeof value === 'object' && value !== null && 'owner' in value;
+}
+
+export interface FlowStep {
+  readonly label: string;
+  readonly detail?: string;
+}
+
+/** A simple flow diagram drawn for the site (no screenshots or internal material). */
+export interface FlowDiagramContent {
+  readonly caption: string;
+  readonly steps: readonly FlowStep[];
+}
+
+export type CaseStudySlug = 'widget-library' | 'nova' | 'converty-shop';
+
+export interface CaseStudyContent {
+  readonly slug: CaseStudySlug;
+  readonly meta: { readonly title: string; readonly description: string };
+  /** File shown in the editor tab, e.g. `nova/README.md`. */
+  readonly file: string;
+  readonly title: string;
+  readonly summary: string;
+  readonly facts: {
+    readonly role: Fact;
+    readonly company: Fact;
+    readonly period: Fact;
+    readonly location: Fact;
+  };
+  readonly stack: readonly string[];
+  /** Context → Problem → What I did → Stack → Results → What I'd do next (brief §6). */
+  readonly context: readonly Fact[];
+  readonly problem: readonly Fact[];
+  readonly approach: readonly Fact[];
+  readonly diagram: FlowDiagramContent | OwnerPlaceholder;
+  readonly results: {
+    readonly metrics: readonly { readonly label: string; readonly value: string }[];
+    readonly notes: readonly Fact[];
+  };
+  readonly next: readonly Fact[];
+  readonly links?: readonly ExternalLink[];
+}
+
+export interface WorkContent {
+  readonly ui: {
+    readonly sections: {
+      readonly context: string;
+      readonly problem: string;
+      readonly approach: string;
+      readonly stack: string;
+      readonly results: string;
+      readonly next: string;
+    };
+    readonly facts: {
+      readonly label: string;
+      readonly role: string;
+      readonly company: string;
+      readonly period: string;
+      readonly location: string;
+    };
+    readonly ownerLabel: string;
+    readonly linksLabel: string;
+    readonly navLabel: string;
+    readonly back: string;
+    readonly nextStudy: string;
+  };
+  readonly caseStudies: readonly CaseStudyContent[];
+}
+
+export interface NotFoundContent {
+  readonly meta: { readonly title: string; readonly description: string };
+  readonly prompt: string;
+  readonly title: string;
+  readonly body: string;
+  readonly terminal: { readonly title: string; readonly error: string };
+  readonly links: readonly { readonly label: string; readonly fragment?: string }[];
+}
