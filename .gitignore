@@ -48,3 +48,17 @@ Thumbs.db
 /playwright-report
 /blob-report
 /playwright/.cache
+
+# Local environment (secrets live in Vercel only)
+.env
+.env.*
+!.env.example
+.vercel
+
+# Scratch output (e.g. the compiled-function smoke test)
+/.tmp
+
+# Compiled output must never sit next to the TypeScript sources
+/api/**/*.js
+/server/**/*.js
+/src/shared/**/*.js

@@ -3,11 +3,23 @@
   scroll-margin-top: var(--space-6);
 }
 
+.contact__layout {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-10);
+}
+
 .contact__text {
   display: flex;
+  flex: 1 1 320px;
   flex-direction: column;
   gap: 14px;
-  max-width: 560px;
+  min-width: 0;
+}
+
+.contact__form {
+  flex: 1 1 380px;
+  min-width: 0;
 }
 
 .contact__body {

@@ -80,6 +80,26 @@ export interface SectionHeading {
   readonly title: string;
 }
 
+type FieldErrors = Readonly<Record<'required' | 'too_short' | 'too_long' | 'invalid', string>>;
+
+export interface ContactFormContent {
+  /** Accessible name of the form. */
+  readonly label: string;
+  readonly labels: { readonly name: string; readonly email: string; readonly message: string };
+  readonly requiredNote: string;
+  readonly honeypotLabel: string;
+  readonly submit: string;
+  readonly sending: string;
+  readonly summaryTitle: string;
+  readonly errors: {
+    readonly name: FieldErrors;
+    readonly email: FieldErrors;
+    readonly message: FieldErrors;
+  };
+  readonly success: { readonly title: string; readonly body: string; readonly again: string };
+  readonly failure: { readonly generic: string; readonly rateLimited: string };
+}
+
 export interface HomeContent {
   readonly meta: { readonly title: string; readonly description: string };
   readonly hero: {
@@ -119,6 +139,7 @@ export interface HomeContent {
     readonly windowTitle: string;
     readonly body: string;
     readonly email: string;
+    readonly form: ContactFormContent;
   };
 }
 

@@ -10,14 +10,14 @@ milestone. If the brief is ambiguous or conflicts with how Angular works, ask in
 
 ## Commands
 
-| Task        | Command                                              |
-| ----------- | ---------------------------------------------------- |
-| Dev server  | `pnpm start` (EN) · `pnpm start:fr` (FR), port 4200  |
-| Build (SSG) | `pnpm build` → `dist/dhaw-portfolio/browser/{en,fr}` |
-| Unit tests  | `pnpm test` (Vitest, once) · `pnpm test:watch`       |
-| E2E         | `pnpm build && pnpm e2e` (Playwright + axe)          |
-| Lint        | `pnpm lint`                                          |
-| Format      | `pnpm format` · `pnpm format:check`                  |
+| Task        | Command                                                   |
+| ----------- | --------------------------------------------------------- |
+| Dev server  | `pnpm start` (EN) · `pnpm start:fr` (FR), port 4200       |
+| Build (SSG) | `pnpm build` → `dist/dhaw-portfolio/browser/{en,fr}`      |
+| Unit tests  | `pnpm test` (Angular + server Vitest) · `pnpm test:watch` |
+| E2E         | `pnpm build && pnpm e2e` (Playwright + axe)               |
+| Lint        | `pnpm lint`                                               |
+| Format      | `pnpm format` · `pnpm format:check`                       |
 
 E2E serves the built output in `dist/` with the redirects and rewrites from `vercel.json`
 (`scripts/serve-dist.mjs`), so always build first.
@@ -65,6 +65,25 @@ E2E serves the built output in `dist/` with the redirects and rewrites from `ver
   `FlowDiagram` steps built from facts.
 - `/404` is prerendered per locale; `pnpm build` copies the English one to the root `404.html`,
   which Vercel serves (with a 404 status) for any unknown URL, French ones included.
+
+## Contact form and /api/contact
+
+- `src/shared/contact.ts` holds the rules both sides use (lengths, email pattern, honeypot field,
+  error codes). Change limits there only.
+- Client: `pages/home/sections/contact/contact-form.ts` (typed reactive form, error summary that
+  takes focus, inline messages via `aria-describedby`, loading/success states, honeypot).
+- Server: `api/contact.ts` is the Vercel Function; the logic is in `server/contact-handler.ts`
+  (method → same-origin → JSON → size → per-IP rate limit → honeypot → Zod → send via Resend as
+  plain text). Errors are JSON codes; submitted values are never echoed.
+- Vercel compiles `api/` with the nearest tsconfig, `api/tsconfig.json` (NodeNext → CommonJS,
+  which its launcher loads). Keep it: the root tsconfig's `"module": "preserve"` emits ES modules
+  that crash with FUNCTION_INVOCATION_FAILED. Relative imports in `api/`, `server/` and
+  `src/shared/` must end in `.js`. `server/function-smoke.spec.ts` compiles with that tsconfig and
+  loads the output with Node's ES-module detection off, the way Vercel runs it.
+- Server code is tested with plain Vitest (`pnpm test:server`, `vitest.server.config.ts`) and
+  type-checked by `pnpm lint` (`tsconfig.server.json`). E2E mocks `/api/contact`.
+- Secrets: `RESEND_API_KEY`, `CONTACT_TO_EMAIL`, `CONTACT_FROM_EMAIL` live only in Vercel
+  environment variables (see `.env.example`). Never commit `.env` files.
 
 ## i18n
 

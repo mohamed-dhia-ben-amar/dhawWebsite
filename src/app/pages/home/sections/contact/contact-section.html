@@ -1,11 +1,14 @@
 @let c = content();
 <section id="contact" class="contact" aria-labelledby="contact-title">
   <app-terminal-window [title]="c.windowTitle" variant="contact">
-    <div class="contact__text">
-      <app-prompt-label [command]="c.prompt" />
-      <h2 id="contact-title" class="section__title">{{ c.title }}</h2>
-      <p class="contact__body">{{ c.body }}</p>
-      <a class="contact__email" [href]="'mailto:' + c.email">{{ c.email }}</a>
+    <div class="contact__layout">
+      <div class="contact__text">
+        <app-prompt-label [command]="c.prompt" />
+        <h2 id="contact-title" class="section__title">{{ c.title }}</h2>
+        <p class="contact__body">{{ c.body }}</p>
+        <a class="contact__email" [href]="'mailto:' + c.email">{{ c.email }}</a>
+      </div>
+      <app-contact-form class="contact__form" [content]="c.form" />
     </div>
   </app-terminal-window>
 </section>
