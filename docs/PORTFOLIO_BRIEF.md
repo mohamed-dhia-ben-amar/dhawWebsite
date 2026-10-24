@@ -91,7 +91,7 @@ Store all copy in typed content files (`src/content/{en,fr}/…ts`) or Angular i
 **Case studies** — structure each as: Context → Problem → What I did → Stack → Results → What I'd do next. Use only the facts above; leave clearly marked placeholders such as `[OWNER: add architecture diagram]` for anything missing. **Confidentiality:** no Minotore code, screenshots, client names or internal URLs; describe architecture and approach, use simple diagrams drawn for the site.
 - Converty Shop: link to the App Store (`https://apps.apple.com/dz/app/converty-shop/id6466304252`) and Google Play (`https://play.google.com/store/apps/details?id=com.converty.app`). Phrase the 10k+ downloads / 4.4 rating as the app's current figures, not as results of the internship alone.
 
-**Links:** GitHub `https://github.com/mohamed-dhia-ben-amar`, LinkedIn `https://linkedin.com/in/mohameddhia-benamar`, email `mohameddhiabenamar@gmail.com`.
+**Links:** GitHub `https://github.com/mohamed-dhia-ben-amar`, LinkedIn `https://linkedin.com/in/mohameddhia-benamar`, email `contact@mohameddhia.dev`.
 
 ## 7. Contact form
 

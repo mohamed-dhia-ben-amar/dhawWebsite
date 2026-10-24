@@ -109,7 +109,7 @@ test.describe('contact form', () => {
     await page.goto('/en/');
     const form = await fill(page);
     await form.getByRole('button', { name: 'Send message' }).click();
-    await expect(form.getByRole('alert')).toContainText('mohameddhiabenamar@gmail.com');
+    await expect(form.getByRole('alert')).toContainText('contact@mohameddhia.dev');
   });
 
   test('the honeypot is not reachable by keyboard', async ({ page }) => {

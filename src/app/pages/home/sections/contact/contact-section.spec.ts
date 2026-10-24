@@ -24,8 +24,8 @@ describe('ContactSection', () => {
 
   it('links the email address with mailto', () => {
     const email = render().querySelector('.contact__email');
-    expect(email?.getAttribute('href')).toBe('mailto:mohameddhiabenamar@gmail.com');
-    expect(email?.textContent).toBe('mohameddhiabenamar@gmail.com');
+    expect(email?.getAttribute('href')).toBe('mailto:contact@mohameddhia.dev');
+    expect(email?.textContent).toBe('contact@mohameddhia.dev');
   });
 
   it('includes the contact form', () => {

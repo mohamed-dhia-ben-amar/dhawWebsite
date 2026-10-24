@@ -12,7 +12,7 @@ describe('personSchema', () => {
       name: 'Mohamed Dhia Ben Amar',
       jobTitle: 'Full-Stack Software Engineer',
       url: 'https://mohameddhia.dev/en/',
-      email: 'mailto:mohameddhiabenamar@gmail.com',
+      email: 'mailto:contact@mohameddhia.dev',
       address: { '@type': 'PostalAddress', addressLocality: 'Tunis', addressCountry: 'TN' },
       worksFor: { '@type': 'Organization', name: 'Minotore' },
     });

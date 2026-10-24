@@ -168,7 +168,7 @@ export const home: HomeContent = {
     title: 'Construisons quelque chose.',
     windowTitle: '~/contact.sh',
     body: 'Ouvert aux postes full-stack et frontend en Tunisie et en Europe, en remote ou en hybride.',
-    email: 'mohameddhiabenamar@gmail.com',
+    email: 'contact@mohameddhia.dev',
     form: {
       label: 'Formulaire de contact',
       labels: { name: 'nom\u00a0:', email: 'email\u00a0:', message: 'message\u00a0:' },
@@ -204,9 +204,9 @@ export const home: HomeContent = {
       },
       failure: {
         generic:
-          'Votre message n’a pas été envoyé. Réessayez, ou écrivez-moi à mohameddhiabenamar@gmail.com.',
+          'Votre message n’a pas été envoyé. Réessayez, ou écrivez-moi à contact@mohameddhia.dev.',
         rateLimited:
-          'Trop de messages en peu de temps. Réessayez dans quelques minutes, ou écrivez-moi à mohameddhiabenamar@gmail.com.',
+          'Trop de messages en peu de temps. Réessayez dans quelques minutes, ou écrivez-moi à contact@mohameddhia.dev.',
       },
     },
   },

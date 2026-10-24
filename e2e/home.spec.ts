@@ -37,9 +37,9 @@ test.describe('home page', () => {
     await page.goto('/en/');
     await page.getByRole('link', { name: 'Get in touch' }).click();
     await expect(page.locator('#contact')).toBeInViewport();
-    await expect(page.getByRole('link', { name: 'mohameddhiabenamar@gmail.com' })).toHaveAttribute(
+    await expect(page.getByRole('link', { name: 'contact@mohameddhia.dev' })).toHaveAttribute(
       'href',
-      'mailto:mohameddhiabenamar@gmail.com',
+      'mailto:contact@mohameddhia.dev',
     );
   });
 

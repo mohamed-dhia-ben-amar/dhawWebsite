@@ -166,7 +166,7 @@ export const home: HomeContent = {
     title: "Let's build something.",
     windowTitle: '~/contact.sh',
     body: 'Open to full-stack and frontend roles in Tunisia and the EU, remote or hybrid.',
-    email: 'mohameddhiabenamar@gmail.com',
+    email: 'contact@mohameddhia.dev',
     form: {
       label: 'Contact form',
       labels: { name: 'name:', email: 'email:', message: 'message:' },
@@ -202,9 +202,9 @@ export const home: HomeContent = {
       },
       failure: {
         generic:
-          'Your message wasn’t sent. Please try again, or email me at mohameddhiabenamar@gmail.com.',
+          'Your message wasn’t sent. Please try again, or email me at contact@mohameddhia.dev.',
         rateLimited:
-          'Too many messages in a short time. Please try again in a few minutes, or email me at mohameddhiabenamar@gmail.com.',
+          'Too many messages in a short time. Please try again in a few minutes, or email me at contact@mohameddhia.dev.',
       },
     },
   },
