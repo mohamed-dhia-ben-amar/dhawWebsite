@@ -1,7 +1,16 @@
 import { expect, test } from '@playwright/test';
 import { expectNoHorizontalScroll } from './support/a11y';
 
-const ROUTES = ['/en/', '/en/styleguide', '/fr/', '/fr/styleguide'];
+// Every prerendered page, in both locales (brief §8: works from 320px, no horizontal page scroll).
+const PAGES = [
+  '/',
+  '/work/widget-library',
+  '/work/nova',
+  '/work/converty-shop',
+  '/404',
+  '/styleguide',
+];
+const ROUTES = ['en', 'fr'].flatMap((locale) => PAGES.map((page) => `/${locale}${page}`));
 
 test.describe('site layout', () => {
   test('has header, main and footer landmarks', async ({ page }) => {
