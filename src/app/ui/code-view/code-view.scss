@@ -1,0 +1,46 @@
+:host {
+  display: block;
+  min-width: 0;
+}
+
+.code {
+  overflow-x: auto;
+  padding: 18px 0 22px;
+}
+
+.code__pre {
+  color: var(--text);
+  font-size: var(--text-md);
+  line-height: var(--leading-code);
+  counter-reset: line;
+}
+
+.code__line {
+  display: block;
+  padding-right: var(--space-6);
+  white-space: pre;
+  counter-increment: line;
+
+  // Decorative line numbers: generated content is not part of the text, is skipped by
+  // screen readers (alt text ""), is never copied and needs no contrast (brief: --line-number).
+  &::before {
+    content: counter(line) / '';
+    display: inline-block;
+    width: 56px;
+    padding-right: var(--space-5);
+    color: var(--line-number);
+    text-align: right;
+  }
+}
+
+.tok--key {
+  color: var(--text-muted);
+}
+
+.tok--string {
+  color: var(--accent);
+}
+
+.tok--date {
+  color: var(--warm);
+}

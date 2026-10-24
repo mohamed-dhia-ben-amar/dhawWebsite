@@ -1,0 +1,22 @@
+<article class="card">
+  <app-editor-pane [tabs]="tabs()">
+    <div class="card__body">
+      <div class="card__text">
+        <h3 class="card__title">{{ title() }}</h3>
+        <p class="card__summary">{{ summary() }}</p>
+        <a class="card__link" [routerLink]="href()">
+          {{ linkLabel() }}<span class="visually-hidden">: {{ title() }}</span>
+          <span aria-hidden="true">→</span>
+        </a>
+      </div>
+      <dl class="card__stats">
+        @for (stat of stats(); track stat.label) {
+          <div>
+            <dt class="card__stat-label">{{ stat.label }}</dt>
+            <dd class="card__stat-value">{{ stat.value }}</dd>
+          </div>
+        }
+      </dl>
+    </div>
+  </app-editor-pane>
+</article>

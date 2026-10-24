@@ -1,0 +1,17 @@
+<header class="header">
+  <div class="header__inner container">
+    <a class="header__logo" routerLink="/">
+      {{ content.logo.text }}<span class="header__prompt">{{ content.logo.prompt }}</span>
+      <span class="visually-hidden"> {{ content.logo.srSuffix }}</span>
+    </a>
+    <nav class="header__nav" [attr.aria-label]="content.nav.label">
+      <ul class="header__links" role="list">
+        @for (link of content.nav.links; track link.fragment) {
+          <li>
+            <a class="header__link" routerLink="/" [fragment]="link.fragment">{{ link.label }}</a>
+          </li>
+        }
+      </ul>
+    </nav>
+  </div>
+</header>

@@ -1,0 +1,11 @@
+<div class="terminal" [attr.role]="label() ? 'group' : null" [attr.aria-label]="label() ?? null">
+  <div class="terminal__bar">
+    <span class="terminal__dot" aria-hidden="true"></span>
+    <span class="terminal__dot" aria-hidden="true"></span>
+    <span class="terminal__dot" aria-hidden="true"></span>
+    <span class="terminal__title">{{ title() }}</span>
+  </div>
+  <div class="terminal__body">
+    <ng-content />
+  </div>
+</div>

@@ -28,13 +28,29 @@ E2E serves the built output in `dist/` as static files, so always build first.
   `docker run --rm --ipc=host -v "$PWD":/work -w /work -e CI=1 mcr.microsoft.com/playwright:v<version>-noble bash -c "corepack enable pnpm && pnpm e2e"`
   (match `<version>` to the installed `@playwright/test`).
 
+## Project structure
+
+- `src/styles/`: `_tokens.scss` (every color, type, spacing and radius token), `_fonts.scss`
+  (self-hosted variable fonts and metric-matched fallbacks), `_base.scss` (reset, focus, `.container`,
+  `.visually-hidden`, reduced motion).
+- `src/content/`: typed copy per locale (`en/` now, `fr/` in milestone 4). The shell reads it through
+  the `SITE_CONTENT` token (`src/app/core/site-content.ts`).
+- `src/app/ui/`: signature components (TerminalWindow, PromptLabel, EditorPane, CodeView, StatStrip,
+  ProjectCard, StatusBar).
+- `src/app/layout/`: app shell (SkipLink, SiteHeader, SiteFooter, LanguageSwitch).
+- `src/app/pages/`: routed pages. `/styleguide` is an internal noindex showcase of the components;
+  keep it out of the sitemap.
+
 ## Conventions
 
 - Standalone components only (no NgModules). Zoneless change detection.
 - State in **signals**; `ChangeDetectionStrategy.OnPush` on every component (lint-enforced).
-- **No hard-coded colors** in components: use the CSS custom properties from the tokens file.
-- New components need unit tests (Vitest, `*.spec.ts` next to the file). New routes need an
-  e2e test with an axe scan.
+- **No hard-coded colors** in components: use the custom properties in `src/styles/_tokens.scss`.
+  Stylelint rejects hex, named and `rgb()`/`hsl()` colors under `src/app/`.
+- Every text/background pair must reach 4.5:1. `--text-faint` is `#82828B`, not the brief's
+  `#71717A` (which fails). Decorative line numbers are CSS counters, not text.
+- New components get a demo on `/styleguide` and need unit tests (Vitest, `*.spec.ts` next to
+  the file). New routes need an e2e test with an axe scan.
 - Copy lives in typed content files (`src/content/{en,fr}/…`), not inline in templates.
 - File names follow the Angular 2025 style guide (`home.ts`, not `home.component.ts`).
 - Conventional commits, small and focused. **One milestone per PR**, on a `feat/mN-…` branch.

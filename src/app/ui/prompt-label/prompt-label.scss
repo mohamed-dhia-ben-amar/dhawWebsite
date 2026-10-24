@@ -1,0 +1,14 @@
+:host {
+  display: block;
+}
+
+.prompt {
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: var(--text-md);
+  font-weight: 500;
+}
+
+.prompt__sign {
+  color: var(--accent);
+}

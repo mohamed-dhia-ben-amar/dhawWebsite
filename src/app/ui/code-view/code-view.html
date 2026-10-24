@@ -1,0 +1,2 @@
+<!-- prettier-ignore -->
+<div class="code" role="region" tabindex="0" [attr.aria-label]="label()"><pre class="code__pre"><code>@for (line of lines(); track $index) {<span class="code__line">@for (token of line; track $index) {<span [class]="'tok tok--' + token.kind">{{ token.text }}</span>}</span>}</code></pre></div>

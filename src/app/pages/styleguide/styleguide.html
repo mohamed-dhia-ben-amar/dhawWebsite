@@ -1,0 +1,121 @@
+<div class="guide container">
+  <header class="guide__intro">
+    <app-prompt-label command="open styleguide" />
+    <h1 class="guide__title">Styleguide</h1>
+    <p class="guide__lede">Design tokens and signature components. Internal page, not indexed.</p>
+  </header>
+
+  <section class="guide__section" aria-labelledby="sg-colors">
+    <app-prompt-label command="cat tokens/colors.scss" />
+    <h2 id="sg-colors">Colors</h2>
+    <ul class="swatches" role="list">
+      @for (swatch of data.swatches; track swatch.token) {
+        <li class="swatch">
+          <span
+            class="swatch__chip"
+            aria-hidden="true"
+            [style.background]="'var(' + swatch.token + ')'"
+          ></span>
+          <code class="swatch__token">{{ swatch.token }}</code>
+          <span class="swatch__value">{{ swatch.value }}</span>
+        </li>
+      }
+    </ul>
+  </section>
+
+  <section class="guide__section" aria-labelledby="sg-type">
+    <app-prompt-label command="cat tokens/type.scss" />
+    <h2 id="sg-type">Type</h2>
+    <p class="type-hero" aria-hidden="true">
+      Full-stack engineer building <span class="type-hero__accent">design systems</span>.
+    </p>
+    <p class="type-h3">Space Grotesk 600 · section and card titles</p>
+    <p>
+      Inter 400, 16px / 1.6 for body copy. I build Angular component libraries in Nx monorepos for
+      market finance.
+    </p>
+    <p class="type-mono">JetBrains Mono · nav, prompts, labels, code</p>
+  </section>
+
+  <section class="guide__section" aria-labelledby="sg-terminal">
+    <app-prompt-label command="./terminal-window --variant terminal" />
+    <h2 id="sg-terminal">TerminalWindow</h2>
+    <app-terminal-window class="guide__narrow" title="mohamed@tunis — zsh" label="Terminal summary">
+      @for (line of data.terminalLines; track line.command) {
+        <p class="term__cmd">
+          <span class="term__sign" aria-hidden="true">$</span> {{ line.command }}
+        </p>
+        <p class="term__out">
+          @if (line.warm) {
+            <span class="term__warm" aria-hidden="true">●</span>
+          }
+          {{ line.output }}
+        </p>
+      }
+    </app-terminal-window>
+  </section>
+
+  <section class="guide__section" aria-labelledby="sg-stats">
+    <app-prompt-label command="./stat-strip" />
+    <h2 id="sg-stats">StatStrip</h2>
+    <app-stat-strip [stats]="data.stats" />
+  </section>
+
+  <section class="guide__section" aria-labelledby="sg-projects">
+    <app-prompt-label command="ls ~/featured-work" />
+    <h2 id="sg-projects">ProjectCard</h2>
+    @for (project of data.projects; track project.file) {
+      <!-- Case-study routes arrive in milestone 6; demo links point back here. -->
+      <app-project-card
+        [title]="project.title"
+        [summary]="project.summary"
+        [file]="project.file"
+        [stack]="project.stack"
+        [stats]="project.stats"
+        href="/styleguide"
+        linkLabel="Read case study"
+      />
+    }
+  </section>
+
+  <section class="guide__section" aria-labelledby="sg-editor">
+    <app-prompt-label command="code experience.json" />
+    <h2 id="sg-editor">EditorPane + CodeView</h2>
+    <app-editor-pane [tabs]="[{ label: 'minotore.json', active: true }]">
+      <nav paneExplorer class="explorer" aria-label="Experience files">
+        <p class="explorer__heading" aria-hidden="true">EXPLORER</p>
+        <ul class="explorer__files" role="list">
+          @for (file of data.explorerFiles; track file; let first = $first) {
+            <li class="explorer__file" [class.explorer__file--active]="first">
+              <span class="explorer__icon" aria-hidden="true">{{ '{}' }}</span
+              >{{ file }}
+            </li>
+          }
+        </ul>
+      </nav>
+      <app-code-view [lines]="data.minotoreLines" label="minotore.json" />
+    </app-editor-pane>
+  </section>
+
+  <section class="guide__section" aria-labelledby="sg-contact">
+    <app-prompt-label command="./terminal-window --variant contact" />
+    <h2 id="sg-contact">TerminalWindow (contact)</h2>
+    <app-terminal-window title="~/contact.sh" variant="contact">
+      <p class="guide__lede">
+        Open to full-stack and frontend roles in Tunisia and the EU, remote or hybrid.
+      </p>
+    </app-terminal-window>
+  </section>
+
+  <section class="guide__section" aria-labelledby="sg-lang">
+    <app-prompt-label command="./language-switch" />
+    <h2 id="sg-lang">LanguageSwitch</h2>
+    <p class="guide__lede">Not in the header until the French build exists (milestone 4).</p>
+    <app-language-switch
+      [options]="site.languages.options"
+      [current]="site.locale"
+      [label]="site.languages.label"
+      path="/styleguide"
+    />
+  </section>
+</div>

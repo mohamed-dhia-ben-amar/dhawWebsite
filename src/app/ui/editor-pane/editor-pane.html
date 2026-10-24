@@ -1,0 +1,15 @@
+<div class="pane">
+  <div class="pane__explorer"><ng-content select="[paneExplorer]" /></div>
+  <div class="pane__main">
+    @if (tabs().length) {
+      <div class="pane__tabs">
+        @for (tab of tabs(); track $index) {
+          <span class="pane__tab" [class.pane__tab--active]="tab.active">{{ tab.label }}</span>
+        }
+      </div>
+    }
+    <div class="pane__body">
+      <ng-content />
+    </div>
+  </div>
+</div>
