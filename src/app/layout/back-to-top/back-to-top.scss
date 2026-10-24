@@ -1,0 +1,30 @@
+.to-top {
+  position: fixed;
+  z-index: 30;
+  right: max(var(--space-4), env(safe-area-inset-right));
+  bottom: calc(var(--space-4) + var(--footer-overlap, 0px) + env(safe-area-inset-bottom));
+  display: grid;
+  place-items: center;
+  width: var(--button-height);
+  height: var(--button-height);
+  padding: 0;
+  color: var(--accent);
+  background: var(--surface-2);
+  border: 1px solid var(--border-strong);
+  border-radius: 50%;
+  cursor: pointer;
+  animation: appear 150ms ease-out;
+
+  &:hover {
+    color: var(--on-accent);
+    background: var(--accent);
+    border-color: var(--accent);
+  }
+}
+
+@keyframes appear {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}

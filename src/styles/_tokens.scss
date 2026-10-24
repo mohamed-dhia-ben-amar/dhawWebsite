@@ -74,6 +74,9 @@
 
   // Layout
   --container-max: 1160px;
+
+  // Sticky header height; measured and updated by SiteHeader, these are prerender defaults.
+  --header-height: 113px;
   --container-padding: 1.5rem;
   --touch-target: 44px;
   --button-height: 48px;
@@ -81,4 +84,10 @@
   // Focus
   --focus-ring: 2px solid var(--accent);
   --focus-offset: 3px;
+}
+
+@media (width >= 640px) {
+  :root {
+    --header-height: 61px;
+  }
 }

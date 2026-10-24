@@ -19,7 +19,13 @@ describe('App', () => {
   it('renders the shell in order: skip link, header, main, footer', () => {
     const el = render();
     const order = [...el.children].map((child) => child.tagName.toLowerCase());
-    expect(order).toEqual(['app-skip-link', 'app-site-header', 'main', 'app-site-footer']);
+    expect(order).toEqual([
+      'app-skip-link',
+      'app-site-header',
+      'main',
+      'app-site-footer',
+      'app-back-to-top',
+    ]);
   });
 
   it('makes main the focusable skip-link target around the router outlet', () => {

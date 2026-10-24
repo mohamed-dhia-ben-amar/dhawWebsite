@@ -33,6 +33,8 @@ export interface SiteContent {
     };
   };
   readonly skipLink: string;
+  /** Accessible name of the floating back-to-top button. */
+  readonly backToTop: string;
   readonly logo: {
     readonly text: string;
     readonly prompt: string;
