@@ -6,7 +6,7 @@ test.describe('home page', () => {
     await page.goto('/en/');
     await expect(page).toHaveTitle('Mohamed Dhia Ben Amar · Full-Stack Software Engineer');
     await expect(page.getByRole('heading', { level: 1 })).toHaveText(
-      'Full-stack engineer building design systems and AI-assisted workflows.',
+      'Full-stack engineer building configurable widget libraries and AI-assisted workflows.',
     );
     await expect(
       page.getByRole('region', { name: 'Highlights' }).getByRole('listitem'),

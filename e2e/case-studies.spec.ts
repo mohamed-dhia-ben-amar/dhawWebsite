@@ -2,7 +2,7 @@ import { expect, test } from '@playwright/test';
 import { expectNoA11yViolations } from './support/a11y';
 
 const STUDIES = [
-  { slug: 'widget-library', title: 'Shared widget library for market finance' },
+  { slug: 'widget-library', title: 'Configurable widget library for a CMS page builder' },
   { slug: 'nova', title: 'NOVA: AI-assisted development workflow' },
   { slug: 'converty-shop', title: 'Converty Shop merchant app' },
 ];
@@ -66,7 +66,7 @@ test.describe('case studies', () => {
   }) => {
     await page.goto('/en/work/converty-shop');
     const nav = page.getByRole('navigation', { name: 'More work' });
-    await nav.getByRole('link', { name: /Shared widget library/ }).click();
+    await nav.getByRole('link', { name: /Configurable widget library/ }).click();
     await expect(page).toHaveURL(/\/en\/work\/widget-library$/);
     await expect(page.getByRole('heading', { level: 1 })).toHaveText(STUDIES[0].title);
 

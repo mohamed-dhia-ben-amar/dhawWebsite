@@ -15,9 +15,9 @@ describe('HeroSection', () => {
   it('renders the headline with the accented phrase', () => {
     const h1 = render().querySelector('h1');
     expect(h1?.textContent?.trim()).toBe(
-      'Full-stack engineer building design systems and AI-assisted workflows.',
+      'Full-stack engineer building configurable widget libraries and AI-assisted workflows.',
     );
-    expect(h1?.querySelector('.hero__accent')?.textContent).toBe('design systems');
+    expect(h1?.querySelector('.hero__accent')?.textContent).toBe('configurable widget libraries');
   });
 
   it('links "Get in touch" to the contact section', () => {

@@ -39,7 +39,7 @@ test.describe('internationalisation', () => {
     await page.goto('/fr/');
     await expect(page).toHaveTitle('Mohamed Dhia Ben Amar · Ingénieur logiciel full-stack');
     await expect(page.getByRole('heading', { level: 1 })).toHaveText(
-      'Ingénieur full-stack, je construis des design systems et des workflows assistés par l’IA.',
+      'Ingénieur full-stack : bibliothèques de widgets configurables et workflows assistés par IA.',
     );
     await expect(page.getByRole('link', { name: 'Me contacter' })).toBeVisible();
     await expect(page.getByRole('navigation', { name: 'Principale' })).toContainText('./parcours');

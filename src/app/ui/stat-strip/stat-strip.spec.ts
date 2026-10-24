@@ -5,7 +5,7 @@ describe('StatStrip', () => {
   it('renders each stat as a list item with value then caption', () => {
     const fixture = TestBed.createComponent(StatStrip);
     fixture.componentRef.setInput('stats', [
-      { value: '76', caption: 'reusable widgets across 8 projects' },
+      { value: '21', caption: 'widgets I authored, of 81 in our team library' },
       { value: '~9,000', caption: 'unit tests, 80–96% coverage' },
     ]);
     fixture.detectChanges();
@@ -17,7 +17,7 @@ describe('StatStrip', () => {
       li.querySelector('.stats__caption')?.textContent,
     ]);
     expect(items).toEqual([
-      ['76', 'reusable widgets across 8 projects'],
+      ['21', 'widgets I authored, of 81 in our team library'],
       ['~9,000', 'unit tests, 80–96% coverage'],
     ]);
   });

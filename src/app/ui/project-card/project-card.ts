@@ -3,7 +3,7 @@ import { RouterLink } from '@angular/router';
 import { EditorPane, EditorTab } from '../editor-pane/editor-pane';
 
 export interface ProjectStat {
-  /** Code-style label, e.g. `size_cut`. */
+  /** Code-style label, e.g. `team_widgets`. */
   readonly label: string;
   readonly value: string;
 }

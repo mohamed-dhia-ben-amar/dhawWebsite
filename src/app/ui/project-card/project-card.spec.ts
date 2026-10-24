@@ -7,8 +7,8 @@ describe('ProjectCard', () => {
     TestBed.configureTestingModule({ providers: [provideRouter([])] });
     const fixture = TestBed.createComponent(ProjectCard);
     const ref = fixture.componentRef;
-    ref.setInput('title', 'Shared widget library for market finance');
-    ref.setInput('summary', 'Accessible, reactive widgets shared across 8 projects.');
+    ref.setInput('title', 'Configurable widget library for a CMS page builder');
+    ref.setInput('summary', 'I built 21 of the 81 widgets in our team library.');
     if (withLink) {
       ref.setInput('href', '/work/widget-library');
       ref.setInput('linkLabel', 'Read case study');
@@ -16,8 +16,8 @@ describe('ProjectCard', () => {
     ref.setInput('file', 'widget-library/README.md');
     ref.setInput('stack', 'Angular · Nx · Vitest');
     ref.setInput('stats', [
-      { label: 'widgets', value: '76' },
-      { label: 'size_cut', value: '30–50%' },
+      { label: 'my_widgets', value: '21' },
+      { label: 'team_widgets', value: '81' },
     ]);
     fixture.detectChanges();
     return fixture.nativeElement as HTMLElement;
@@ -26,9 +26,9 @@ describe('ProjectCard', () => {
   it('renders an article with an h3 title and summary', () => {
     const el = render();
     expect(el.querySelector('article h3')?.textContent).toBe(
-      'Shared widget library for market finance',
+      'Configurable widget library for a CMS page builder',
     );
-    expect(el.querySelector('.card__summary')?.textContent).toContain('8 projects');
+    expect(el.querySelector('.card__summary')?.textContent).toContain('21 of the 81 widgets');
   });
 
   it('shows the file as the active tab and the stack as a secondary tab', () => {
@@ -46,7 +46,9 @@ describe('ProjectCard', () => {
       .map((node) => node.textContent)
       .join('')
       .trim();
-    expect(accessibleText).toBe('Read case study — Shared widget library for market finance');
+    expect(accessibleText).toBe(
+      'Read case study — Configurable widget library for a CMS page builder',
+    );
     expect(link?.querySelector('[aria-hidden="true"]')?.textContent).toBe('→');
   });
 
@@ -57,9 +59,9 @@ describe('ProjectCard', () => {
   it('renders stats as a description list', () => {
     const el = render();
     expect([...el.querySelectorAll('dt')].map((d) => d.textContent)).toEqual([
-      'widgets',
-      'size_cut',
+      'my_widgets',
+      'team_widgets',
     ]);
-    expect([...el.querySelectorAll('dd')].map((d) => d.textContent)).toEqual(['76', '30–50%']);
+    expect([...el.querySelectorAll('dd')].map((d) => d.textContent)).toEqual(['21', '81']);
   });
 });

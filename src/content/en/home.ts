@@ -5,17 +5,17 @@ export const home: HomeContent = {
   meta: {
     title: 'Mohamed Dhia Ben Amar · Full-Stack Software Engineer',
     description:
-      'Full-stack engineer in Tunis building Angular design systems and AI-assisted workflows. Open to EU remote and hybrid roles.',
+      'Full-stack engineer in Tunis building configurable Angular widget libraries and AI-assisted workflows. Open to EU remote and hybrid roles.',
   },
   hero: {
     availability: 'Open to EU remote/hybrid · Based in Tunis',
     headline: {
       before: 'Full-stack engineer building ',
-      accent: 'design systems',
+      accent: 'configurable widget libraries',
       after: ' and AI-assisted workflows.',
     },
     intro:
-      "I'm Mohamed Dhia Ben Amar. I build Angular component libraries in Nx monorepos for market finance, lead AI-assisted development with Claude Code agents, and ship with React, Node.js and Golang.",
+      "I'm Mohamed Dhia Ben Amar. I build configurable Angular widgets that power a CMS page builder, lead AI-assisted development with Claude Code agents, and ship with React, Node.js and Golang.",
     cta: {
       contact: 'Get in touch',
       cv: {
@@ -54,8 +54,8 @@ export const home: HomeContent = {
   highlights: {
     label: 'Highlights',
     stats: [
-      { value: '76', caption: 'reusable widgets across 8 projects' },
-      { value: '~9,000', caption: 'unit tests, 80–96% coverage' },
+      { value: '21', caption: 'widgets I authored, of 81 in our team library' },
+      { value: '~9,000', caption: 'unit tests after I led the Vitest adoption' },
       { value: '4 days', caption: 'widget delivery, down from 1–2 weeks' },
       { value: '10k+', caption: 'downloads on the Converty Shop app' },
     ],
@@ -67,14 +67,14 @@ export const home: HomeContent = {
     projects: [
       {
         slug: 'widget-library',
-        title: 'Shared widget library for market finance',
+        title: 'Configurable widget library for a CMS page builder',
         summary:
-          'Accessible, reactive widgets with RxJS and Signals, shared across 8 projects at Minotore, plus the Angular 18 → 21 / Nx 22 migration in one sprint.',
+          'I built 21 of the 81 accessible Angular widgets (product, content, document, search) in our team library. Webmasters configure them through JSON-schema-generated forms and add them to their sites. I also supervised the Angular 18 → 21 / Nx 22 migration in one sprint.',
         file: 'widget-library/README.md',
         stack: 'Angular · Nx · Vitest',
         stats: [
-          { label: 'widgets', value: '76' },
-          { label: 'size_cut', value: '30–50%' },
+          { label: 'my_widgets', value: '21' },
+          { label: 'team_widgets', value: '81' },
         ],
       },
       {
@@ -117,7 +117,7 @@ export const home: HomeContent = {
         location: 'Tunis (hybrid)',
         period: 'Dec 2024 – present',
         highlights: [
-          '76 widgets shared across 8 projects',
+          'Author of 21 of the 81 team widgets, used across 8 projects',
           'Angular 18 → 21 / Nx 22 migration, 3 developers',
           'Tech lead, NOVA: AI-assisted dev workflow',
         ],

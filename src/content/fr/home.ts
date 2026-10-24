@@ -7,17 +7,17 @@ export const home: HomeContent = {
   meta: {
     title: 'Mohamed Dhia Ben Amar · Ingénieur logiciel full-stack',
     description:
-      'Ingénieur full-stack basé à Tunis\u00a0: design systems Angular et workflows de développement assistés par l’IA. Ouvert aux postes en remote ou en hybride en Europe.',
+      'Ingénieur full-stack basé à Tunis\u00a0: bibliothèques de widgets Angular configurables et workflows de développement assistés par IA. Ouvert aux postes en remote ou en hybride en Europe.',
   },
   hero: {
     availability: 'Remote ou hybride en Europe · Basé à Tunis',
     headline: {
-      before: 'Ingénieur full-stack, je construis des ',
-      accent: 'design systems',
-      after: ' et des workflows assistés par l’IA.',
+      before: 'Ingénieur full-stack\u00a0: bibliothèques de ',
+      accent: 'widgets configurables',
+      after: ' et workflows assistés par IA.',
     },
     intro:
-      'Je suis Mohamed Dhia Ben Amar. Je développe des bibliothèques de composants Angular dans des monorepos Nx pour la finance de marché, je pilote le développement assisté par l’IA avec des agents Claude Code, et je livre aussi en React, Node.js et Golang.',
+      'Je suis Mohamed Dhia Ben Amar. Je développe des widgets Angular configurables qui alimentent le page builder d’un CMS, je pilote le développement assisté par IA avec des agents Claude Code, et je livre aussi avec React, Node.js et Golang.',
     cta: {
       contact: 'Me contacter',
       cv: {
@@ -56,8 +56,14 @@ export const home: HomeContent = {
   highlights: {
     label: 'Chiffres clés',
     stats: [
-      { value: '76', caption: 'widgets réutilisables sur 8 projets' },
-      { value: '~9\u202f000', caption: 'tests unitaires, 80–96\u00a0% de couverture' },
+      {
+        value: '21',
+        caption: 'widgets dont je suis l’auteur, sur 81 dans la bibliothèque de l’équipe',
+      },
+      {
+        value: '~9\u202f000',
+        caption: 'tests unitaires depuis l’adoption de Vitest que j’ai pilotée',
+      },
       { value: '4 jours', caption: 'pour livrer un widget, contre 1 à 2 semaines' },
       { value: '10k+', caption: 'téléchargements de l’app Converty Shop' },
     ],
@@ -69,14 +75,14 @@ export const home: HomeContent = {
     projects: [
       {
         slug: 'widget-library',
-        title: 'Bibliothèque de widgets pour la finance de marché',
+        title: 'Bibliothèque de widgets configurables pour le page builder d’un CMS',
         summary:
-          'Des widgets accessibles et réactifs, en RxJS et Signals, partagés entre 8 projets chez Minotore, et la migration Angular 18 → 21 / Nx 22 menée en un seul sprint.',
+          'J’ai développé 21 des 81 widgets Angular accessibles (produit, contenu, document, recherche) de la bibliothèque de l’équipe. Les webmasters les configurent via des formulaires générés depuis un schéma JSON et les ajoutent à leurs sites. J’ai aussi supervisé la migration Angular 18 → 21 / Nx 22 en un sprint.',
         file: 'widget-library/README.md',
         stack: 'Angular · Nx · Vitest',
         stats: [
-          { label: 'widgets', value: '76' },
-          { label: 'size_cut', value: '30–50\u00a0%' },
+          { label: 'my_widgets', value: '21' },
+          { label: 'team_widgets', value: '81' },
         ],
       },
       {
@@ -119,7 +125,7 @@ export const home: HomeContent = {
         location: 'Tunis (hybride)',
         period: 'déc. 2024 – aujourd’hui',
         highlights: [
-          '76 widgets partagés entre 8 projets',
+          'Auteur de 21 des 81 widgets de l’équipe, utilisés sur 8 projets',
           'Migration Angular 18 → 21 / Nx 22 avec 3 développeurs',
           'Lead technique de NOVA, workflow de dev assisté par l’IA',
         ],
