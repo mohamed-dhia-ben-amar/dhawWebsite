@@ -171,7 +171,7 @@ describe('ContactForm', () => {
     fillValid();
     await submit();
     expect(el.querySelector('[role="alert"]')?.textContent).toContain(
-      'email me at mohameddhiabenamar@gmail.com',
+      'email me at contact@mohameddhia.dev',
     );
   });
 

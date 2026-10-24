@@ -7,7 +7,7 @@ export const site: SiteContent = {
     person: {
       name: 'Mohamed Dhia Ben Amar',
       jobTitle: 'Full-Stack Software Engineer',
-      email: 'mohameddhiabenamar@gmail.com',
+      email: 'contact@mohameddhia.dev',
       locality: 'Tunis',
       countryCode: 'TN',
       worksFor: 'Minotore',
