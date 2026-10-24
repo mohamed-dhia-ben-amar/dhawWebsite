@@ -48,10 +48,10 @@ describe('Home', () => {
   it('sets a canonical URL and the homepage share image', () => {
     render();
     expect(document.head.querySelector('link[rel="canonical"]')?.getAttribute('href')).toBe(
-      'https://dhaw-website.vercel.app/en/',
+      'https://mohameddhia.dev/en/',
     );
     expect(TestBed.inject(Meta).getTag('property="og:image"')?.content).toBe(
-      'https://dhaw-website.vercel.app/en/og/home.png',
+      'https://mohameddhia.dev/en/og/home.png',
     );
   });
 });

@@ -87,9 +87,9 @@ test.describe('case studies', () => {
       .locator('head link[rel="alternate"][hreflang]')
       .evaluateAll((links) => links.map((l) => l.getAttribute('href')));
     expect(hrefs).toEqual([
-      'https://dhaw-website.vercel.app/en/work/converty-shop',
-      'https://dhaw-website.vercel.app/fr/work/converty-shop',
-      'https://dhaw-website.vercel.app/en/work/converty-shop',
+      'https://mohameddhia.dev/en/work/converty-shop',
+      'https://mohameddhia.dev/fr/work/converty-shop',
+      'https://mohameddhia.dev/en/work/converty-shop',
     ]);
   });
 

@@ -1,7 +1,7 @@
 import { expect, test } from '@playwright/test';
 import { expectNoA11yViolations } from './support/a11y';
 
-const ORIGIN = 'https://dhaw-website.vercel.app';
+const ORIGIN = 'https://mohameddhia.dev';
 
 test.describe('internationalisation', () => {
   test('the root redirects to the English homepage', async ({ page }) => {

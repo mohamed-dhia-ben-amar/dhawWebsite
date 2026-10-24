@@ -116,7 +116,7 @@ E2E serves the built output in `dist/` with the redirects and rewrites from `ver
 - `src/locale/messages.fr.xlf` is empty on purpose (no `i18n` attributes in templates).
 - `/` redirects to `/en/`; `/cv/*` and `/fonts/*` are rewritten to the `/en/` copies (`vercel.json`).
 - Every page gets `hreflang` alternates (en, fr, x-default) from `AlternateLinks`, built on
-  `SITE_ORIGIN` in `src/app/core/site-config.ts` (switch to the custom domain in milestone 9).
+  `SITE_ORIGIN` in `src/app/core/site-config.ts` (`https://mohameddhia.dev`).
 
 ## Conventions
 

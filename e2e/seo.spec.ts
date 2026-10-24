@@ -1,6 +1,6 @@
 import { expect, test, type APIRequestContext, type Page } from '@playwright/test';
 
-const ORIGIN = 'https://dhaw-website.vercel.app';
+const ORIGIN = 'https://mohameddhia.dev';
 const toLocal = (url: string) => url.replace(ORIGIN, '');
 
 async function meta(page: Page, selector: string) {

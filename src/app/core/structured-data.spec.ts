@@ -5,13 +5,13 @@ import { StructuredData, personSchema } from './structured-data';
 
 describe('personSchema', () => {
   it('describes the owner as a schema.org Person', () => {
-    const schema = personSchema(site.seo.person, 'https://dhaw-website.vercel.app/en/');
+    const schema = personSchema(site.seo.person, 'https://mohameddhia.dev/en/');
     expect(schema).toMatchObject({
       '@context': 'https://schema.org',
       '@type': 'Person',
       name: 'Mohamed Dhia Ben Amar',
       jobTitle: 'Full-Stack Software Engineer',
-      url: 'https://dhaw-website.vercel.app/en/',
+      url: 'https://mohameddhia.dev/en/',
       email: 'mailto:mohameddhiabenamar@gmail.com',
       address: { '@type': 'PostalAddress', addressLocality: 'Tunis', addressCountry: 'TN' },
       worksFor: { '@type': 'Organization', name: 'Minotore' },
