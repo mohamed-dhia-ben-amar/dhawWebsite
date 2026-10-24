@@ -19,13 +19,17 @@ describe('ProjectsSection', () => {
     expect(section?.querySelector('h2')?.textContent).toBe('Selected projects');
   });
 
-  it('renders the three project cards without case-study links yet', () => {
+  it('renders the three project cards, each linking to its case study', () => {
     const el = render();
     expect([...el.querySelectorAll('h3')].map((h) => h.textContent)).toEqual([
       'Shared widget library for market finance',
       'NOVA: AI-assisted development workflow',
       'Converty Shop merchant app',
     ]);
-    expect(el.querySelector('.card__link')).toBeNull();
+    expect([...el.querySelectorAll('.card__link')].map((a) => a.getAttribute('href'))).toEqual([
+      '/work/widget-library',
+      '/work/nova',
+      '/work/converty-shop',
+    ]);
   });
 });

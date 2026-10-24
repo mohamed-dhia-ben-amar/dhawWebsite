@@ -3,7 +3,6 @@ import type { HomeContent } from '../../../../../content/types';
 import { ProjectCard } from '../../../../ui/project-card/project-card';
 import { PromptLabel } from '../../../../ui/prompt-label/prompt-label';
 
-/** Case-study links are added when the case-study routes exist (milestone 6). */
 @Component({
   selector: 'app-projects-section',
   imports: [ProjectCard, PromptLabel],
@@ -18,6 +17,8 @@ import { PromptLabel } from '../../../../ui/prompt-label/prompt-label';
           [file]="project.file"
           [stack]="project.stack"
           [stats]="project.stats"
+          [href]="'/work/' + project.slug"
+          [linkLabel]="c.caseStudyLabel"
         />
       }
     </section>`,

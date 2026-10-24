@@ -6,7 +6,7 @@
         <p class="card__summary">{{ summary() }}</p>
         @if (href(); as href) {
           <a class="card__link" [routerLink]="href">
-            {{ linkLabel() }}<span class="visually-hidden">: {{ title() }}</span>
+            {{ linkLabel() }}<span class="visually-hidden"> — {{ title() }}</span>
             <span aria-hidden="true">→</span>
           </a>
         }
