@@ -7,14 +7,16 @@
     "start:fr": "ng serve --configuration development-fr",
     "build": "ng build && node scripts/copy-404.mjs",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test --watch=false",
-    "lint": "ng lint && pnpm lint:styles",
+    "test": "ng test --watch=false && pnpm test:server",
+    "lint": "ng lint && pnpm lint:styles && pnpm typecheck:server",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "prepare": "husky",
     "test:watch": "ng test",
     "e2e": "playwright test",
-    "lint:styles": "stylelint \"src/**/*.scss\""
+    "lint:styles": "stylelint \"src/**/*.scss\"",
+    "test:server": "vitest run --config vitest.server.config.ts",
+    "typecheck:server": "tsc -p tsconfig.server.json"
   },
   "private": true,
   "packageManager": "pnpm@12.15.0",
@@ -31,7 +33,8 @@
     "@fontsource-variable/jetbrains-mono": "^5.3.0",
     "@fontsource-variable/space-grotesk": "^5.3.0",
     "rxjs": "~7.8.0",
-    "tslib": "^2.3.0"
+    "tslib": "^2.3.0",
+    "zod": "^4.6.7"
   },
   "devDependencies": {
     "@angular-eslint/builder": "22.6.0",
