@@ -2,6 +2,7 @@
 // vercel.json, so e2e tests exercise the production routing. Usage: node scripts/serve-dist.mjs [port]
 import { readFileSync } from 'node:fs';
 import { createServer } from 'node:http';
+import compression from 'compression';
 import handler from 'serve-handler';
 
 const port = Number(process.argv[2] ?? 4300);
@@ -18,6 +19,9 @@ const config = {
   })),
 };
 
-createServer((req, res) => handler(req, res, config)).listen(port, () => {
+// Compress text responses like Vercel's CDN, so local Lighthouse runs are comparable.
+const compress = compression();
+
+createServer((req, res) => compress(req, res, () => handler(req, res, config))).listen(port, () => {
   console.log(`Serving ${config.public} on http://localhost:${port}`);
 });
