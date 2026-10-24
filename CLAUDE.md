@@ -54,6 +54,16 @@ E2E serves the built output in `dist/` with the redirects and rewrites from `ver
   prerendered, only the open one visible. `/styleguide` is an internal noindex showcase of the components;
   keep it out of the sitemap.
 
+## Performance
+
+- Incremental hydration (`@defer (hydrate on …)`) was tried and dropped: clicks and form submits
+  made before a section hydrated were lost or submitted natively, for a small, noisy gain.
+- Fallback fonts are metric-matched (`_fonts.scss`) and list Arial plus its Linux/Android
+  equivalents (Liberation Sans, Arimo, Roboto); without a matching local font the text re-wraps
+  when the web font arrives and Lighthouse reports layout shift.
+- Measure with mobile Lighthouse against production, or locally against `scripts/serve-dist.mjs`
+  (gzips like Vercel).
+
 ## Case studies and 404
 
 - `/work/:slug` is prerendered for every slug (`getPrerenderParams`); unknown slugs fall through
