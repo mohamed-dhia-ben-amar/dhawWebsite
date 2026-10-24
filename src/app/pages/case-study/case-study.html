@@ -1,0 +1,117 @@
+@let s = study();
+<article class="study container" aria-labelledby="study-title">
+  <header class="study__header">
+    <app-prompt-label [command]="'cat ~/work/' + s.file" />
+    <h1 id="study-title" class="study__title">{{ s.title }}</h1>
+    <p class="study__summary">{{ s.summary }}</p>
+    <app-editor-pane [tabs]="tabs()">
+      <dl class="study__facts" [attr.aria-label]="ui.facts.label">
+        @for (row of factRows(); track row.label) {
+          <div class="study__fact">
+            <dt class="study__fact-label">{{ row.label }}</dt>
+            <dd class="study__fact-value">
+              <app-fact-text [fact]="row.value" [ownerLabel]="ui.ownerLabel" />
+            </dd>
+          </div>
+        }
+      </dl>
+    </app-editor-pane>
+  </header>
+
+  <section class="study__section" aria-labelledby="study-context">
+    <h2 id="study-context" class="study__heading">
+      <span class="study__hash" aria-hidden="true">##</span> {{ ui.sections.context }}
+    </h2>
+    @for (fact of s.context; track $index) {
+      <p><app-fact-text [fact]="fact" [ownerLabel]="ui.ownerLabel" /></p>
+    }
+  </section>
+
+  <section class="study__section" aria-labelledby="study-problem">
+    <h2 id="study-problem" class="study__heading">
+      <span class="study__hash" aria-hidden="true">##</span> {{ ui.sections.problem }}
+    </h2>
+    @for (fact of s.problem; track $index) {
+      <p><app-fact-text [fact]="fact" [ownerLabel]="ui.ownerLabel" /></p>
+    }
+  </section>
+
+  <section class="study__section" aria-labelledby="study-approach">
+    <h2 id="study-approach" class="study__heading">
+      <span class="study__hash" aria-hidden="true">##</span> {{ ui.sections.approach }}
+    </h2>
+    <ul class="study__list">
+      @for (fact of s.approach; track $index) {
+        <li><app-fact-text [fact]="fact" [ownerLabel]="ui.ownerLabel" /></li>
+      }
+    </ul>
+    @if (diagram(); as d) {
+      <app-flow-diagram [caption]="d.caption" [steps]="d.steps" />
+    } @else if (diagramOwner(); as note) {
+      <p><app-owner-note [note]="note" [label]="ui.ownerLabel" /></p>
+    }
+  </section>
+
+  <section class="study__section" aria-labelledby="study-stack">
+    <h2 id="study-stack" class="study__heading">
+      <span class="study__hash" aria-hidden="true">##</span> {{ ui.sections.stack }}
+    </h2>
+    <ul class="study__stack" role="list">
+      @for (tech of s.stack; track tech) {
+        <li class="study__chip">{{ tech }}</li>
+      }
+    </ul>
+  </section>
+
+  <section class="study__section" aria-labelledby="study-results">
+    <h2 id="study-results" class="study__heading">
+      <span class="study__hash" aria-hidden="true">##</span> {{ ui.sections.results }}
+    </h2>
+    <dl class="study__metrics">
+      @for (metric of s.results.metrics; track metric.label) {
+        <div class="study__metric">
+          <dt class="study__metric-label">{{ metric.label }}</dt>
+          <dd class="study__metric-value">{{ metric.value }}</dd>
+        </div>
+      }
+    </dl>
+    @for (fact of s.results.notes; track $index) {
+      <p><app-fact-text [fact]="fact" [ownerLabel]="ui.ownerLabel" /></p>
+    }
+    @if (s.links?.length) {
+      <div class="study__links">
+        <p class="study__links-label">{{ ui.linksLabel }}</p>
+        <ul class="study__link-list" role="list">
+          @for (link of s.links; track link.href) {
+            <li>
+              <a class="button button--outline" [href]="link.href"
+                >{{ link.label }} <span aria-hidden="true">↗</span></a
+              >
+            </li>
+          }
+        </ul>
+      </div>
+    }
+  </section>
+
+  <section class="study__section" aria-labelledby="study-next">
+    <h2 id="study-next" class="study__heading">
+      <span class="study__hash" aria-hidden="true">##</span> {{ ui.sections.next }}
+    </h2>
+    @for (fact of s.next; track $index) {
+      <p><app-fact-text [fact]="fact" [ownerLabel]="ui.ownerLabel" /></p>
+    }
+  </section>
+
+  <nav class="study__nav" [attr.aria-label]="ui.navLabel">
+    <a class="study__nav-link study__nav-link--back" routerLink="/" fragment="work">
+      <span aria-hidden="true">←</span> {{ ui.back }}
+    </a>
+    @if (next(); as n) {
+      <a class="study__nav-link study__nav-link--next" [routerLink]="['/work', n.slug]">
+        <span class="study__nav-kicker">{{ ui.nextStudy }}</span>
+        <span>{{ n.title }} <span aria-hidden="true">→</span></span>
+      </a>
+    }
+  </nav>
+</article>

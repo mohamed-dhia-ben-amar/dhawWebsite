@@ -1,0 +1,24 @@
+@let c = content;
+<div class="missing container">
+  <app-prompt-label [command]="c.prompt + ' ' + path()" />
+  <h1 class="missing__title">{{ c.title }}</h1>
+  <p class="missing__body">{{ c.body }}</p>
+  <app-terminal-window class="missing__terminal" [title]="c.terminal.title">
+    <p class="missing__cmd">
+      <span class="missing__sign" aria-hidden="true">$&nbsp;</span>{{ path() }}
+    </p>
+    <p class="missing__error">{{ c.terminal.error }}: {{ path() }}</p>
+    <ul class="missing__links" role="list">
+      @for (link of c.links; track link.label) {
+        <li>
+          <span class="missing__sign" aria-hidden="true">$&nbsp;</span>
+          @if (link.fragment) {
+            <a routerLink="/" [fragment]="link.fragment">{{ link.label }}</a>
+          } @else {
+            <a routerLink="/">{{ link.label }}</a>
+          }
+        </li>
+      }
+    </ul>
+  </app-terminal-window>
+</div>
