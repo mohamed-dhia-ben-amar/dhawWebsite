@@ -1,0 +1,89 @@
+@let c = content();
+@if (status() === 'success') {
+  <div class="cf__success" role="status">
+    <h3 #successTitle class="cf__success-title" tabindex="-1">{{ c.success.title }}</h3>
+    <p class="cf__muted">{{ c.success.body }}</p>
+    <button type="button" class="button button--outline" (click)="sendAnother()">
+      {{ c.success.again }}
+    </button>
+  </div>
+} @else {
+  <form class="cf" [formGroup]="form" (ngSubmit)="submit()" [attr.aria-label]="c.label" novalidate>
+    @let invalid = invalidFields();
+    @if (invalid.length) {
+      <div #summary class="cf__summary" tabindex="-1" aria-labelledby="contact-summary-title">
+        <h3 id="contact-summary-title" class="cf__summary-title">{{ c.summaryTitle }}</h3>
+        <ul class="cf__summary-list">
+          @for (field of invalid; track field) {
+            <li>
+              <a [href]="'#' + fieldId(field)" (click)="focusField($event, field)">{{
+                errorMessage(field)
+              }}</a>
+            </li>
+          }
+        </ul>
+      </div>
+    }
+
+    <p class="cf__muted cf__note">{{ c.requiredNote }}</p>
+
+    @for (field of fields; track field) {
+      @let id = fieldId(field);
+      @let hasError = showError(field);
+      <div class="cf__field" [class.cf__field--invalid]="hasError">
+        <label class="cf__label" [for]="id">{{ c.labels[field] }}</label>
+        @if (field === 'message') {
+          <textarea
+            class="cf__input cf__input--area"
+            rows="5"
+            aria-required="true"
+            [id]="id"
+            [formControlName]="field"
+            [attr.aria-invalid]="hasError"
+            [attr.aria-describedby]="hasError ? id + '-error' : null"
+          ></textarea>
+        } @else {
+          <input
+            class="cf__input"
+            aria-required="true"
+            [id]="id"
+            [type]="field === 'email' ? 'email' : 'text'"
+            [attr.autocomplete]="field"
+            [attr.spellcheck]="field === 'email' ? 'false' : null"
+            [formControlName]="field"
+            [attr.aria-invalid]="hasError"
+            [attr.aria-describedby]="hasError ? id + '-error' : null"
+          />
+        }
+        @if (hasError) {
+          <p class="cf__error" [id]="id + '-error'">
+            <span class="cf__error-mark" aria-hidden="true">!</span> {{ errorMessage(field) }}
+          </p>
+        }
+      </div>
+    }
+
+    <!-- Honeypot: invisible and unreachable for people; bots that fill it are dropped. -->
+    <div class="cf__trap" aria-hidden="true">
+      <label for="contact-website">{{ c.honeypotLabel }}</label>
+      <input
+        id="contact-website"
+        type="text"
+        tabindex="-1"
+        autocomplete="off"
+        formControlName="website"
+      />
+    </div>
+
+    @if (failure(); as message) {
+      <p class="cf__failure" role="alert">{{ message }}</p>
+    }
+
+    <div>
+      <button type="submit" class="button button--primary" [attr.aria-disabled]="submitting()">
+        {{ submitting() ? c.sending : c.submit }}
+      </button>
+    </div>
+    <p class="visually-hidden" aria-live="polite">{{ submitting() ? c.sending : '' }}</p>
+  </form>
+}

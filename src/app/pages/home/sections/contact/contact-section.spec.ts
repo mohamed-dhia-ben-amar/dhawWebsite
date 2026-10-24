@@ -1,9 +1,13 @@
 import { TestBed } from '@angular/core/testing';
+import { ContactApi } from '../../../../core/contact-api';
 import { home } from '../../../../../content/en/home';
 import { ContactSection } from './contact-section';
 
 describe('ContactSection', () => {
   function render() {
+    TestBed.configureTestingModule({
+      providers: [{ provide: ContactApi, useValue: { send: vi.fn() } }],
+    });
     const fixture = TestBed.createComponent(ContactSection);
     fixture.componentRef.setInput('content', home.contact);
     fixture.detectChanges();
@@ -22,5 +26,9 @@ describe('ContactSection', () => {
     const email = render().querySelector('.contact__email');
     expect(email?.getAttribute('href')).toBe('mailto:mohameddhiabenamar@gmail.com');
     expect(email?.textContent).toBe('mohameddhiabenamar@gmail.com');
+  });
+
+  it('includes the contact form', () => {
+    expect(render().querySelector('app-contact-form form')).not.toBeNull();
   });
 });

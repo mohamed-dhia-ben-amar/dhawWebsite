@@ -1,0 +1,150 @@
+:host {
+  display: block;
+}
+
+.cf,
+.cf__success {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.cf__muted {
+  color: var(--text-muted);
+}
+
+.cf__note {
+  font-size: var(--text-md);
+}
+
+.cf__field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.cf__label {
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+}
+
+.cf__input {
+  min-height: var(--button-height);
+  padding: 0 14px;
+  color: var(--text-strong);
+  background: var(--bg);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-input);
+
+  &:hover {
+    border-color: var(--text-muted);
+  }
+
+  &:focus-visible {
+    outline-offset: 1px;
+  }
+}
+
+.cf__input--area {
+  padding-block: 14px;
+  resize: vertical;
+}
+
+// Only two hues exist (accent, warm), so errors are neutral but unmistakable: a strong border,
+// a ! mark and a message, never color alone.
+.cf__field--invalid .cf__input {
+  border-color: var(--text-strong);
+  border-width: 2px;
+}
+
+.cf__error {
+  display: flex;
+  gap: var(--space-2);
+  color: var(--text-strong);
+  font-size: var(--text-md);
+}
+
+.cf__error-mark {
+  flex: none;
+  display: inline-grid;
+  place-items: center;
+  width: 1.25rem;
+  height: 1.25rem;
+  color: var(--bg);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  background: var(--text-strong);
+  border-radius: 50%;
+}
+
+.cf__summary {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-4);
+  border: 2px solid var(--text-strong);
+  border-radius: var(--radius-input);
+}
+
+.cf__summary-title {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  font-weight: 600;
+  letter-spacing: normal;
+}
+
+.cf__summary-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  margin: 0;
+  padding-left: 1.25em;
+
+  li {
+    padding-block: 2px;
+  }
+
+  a {
+    color: var(--text-strong);
+    text-underline-offset: 3px;
+  }
+}
+
+.cf__failure {
+  padding: var(--space-3) var(--space-4);
+  color: var(--text-strong);
+  border: 1px dashed var(--text-muted);
+  border-radius: var(--radius-input);
+}
+
+.cf__trap {
+  position: absolute;
+  left: -10000px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.cf__success {
+  align-items: flex-start;
+  padding: var(--space-6);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-input);
+}
+
+.cf__success-title {
+  font-size: var(--text-h3);
+  font-weight: 600;
+
+  &::before {
+    content: '✓ ' / '';
+    color: var(--accent);
+  }
+}
+
+[aria-disabled='true'] {
+  cursor: progress;
+  opacity: 0.75;
+}
