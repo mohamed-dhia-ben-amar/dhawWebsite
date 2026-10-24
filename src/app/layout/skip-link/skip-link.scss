@@ -1,0 +1,22 @@
+.skip-link {
+  position: absolute;
+  z-index: 100;
+  top: var(--space-2);
+  left: var(--space-2);
+  padding: var(--space-3) var(--space-4);
+  background: var(--accent);
+  color: var(--on-accent);
+  font-family: var(--font-mono);
+  font-size: var(--text-md);
+  font-weight: 700;
+  border-radius: var(--radius-md);
+  transform: translateY(calc(-100% - var(--space-4)));
+
+  &:focus {
+    transform: none;
+  }
+
+  &:focus-visible {
+    outline-color: var(--text-strong);
+  }
+}

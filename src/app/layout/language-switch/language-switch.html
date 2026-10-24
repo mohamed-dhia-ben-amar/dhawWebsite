@@ -1,0 +1,17 @@
+<ul class="langs" role="list" [attr.aria-label]="label()">
+  @for (link of links(); track link.locale) {
+    <li>
+      <!-- Plain href: each locale is a separate build, so this is a full page load. -->
+      <a
+        class="langs__link"
+        [class.langs__link--active]="link.active"
+        [href]="link.href"
+        [attr.hreflang]="link.locale"
+        [attr.lang]="link.locale"
+        [attr.aria-current]="link.active ? 'true' : null"
+      >
+        {{ link.short }}<span class="visually-hidden"> {{ link.name }}</span>
+      </a>
+    </li>
+  }
+</ul>
