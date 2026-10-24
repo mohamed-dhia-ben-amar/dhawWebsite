@@ -1,0 +1,77 @@
+:host {
+  display: block;
+}
+
+.flow {
+  margin: 0;
+}
+
+.flow__steps {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.flow__step {
+  position: relative;
+  display: flex;
+  flex: 1 1 0;
+  flex-direction: column;
+  gap: var(--space-1);
+  padding: var(--space-4);
+  background: var(--surface);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-md);
+
+  // Arrow to the next step (decorative): down when stacked, right when in a row.
+  &:not(.flow__step--last)::after {
+    content: '↓' / '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    color: var(--accent);
+    font-family: var(--font-mono);
+    line-height: var(--space-8);
+    transform: translateX(-50%);
+  }
+}
+
+.flow__label {
+  color: var(--text-strong);
+  font-family: var(--font-heading);
+  font-weight: 600;
+}
+
+.flow__detail {
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+}
+
+.flow__caption {
+  margin-top: var(--space-3);
+  color: var(--text-muted);
+  font-size: var(--text-md);
+}
+
+@container flow (width >= 640px) {
+  .flow__steps {
+    flex-direction: row;
+  }
+
+  .flow__step:not(.flow__step--last)::after {
+    content: '→' / '';
+    top: 50%;
+    left: 100%;
+    width: var(--space-8);
+    text-align: center;
+    transform: translateY(-50%);
+  }
+}
+
+.flow {
+  container: flow / inline-size;
+}
