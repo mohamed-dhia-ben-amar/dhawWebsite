@@ -47,12 +47,7 @@ export const work: WorkContent = {
       context: [
         'Minotore conçoit des logiciels pour la finance de marché. Je fais partie de l’équipe frontend, où une bibliothèque de widgets partagée alimente 8 projets depuis un monorepo Nx.',
       ],
-      problem: [
-        {
-          owner:
-            'décrire la situation avant la bibliothèque partagée (par exemple des widgets dupliqués, des comportements incohérents ou des bundles trop lourds), sans nom de client',
-        },
-      ],
+      problem: [],
       approach: [
         'Développé 76 widgets réutilisables et accessibles, en RxJS et Signals, partagés entre les 8 projets.',
         'Réduit la taille des widgets de 30 à 50\u00a0%.',
@@ -79,7 +74,7 @@ export const work: WorkContent = {
         ],
         notes: ['Migration Angular 18 → 21 / Nx 22 livrée en un seul sprint de 3 semaines.'],
       },
-      next: [{ owner: 'ce que vous amélioreriez ou feriez ensuite sur la bibliothèque' }],
+      next: [],
     },
     {
       slug: 'nova',
@@ -95,17 +90,13 @@ export const work: WorkContent = {
       facts: {
         role: 'Lead technique',
         company: 'Minotore',
-        period: { owner: 'indiquer depuis quand vous pilotez NOVA' },
         location: 'Tunis (hybride)',
       },
       stack: ['Claude Code', 'Playwright'],
       context: [
         'NOVA est un workflow de développement assisté par l’IA, utilisé par environ 30 développeurs dans 4 équipes. J’en suis le lead technique.',
       ],
-      problem: [
-        'Livrer un widget prenait 1 à 2 semaines.',
-        { owner: 'expliquer, en termes généraux, ce qui ralentissait la livraison' },
-      ],
+      problem: ['Livrer un widget prenait 1 à 2 semaines.'],
       approach: [
         'Contribué à standardiser un agent de workflow de développement fondé sur des agents Claude Code, partagé par les 4 équipes.',
         'Donné aux agents un navigateur headless (Playwright) pour tester les widgets sur des données réelles.',
@@ -128,7 +119,7 @@ export const work: WorkContent = {
         ],
         notes: [],
       },
-      next: [{ owner: 'ce que vous feriez ensuite avec NOVA' }],
+      next: [],
     },
     {
       slug: 'converty-shop',
@@ -151,7 +142,7 @@ export const work: WorkContent = {
       context: [
         'Converty est une plateforme e-commerce. Converty Shop est son application marchande pour iOS et Android, que j’ai co-développée avec un autre développeur, en lien étroit avec le design et le produit.',
       ],
-      problem: [{ owner: 'décrire le besoin des marchands auquel l’app répondait' }],
+      problem: [],
       approach: [
         'Co-développé l’app en React Native et Expo, avec Redux et Zustand pour l’état.',
         'Développé les écrans de statistiques et de profil.',
@@ -176,7 +167,7 @@ export const work: WorkContent = {
           'Aujourd’hui, l’app compte plus de 10k téléchargements et une note de 4,4/5. Ce sont les chiffres actuels de l’app, pas les résultats de mon seul stage.',
         ],
       },
-      next: [{ owner: 'ce que vous feriez ensuite sur l’app' }],
+      next: [],
       links: [
         { label: 'App Store', href: 'https://apps.apple.com/dz/app/converty-shop/id6466304252' },
         {

@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, computed, effect, inject, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { CASE_STUDY_SLUGS, hasOwnerPlaceholders } from '../../../content/case-studies';
-import { isOwnerPlaceholder } from '../../../content/types';
+import { type Fact, isOwnerPlaceholder } from '../../../content/types';
 import { Seo } from '../../core/seo';
 import { WORK_CONTENT } from '../../core/work-content';
 import { EditorPane } from '../../ui/editor-pane/editor-pane';
@@ -44,12 +44,13 @@ export class CaseStudy {
   protected readonly factRows = computed(() => {
     const { facts } = this.study();
     const labels = this.ui.facts;
-    return [
+    const rows = [
       { label: labels.role, value: facts.role },
       { label: labels.company, value: facts.company },
       { label: labels.period, value: facts.period },
       { label: labels.location, value: facts.location },
     ];
+    return rows.filter((row): row is { label: string; value: Fact } => row.value !== undefined);
   });
   protected readonly diagram = computed(() => {
     const diagram = this.study().diagram;

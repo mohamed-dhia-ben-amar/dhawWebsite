@@ -27,14 +27,16 @@
     }
   </section>
 
-  <section class="study__section" aria-labelledby="study-problem">
-    <h2 id="study-problem" class="study__heading">
-      <span class="study__hash" aria-hidden="true">##</span> {{ ui.sections.problem }}
-    </h2>
-    @for (fact of s.problem; track $index) {
-      <p><app-fact-text [fact]="fact" [ownerLabel]="ui.ownerLabel" /></p>
-    }
-  </section>
+  @if (s.problem.length) {
+    <section class="study__section" aria-labelledby="study-problem">
+      <h2 id="study-problem" class="study__heading">
+        <span class="study__hash" aria-hidden="true">##</span> {{ ui.sections.problem }}
+      </h2>
+      @for (fact of s.problem; track $index) {
+        <p><app-fact-text [fact]="fact" [ownerLabel]="ui.ownerLabel" /></p>
+      }
+    </section>
+  }
 
   <section class="study__section" aria-labelledby="study-approach">
     <h2 id="study-approach" class="study__heading">
@@ -94,14 +96,16 @@
     }
   </section>
 
-  <section class="study__section" aria-labelledby="study-next">
-    <h2 id="study-next" class="study__heading">
-      <span class="study__hash" aria-hidden="true">##</span> {{ ui.sections.next }}
-    </h2>
-    @for (fact of s.next; track $index) {
-      <p><app-fact-text [fact]="fact" [ownerLabel]="ui.ownerLabel" /></p>
-    }
-  </section>
+  @if (s.next.length) {
+    <section class="study__section" aria-labelledby="study-next">
+      <h2 id="study-next" class="study__heading">
+        <span class="study__hash" aria-hidden="true">##</span> {{ ui.sections.next }}
+      </h2>
+      @for (fact of s.next; track $index) {
+        <p><app-fact-text [fact]="fact" [ownerLabel]="ui.ownerLabel" /></p>
+      }
+    </section>
+  }
 
   <nav class="study__nav" [attr.aria-label]="ui.navLabel">
     <a class="study__nav-link study__nav-link--back" routerLink="/" fragment="work">

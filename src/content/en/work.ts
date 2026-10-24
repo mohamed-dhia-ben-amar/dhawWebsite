@@ -1,7 +1,9 @@
 import type { WorkContent } from '../types';
 
-// Facts only from docs/PORTFOLIO_BRIEF.md §6 and the approved design. Anything missing is an
-// owner placeholder. Confidential: no Minotore code, screenshots, client names or internal URLs.
+// Facts only from docs/PORTFOLIO_BRIEF.md §6 and the approved design; nothing invented. A fact
+// that is not known is left out (empty sections are hidden), or can be an { owner } placeholder,
+// which marks the page noindex. Confidential: no Minotore code, screenshots, client names or
+// internal URLs.
 export const work: WorkContent = {
   ui: {
     sections: {
@@ -47,12 +49,7 @@ export const work: WorkContent = {
       context: [
         'Minotore builds software for market finance. I work on the frontend team, where a shared library of widgets serves 8 projects from an Nx monorepo.',
       ],
-      problem: [
-        {
-          owner:
-            'describe the situation before the shared library (for example duplicated widgets, inconsistent behaviour or heavy bundles), without client names',
-        },
-      ],
+      problem: [],
       approach: [
         'Built 76 reusable, accessible widgets with RxJS and Signals, shared across the 8 projects.',
         'Cut widget size by 30–50%.',
@@ -79,7 +76,7 @@ export const work: WorkContent = {
         ],
         notes: ['Angular 18 → 21 / Nx 22 migration delivered in a single 3-week sprint.'],
       },
-      next: [{ owner: 'what you would improve or do next on the library' }],
+      next: [],
     },
     {
       slug: 'nova',
@@ -95,17 +92,13 @@ export const work: WorkContent = {
       facts: {
         role: 'Technical Lead',
         company: 'Minotore',
-        period: { owner: 'add when you started leading NOVA' },
         location: 'Tunis (hybrid)',
       },
       stack: ['Claude Code', 'Playwright'],
       context: [
         'NOVA is an AI-assisted development workflow used by about 30 developers across 4 teams. I am its technical lead.',
       ],
-      problem: [
-        'Delivering a widget took 1 to 2 weeks.',
-        { owner: 'add what slowed delivery down, in general terms' },
-      ],
+      problem: ['Delivering a widget took 1 to 2 weeks.'],
       approach: [
         'Helped standardize a dev-workflow agent built on Claude Code agents, shared by the 4 teams.',
         'Gave the agents a headless browser (Playwright) so they could test widgets against real data.',
@@ -128,7 +121,7 @@ export const work: WorkContent = {
         ],
         notes: [],
       },
-      next: [{ owner: 'what you would do next with NOVA' }],
+      next: [],
     },
     {
       slug: 'converty-shop',
@@ -151,7 +144,7 @@ export const work: WorkContent = {
       context: [
         'Converty is an e-commerce platform. Converty Shop is its merchant app for iOS and Android, which I co-developed with one other developer, working with a designer and a product manager.',
       ],
-      problem: [{ owner: 'describe what merchants needed that the app solved' }],
+      problem: [],
       approach: [
         'Co-developed the app in React Native and Expo, with Redux and Zustand for state.',
         'Built the statistics and profile screens.',
@@ -176,7 +169,7 @@ export const work: WorkContent = {
           'Today the app has 10k+ downloads and a 4.4/5 rating. These are the app’s current figures, not results of my internship alone.',
         ],
       },
-      next: [{ owner: 'what you would do next on the app' }],
+      next: [],
       links: [
         { label: 'App Store', href: 'https://apps.apple.com/dz/app/converty-shop/id6466304252' },
         {
