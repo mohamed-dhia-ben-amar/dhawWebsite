@@ -66,6 +66,17 @@ E2E serves the built output in `dist/` with the redirects and rewrites from `ver
 - `/404` is prerendered per locale; `pnpm build` copies the English one to the root `404.html`,
   which Vercel serves (with a 404 status) for any unknown URL, French ones included.
 
+## SEO and analytics
+
+- Every routed page calls `Seo.setPage()` (`src/app/core/seo.ts`): title, description, canonical
+  (only when indexable), Open Graph, Twitter card, robots. Don't set title/meta tags elsewhere.
+- `pnpm build` runs `scripts/seo-assets.mts` (via tsx) after `ng build`: 1200×630 share images per
+  locale in `/{locale}/og/{home|slug}.png` (satori + resvg, site fonts from `@fontsource/*`), plus
+  `sitemap.xml` (indexable prerendered pages only, with hreflang) and `robots.txt`.
+- The homepage adds Person JSON-LD (`StructuredData`, facts in `site.ts` → `seo.person`).
+- Vercel Web Analytics (cookieless) is injected in the browser only, never for automated
+  browsers. It has to be enabled in the Vercel dashboard.
+
 ## Contact form and /api/contact
 
 - `src/shared/contact.ts` holds the rules both sides use (lengths, email pattern, honeypot field,
