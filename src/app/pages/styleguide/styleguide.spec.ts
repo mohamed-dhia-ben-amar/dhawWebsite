@@ -14,11 +14,8 @@ describe('Styleguide', () => {
     expect([...el.querySelectorAll('h2')].map((h) => h.textContent)).toContain('ProjectCard');
   });
 
-  it('is noindex while shown, and drops the tag when left', () => {
-    const meta = TestBed.inject(Meta);
-    const fixture = TestBed.createComponent(Styleguide);
-    expect(meta.getTag('name="robots"')?.content).toBe('noindex, nofollow');
-    fixture.destroy();
-    expect(meta.getTag('name="robots"')).toBeNull();
+  it('is noindex, nofollow', () => {
+    TestBed.createComponent(Styleguide);
+    expect(TestBed.inject(Meta).getTag('name="robots"')?.content).toBe('noindex, nofollow');
   });
 });

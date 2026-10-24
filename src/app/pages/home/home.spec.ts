@@ -35,4 +35,23 @@ describe('Home', () => {
     expect(TestBed.inject(Title).getTitle()).toBe(home.meta.title);
     expect(TestBed.inject(Meta).getTag('name="description"')?.content).toBe(home.meta.description);
   });
+
+  it('adds the Person structured data and removes it when left', () => {
+    TestBed.configureTestingModule({ providers: [provideRouter([])] });
+    const fixture = TestBed.createComponent(Home);
+    const script = document.getElementById('person-jsonld');
+    expect(JSON.parse(script?.textContent ?? '{}')['@type']).toBe('Person');
+    fixture.destroy();
+    expect(document.getElementById('person-jsonld')).toBeNull();
+  });
+
+  it('sets a canonical URL and the homepage share image', () => {
+    render();
+    expect(document.head.querySelector('link[rel="canonical"]')?.getAttribute('href')).toBe(
+      'https://dhaw-website.vercel.app/en/',
+    );
+    expect(TestBed.inject(Meta).getTag('property="og:image"')?.content).toBe(
+      'https://dhaw-website.vercel.app/en/og/home.png',
+    );
+  });
 });

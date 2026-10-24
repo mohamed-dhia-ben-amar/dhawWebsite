@@ -1,13 +1,6 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  DestroyRef,
-  afterNextRender,
-  inject,
-  signal,
-} from '@angular/core';
-import { Meta, Title } from '@angular/platform-browser';
+import { ChangeDetectionStrategy, Component, afterNextRender, inject, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { Seo } from '../../core/seo';
 import { NOT_FOUND_CONTENT } from '../../core/work-content';
 import { PromptLabel } from '../../ui/prompt-label/prompt-label';
 import { TerminalWindow } from '../../ui/terminal-window/terminal-window';
@@ -30,11 +23,8 @@ export class NotFound {
   protected readonly path = signal('404');
 
   constructor() {
-    const meta = inject(Meta);
-    inject(Title).setTitle(this.content.meta.title);
-    meta.updateTag({ name: 'description', content: this.content.meta.description });
-    meta.updateTag({ name: 'robots', content: 'noindex' });
-    inject(DestroyRef).onDestroy(() => meta.removeTag('name="robots"'));
+    const { title, description } = this.content.meta;
+    inject(Seo).setPage({ title, description, path: '/404', robots: 'noindex' });
 
     afterNextRender(() => {
       const requested = window.location.pathname.replace(/^\/(en|fr)\//, '/');

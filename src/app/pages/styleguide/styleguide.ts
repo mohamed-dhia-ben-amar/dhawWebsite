@@ -1,7 +1,7 @@
-import { ChangeDetectionStrategy, Component, DestroyRef, inject } from '@angular/core';
-import { Meta } from '@angular/platform-browser';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { isOwnerPlaceholder } from '../../../content/types';
 import { HOME_CONTENT } from '../../core/home-content';
+import { Seo } from '../../core/seo';
 import { SITE_CONTENT } from '../../core/site-content';
 import { WORK_CONTENT } from '../../core/work-content';
 import { ExperienceTabs } from '../home/sections/experience/experience-tabs';
@@ -44,8 +44,11 @@ export class Styleguide {
   })();
 
   constructor() {
-    const meta = inject(Meta);
-    meta.updateTag({ name: 'robots', content: 'noindex, nofollow' });
-    inject(DestroyRef).onDestroy(() => meta.removeTag('name="robots"'));
+    inject(Seo).setPage({
+      title: 'Styleguide · mdba',
+      description: 'Internal showcase of the design tokens and components.',
+      path: '/styleguide',
+      robots: 'noindex, nofollow',
+    });
   }
 }

@@ -17,6 +17,21 @@ export interface LanguageOption {
 
 export interface SiteContent {
   readonly locale: Locale;
+  readonly seo: {
+    /** og:site_name. */
+    readonly siteName: string;
+    /** Person structured data (JSON-LD) on the homepage. Facts from the brief only. */
+    readonly person: {
+      readonly name: string;
+      readonly jobTitle: string;
+      readonly email: string;
+      readonly locality: string;
+      readonly countryCode: string;
+      readonly worksFor: string;
+      readonly knowsAbout: readonly string[];
+      readonly sameAs: readonly string[];
+    };
+  };
   readonly skipLink: string;
   readonly logo: {
     readonly text: string;

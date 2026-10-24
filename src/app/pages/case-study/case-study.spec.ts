@@ -66,10 +66,15 @@ describe('CaseStudy', () => {
     expect(meta.getTag('name="robots"')?.content).toBe('noindex, follow');
   });
 
-  it('drops the robots tag when the page is left', () => {
-    const { fixture } = render('nova');
-    fixture.destroy();
-    expect(TestBed.inject(Meta).getTag('name="robots"')).toBeNull();
+  it('uses its own share image and no canonical URL while noindex', () => {
+    render('nova');
+    const meta = TestBed.inject(Meta);
+    expect(meta.getTag('property="og:type"')?.content).toBe('article');
+    expect(meta.getTag('property="og:image"')?.content).toBe(
+      'https://dhaw-website.vercel.app/en/og/nova.png',
+    );
+    // Noindex while placeholders remain, so no canonical URL.
+    expect(document.head.querySelector('link[rel="canonical"]')).toBeNull();
   });
 
   it('uses the French copy in the fr build', () => {
