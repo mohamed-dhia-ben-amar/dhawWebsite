@@ -74,17 +74,14 @@
 
   <section class="guide__section" aria-labelledby="sg-editor">
     <app-prompt-label command="code experience.json" />
-    <h2 id="sg-editor">EditorPane + CodeView</h2>
-    <app-editor-pane [tabs]="[{ label: experience.file, active: true }]">
-      <app-file-explorer
-        paneExplorer
-        [files]="experienceFiles"
-        [active]="experience.file"
-        [label]="home.experience.explorerLabel"
-        [heading]="home.experience.explorerHeading"
-      />
-      <app-code-view [lines]="experienceLines" [label]="experience.file" />
-    </app-editor-pane>
+    <h2 id="sg-editor">ExperienceTabs</h2>
+    <p class="guide__lede">EditorPane + FileExplorer (tabs) + CodeView.</p>
+    <app-experience-tabs
+      idPrefix="sg-experience"
+      [items]="home.experience.items"
+      [explorerLabel]="home.experience.explorerLabel"
+      [explorerHeading]="home.experience.explorerHeading"
+    />
   </section>
 
   <section class="guide__section" aria-labelledby="sg-contact">

@@ -12,7 +12,7 @@ test.describe('styleguide', () => {
 
   test('renders every signature component', async ({ page }) => {
     await page.goto('/en/styleguide');
-    for (const name of ['TerminalWindow', 'StatStrip', 'ProjectCard', 'EditorPane + CodeView']) {
+    for (const name of ['TerminalWindow', 'StatStrip', 'ProjectCard', 'ExperienceTabs']) {
       await expect(page.getByRole('heading', { level: 2, name, exact: true })).toBeVisible();
     }
     await expect(page.getByRole('group', { name: 'Terminal summary' })).toBeVisible();

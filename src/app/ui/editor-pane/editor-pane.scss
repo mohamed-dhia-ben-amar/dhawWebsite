@@ -1,11 +1,14 @@
+@use '../../../styles/breakpoints' as bp;
+
 :host {
   display: block;
   min-width: 0;
 }
 
+// Narrow: explorer above the code. Wide: explorer as a sidebar.
 .pane {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   overflow: hidden;
   background: var(--surface);
   border: 1px solid var(--border);
@@ -13,9 +16,9 @@
 }
 
 .pane__explorer {
-  flex: 1 1 220px;
+  min-width: 0;
   background: var(--surface-sunken);
-  border-right: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
 
   &:empty {
     display: none;
@@ -24,9 +27,21 @@
 
 .pane__main {
   display: flex;
-  flex: 999 1 560px;
+  flex: 1;
   flex-direction: column;
   min-width: 0;
+}
+
+@media (width >= bp.$editor-wide) {
+  .pane {
+    flex-direction: row;
+  }
+
+  .pane__explorer {
+    flex: 0 0 220px;
+    border-right: 1px solid var(--border);
+    border-bottom: 0;
+  }
 }
 
 // Tabs wrap rather than scroll: a scrolling strip of plain text cannot be reached by keyboard.

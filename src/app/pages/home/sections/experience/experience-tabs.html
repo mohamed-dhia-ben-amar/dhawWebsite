@@ -1,0 +1,21 @@
+<app-editor-pane [tabs]="[{ label: active(), active: true }]">
+  <app-file-explorer
+    paneExplorer
+    [idPrefix]="idPrefix()"
+    [files]="files()"
+    [(active)]="active"
+    [label]="explorerLabel()"
+    [heading]="explorerHeading()"
+    [orientation]="orientation()"
+  />
+  @for (panel of panels(); track panel.file) {
+    <div
+      role="tabpanel"
+      [id]="panelId(idPrefix(), panel.file)"
+      [attr.aria-labelledby]="tabId(idPrefix(), panel.file)"
+      [hidden]="panel.file !== active()"
+    >
+      <app-code-view [lines]="panel.lines" [label]="panel.file" />
+    </div>
+  }
+</app-editor-pane>

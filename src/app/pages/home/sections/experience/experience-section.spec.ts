@@ -1,38 +1,20 @@
 import { TestBed } from '@angular/core/testing';
 import { home } from '../../../../../content/en/home';
-import { ExperienceSection, experienceJson } from './experience-section';
+import { ExperienceSection } from './experience-section';
 
 describe('ExperienceSection', () => {
-  function render() {
+  it('is the #experience section with a prompt, a title and the experience tabs', () => {
     const fixture = TestBed.createComponent(ExperienceSection);
     fixture.componentRef.setInput('content', home.experience);
     fixture.detectChanges();
-    return fixture.nativeElement as HTMLElement;
-  }
-
-  it('lists the four experience files with the first one open', () => {
-    const el = render();
-    expect(
-      [...el.querySelectorAll('.explorer__file')].map((f) => f.textContent?.replace(/\s+/g, '')),
-    ).toEqual(['{}minotore.json', '{}converty.json', '{}ibspace.json', '{}inoteqia.json']);
-    expect(el.querySelector('.explorer__file--active')?.textContent).toContain('minotore.json');
-    expect(el.querySelector('.pane__tab--active')?.textContent).toBe('minotore.json');
-  });
-
-  it('shows the open file as JSON with the period highlighted as a date', () => {
-    const el = render();
-    expect(el.querySelector('[role="region"]')?.getAttribute('aria-label')).toBe('minotore.json');
-    expect(el.querySelector('.tok--date')?.textContent).toBe('"Dec 2024 – present"');
-    expect(el.querySelector('.code')?.textContent).toContain('"Frontend Developer"');
-  });
-
-  it('builds the editor JSON from the content fields', () => {
-    expect(Object.keys(experienceJson(home.experience.items[0]))).toEqual([
-      'role',
-      'company',
-      'industry',
-      'period',
-      'highlights',
-    ]);
+    const section = (fixture.nativeElement as HTMLElement).querySelector('section');
+    expect(section?.id).toBe('experience');
+    expect(section?.querySelector('app-prompt-label')?.textContent).toContain(
+      'code experience.json',
+    );
+    expect(section?.querySelector('h2')?.textContent).toBe("Where I've worked");
+    expect(section?.querySelector('[role="tablist"]')?.getAttribute('aria-label')).toBe(
+      'Experience files',
+    );
   });
 });

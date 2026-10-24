@@ -1,15 +1,29 @@
-<nav class="explorer" [attr.aria-label]="label()">
+<div class="explorer">
   <p class="explorer__heading" aria-hidden="true">{{ heading() }}</p>
-  <ul class="explorer__files" role="list">
+  <div
+    class="explorer__files"
+    role="tablist"
+    [attr.aria-label]="label()"
+    [attr.aria-orientation]="orientation()"
+  >
     @for (file of files(); track file) {
-      <li
+      @let selected = file === active();
+      <button
+        #tab
+        type="button"
+        role="tab"
         class="explorer__file"
-        [class.explorer__file--active]="file === active()"
-        [attr.aria-current]="file === active() ? 'true' : null"
+        [class.explorer__file--active]="selected"
+        [id]="tabId(idPrefix(), file)"
+        [attr.aria-controls]="panelId(idPrefix(), file)"
+        [attr.aria-selected]="selected"
+        [attr.tabindex]="selected ? 0 : -1"
+        (click)="select(file)"
+        (keydown)="onKeydown($event)"
       >
         <span class="explorer__icon" aria-hidden="true">{{ '{}' }}</span
         >{{ file }}
-      </li>
+      </button>
     }
-  </ul>
-</nav>
+  </div>
+</div>
