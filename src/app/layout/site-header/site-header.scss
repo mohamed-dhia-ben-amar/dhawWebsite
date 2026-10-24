@@ -1,3 +1,11 @@
+:host {
+  position: sticky;
+  z-index: 20;
+  top: 0;
+  display: block;
+  background: var(--bg);
+}
+
 .header {
   border-bottom: 1px solid var(--border);
 }

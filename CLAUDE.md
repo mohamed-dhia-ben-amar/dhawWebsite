@@ -47,7 +47,9 @@ E2E serves the built output in `dist/` with the redirects and rewrites from `ver
   `src/app/core/`. Case-study slugs live in `src/content/case-studies.ts`.
 - `src/app/ui/`: signature components (TerminalWindow, TerminalSession, PromptLabel, EditorPane,
   FileExplorer, CodeView, StatStrip, ProjectCard, StatusBar).
-- `src/app/layout/`: app shell (SkipLink, SiteHeader, SiteFooter, LanguageSwitch).
+- `src/app/layout/`: app shell (SkipLink, SiteHeader, SiteFooter, LanguageSwitch, BackToTop).
+  The header is sticky and publishes its live height as `--header-height` (drives
+  `scroll-padding-top`) and as the router's anchor-scroll offset; don't hard-code header offsets.
 - `src/app/pages/`: routed pages. The homepage is composed of `pages/home/sections/*`, which take
   their content slice as an input. The experience section is `ExperienceTabs`: `FileExplorer` is a
   WAI-ARIA tab list (roving tabindex, arrows/Home/End, automatic activation) and every panel is

@@ -29,6 +29,7 @@ export const site: SiteContent = {
       ],
     },
   },
+  backToTop: 'Back to top',
   skipLink: 'Skip to content',
   logo: {
     text: 'mdba',
