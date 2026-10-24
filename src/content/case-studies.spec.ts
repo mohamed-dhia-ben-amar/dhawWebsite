@@ -27,13 +27,13 @@ describe('case studies', () => {
     expect(ownerPlaceholders(['plain', 3, null])).toEqual([]);
   });
 
-  // Tracks what the owner still has to supply. Update this list as placeholders are filled in;
-  // a page becomes indexable once its list is empty.
-  it('lists the owner placeholders still to fill', () => {
-    const open = Object.fromEntries(
-      enWork.caseStudies.map((s) => [s.slug, ownerPlaceholders(s).length]),
-    );
-    expect(open).toEqual({ 'widget-library': 2, nova: 3, 'converty-shop': 2 });
-    expect(enWork.caseStudies.every(hasOwnerPlaceholders)).toBe(true);
+  // A placeholder keeps a page out of search; the published case studies have none.
+  it('has no owner placeholders left, so every case study is indexable', () => {
+    for (const work of [enWork, frWork]) {
+      for (const study of work.caseStudies) {
+        expect(ownerPlaceholders(study), study.slug).toEqual([]);
+        expect(hasOwnerPlaceholders(study)).toBe(false);
+      }
+    }
   });
 });

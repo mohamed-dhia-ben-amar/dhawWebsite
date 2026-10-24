@@ -76,7 +76,7 @@ test.describe('SEO', () => {
   });
 
   test('noindex pages have no canonical URL', async ({ page }) => {
-    for (const path of ['/en/work/nova', '/en/404', '/en/styleguide']) {
+    for (const path of ['/en/404', '/fr/404', '/en/styleguide']) {
       await page.goto(path);
       await expect(page.locator('head meta[name="robots"]')).toHaveAttribute('content', /noindex/);
       await expect(page.locator('head link[rel="canonical"]')).toHaveCount(0);
@@ -93,6 +93,11 @@ test.describe('SEO', () => {
     const locs = [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]);
     expect(locs).toContain(`${ORIGIN}/en/`);
     expect(locs).toContain(`${ORIGIN}/fr/`);
+    for (const slug of ['widget-library', 'nova', 'converty-shop']) {
+      expect(locs).toContain(`${ORIGIN}/en/work/${slug}`);
+      expect(locs).toContain(`${ORIGIN}/fr/work/${slug}`);
+    }
+    expect(locs).toHaveLength(8);
     expect(xml).toContain(`hreflang="x-default" href="${ORIGIN}/en/"`);
     for (const loc of locs) {
       expect(loc).not.toMatch(/styleguide|404/);

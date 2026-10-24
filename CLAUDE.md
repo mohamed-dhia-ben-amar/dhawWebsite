@@ -68,9 +68,10 @@ E2E serves the built output in `dist/` with the redirects and rewrites from `ver
 
 - `/work/:slug` is prerendered for every slug (`getPrerenderParams`); unknown slugs fall through
   to the 404 page. Structure: Context → Problem → What I did → Stack → Results → What I'd do next.
-- Facts only from the brief. A missing fact is an `{ owner: '…' }` placeholder (`Fact` type):
-  rendered as a visible `[OWNER: …]` marker, and any page that still has one is `noindex`.
-  `src/content/case-studies.spec.ts` counts the open placeholders; update it as they are filled.
+- Facts only from the brief, nothing invented. The owner chose to publish without the missing
+  facts: an unknown fact is simply left out (empty sections and missing fact rows are hidden).
+  An `{ owner: '…' }` placeholder (`Fact` type) still exists: it renders a visible `[OWNER: …]`
+  marker and makes the page `noindex`. `src/content/case-studies.spec.ts` checks none are left.
 - Confidentiality: no Minotore code, screenshots, client names or internal URLs. Diagrams are
   `FlowDiagram` steps built from facts.
 - `/404` is prerendered per locale; `pnpm build` copies the English one to the root `404.html`,

@@ -196,11 +196,15 @@ export interface CaseStudyContent {
   readonly facts: {
     readonly role: Fact;
     readonly company: Fact;
-    readonly period: Fact;
+    /** Omitted when unknown; the row is then not shown. */
+    readonly period?: Fact;
     readonly location: Fact;
   };
   readonly stack: readonly string[];
-  /** Context → Problem → What I did → Stack → Results → What I'd do next (brief §6). */
+  /**
+   * Context → Problem → What I did → Stack → Results → What I'd do next (brief §6). A section
+   * with no facts (an empty array) is not shown.
+   */
   readonly context: readonly Fact[];
   readonly problem: readonly Fact[];
   readonly approach: readonly Fact[];

@@ -20,17 +20,28 @@ describe('CaseStudy', () => {
     expect(el.querySelector('h1')?.textContent).toBe('NOVA: AI-assisted development workflow');
     expect(
       [...el.querySelectorAll('h2')].map((h) => h.textContent?.replace('##', '').trim()),
-    ).toEqual(['Context', 'Problem', 'What I did', 'Stack', 'Results', 'What I’d do next']);
+    ).toEqual(['Context', 'Problem', 'What I did', 'Stack', 'Results']);
   });
 
-  it('shows facts, with owner placeholders where a fact is missing', () => {
+  it('hides sections that have no facts', () => {
+    const headings = [...render('converty-shop').el.querySelectorAll('h2')].map((h) =>
+      h.textContent?.replace('##', '').trim(),
+    );
+    expect(headings).toEqual(['Context', 'What I did', 'Stack', 'Results']);
+  });
+
+  it('shows the facts card, skipping facts that are not known', () => {
     const { el } = render('nova');
     const facts = [...el.querySelectorAll('.study__fact')].map((f) => [
       f.querySelector('dt')?.textContent,
       f.querySelector('dd')?.textContent?.replace(/\s+/g, ' ').trim(),
     ]);
-    expect(facts[0]).toEqual(['role', 'Technical Lead']);
-    expect(facts[2]).toEqual(['period', '[OWNER: add when you started leading NOVA]']);
+    expect(facts).toEqual([
+      ['role', 'Technical Lead'],
+      ['company', 'Minotore'],
+      ['location', 'Tunis (hybrid)'],
+    ]);
+    expect(el.querySelector('app-owner-note')).toBeNull();
   });
 
   it('renders the diagram as a captioned list of steps', () => {
@@ -56,25 +67,26 @@ describe('CaseStudy', () => {
     expect(next.getAttribute('href')).toBe('/work/widget-library');
   });
 
-  it('sets title and description, and is noindex while placeholders remain', () => {
+  it('sets title and description, and is indexable', () => {
     render('widget-library');
     expect(TestBed.inject(Title).getTitle()).toBe(
       'Shared widget library for market finance · Mohamed Dhia Ben Amar',
     );
     const meta = TestBed.inject(Meta);
     expect(meta.getTag('name="description"')?.content).toContain('76 accessible Angular widgets');
-    expect(meta.getTag('name="robots"')?.content).toBe('noindex, follow');
+    expect(meta.getTag('name="robots"')).toBeNull();
   });
 
-  it('uses its own share image and no canonical URL while noindex', () => {
+  it('uses its own share image and a canonical URL', () => {
     render('nova');
     const meta = TestBed.inject(Meta);
     expect(meta.getTag('property="og:type"')?.content).toBe('article');
     expect(meta.getTag('property="og:image"')?.content).toBe(
       'https://mohameddhia.dev/en/og/nova.png',
     );
-    // Noindex while placeholders remain, so no canonical URL.
-    expect(document.head.querySelector('link[rel="canonical"]')).toBeNull();
+    expect(document.head.querySelector('link[rel="canonical"]')?.getAttribute('href')).toBe(
+      'https://mohameddhia.dev/en/work/nova',
+    );
   });
 
   it('uses the French copy in the fr build', () => {

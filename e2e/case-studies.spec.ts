@@ -21,22 +21,29 @@ test.describe('case studies', () => {
     test(`/en/work/${slug} follows the case-study structure`, async ({ page }) => {
       await page.goto(`/en/work/${slug}`);
       await expect(page).toHaveTitle(`${title} · Mohamed Dhia Ben Amar`);
-      await expect(page.getByRole('heading', { level: 2 })).toHaveText([
-        /Context/,
-        /Problem/,
-        /What I did/,
-        /Stack/,
-        /Results/,
-        /What I’d do next/,
-      ]);
+      const headings = (await page.getByRole('heading', { level: 2 }).allTextContents()).map((h) =>
+        h.replace('##', '').trim(),
+      );
+      // Brief order; sections without facts are left out, the core ones are always there.
+      const order = ['Context', 'Problem', 'What I did', 'Stack', 'Results', 'What I’d do next'];
+      expect(headings).toEqual(order.filter((h) => headings.includes(h)));
+      for (const required of ['Context', 'What I did', 'Stack', 'Results']) {
+        expect(headings).toContain(required);
+      }
       await expect(page.getByRole('figure')).toBeVisible();
     });
   }
 
-  test('missing facts are marked and keep the page out of search', async ({ page }) => {
-    await page.goto('/en/work/nova');
-    await expect(page.getByText('[OWNER: add when you started leading NOVA]')).toBeVisible();
-    await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content', 'noindex, follow');
+  test('case studies are finished: no owner markers, indexable, canonical', async ({ page }) => {
+    for (const { slug } of STUDIES) {
+      await page.goto(`/en/work/${slug}`);
+      await expect(page.getByText('[OWNER:')).toHaveCount(0);
+      await expect(page.locator('meta[name="robots"]')).toHaveCount(0);
+      await expect(page.locator('head link[rel="canonical"]')).toHaveAttribute(
+        'href',
+        `https://mohameddhia.dev/en/work/${slug}`,
+      );
+    }
   });
 
   test('Converty Shop links to both stores and frames the figures as current', async ({ page }) => {
