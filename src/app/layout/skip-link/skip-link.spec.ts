@@ -1,6 +1,7 @@
+import { APP_BASE_HREF } from '@angular/common';
 import { Component } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
-import { provideRouter } from '@angular/router';
+import { Router, provideRouter } from '@angular/router';
 import { SkipLink } from './skip-link';
 
 @Component({
@@ -11,8 +12,10 @@ import { SkipLink } from './skip-link';
 class Host {}
 
 describe('SkipLink', () => {
-  function render() {
-    TestBed.configureTestingModule({ providers: [provideRouter([])] });
+  function render(baseHref = '/') {
+    TestBed.configureTestingModule({
+      providers: [provideRouter([]), { provide: APP_BASE_HREF, useValue: baseHref }],
+    });
     const fixture = TestBed.createComponent(Host);
     fixture.detectChanges();
     return fixture.nativeElement as HTMLElement;
@@ -22,6 +25,25 @@ describe('SkipLink', () => {
     const link = render().querySelector('a');
     expect(link?.textContent).toBe('Skip to content');
     expect(link?.getAttribute('href')).toBe('/#main');
+  });
+
+  it('includes the locale base href', () => {
+    expect(render('/fr/').querySelector('a')?.getAttribute('href')).toBe('/fr/#main');
+  });
+
+  it('follows navigation to other pages', async () => {
+    @Component({ template: '' })
+    class Page {}
+    TestBed.configureTestingModule({
+      providers: [provideRouter([{ path: 'styleguide', component: Page }])],
+    });
+    const fixture = TestBed.createComponent(Host);
+    fixture.detectChanges();
+    await TestBed.inject(Router).navigateByUrl('/styleguide');
+    fixture.detectChanges();
+    expect((fixture.nativeElement as HTMLElement).querySelector('a')?.getAttribute('href')).toBe(
+      '/styleguide#main',
+    );
   });
 
   it('moves focus to the target on click instead of navigating', () => {

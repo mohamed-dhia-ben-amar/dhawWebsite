@@ -3,7 +3,6 @@ import type { LanguageOption, Locale } from '../../../content/types';
 
 /**
  * EN/FR links to the same page in each locale, with `aria-current` on the active one.
- * Built in milestone 2; rendered in the header once the /fr/ build exists (milestone 4).
  */
 @Component({
   selector: 'app-language-switch',

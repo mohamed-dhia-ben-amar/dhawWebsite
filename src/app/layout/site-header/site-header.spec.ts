@@ -1,10 +1,13 @@
+import { LOCALE_ID } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
 import { SiteHeader } from './site-header';
 
 describe('SiteHeader', () => {
-  function render() {
-    TestBed.configureTestingModule({ providers: [provideRouter([])] });
+  function render(localeId = 'en-US') {
+    TestBed.configureTestingModule({
+      providers: [provideRouter([]), { provide: LOCALE_ID, useValue: localeId }],
+    });
     const fixture = TestBed.createComponent(SiteHeader);
     fixture.detectChanges();
     return fixture.nativeElement as HTMLElement;
@@ -30,5 +33,24 @@ describe('SiteHeader', () => {
       ['./experience', '/#experience'],
       ['./contact', '/#contact'],
     ]);
+  });
+
+  it('renders the language switch for the current page with English marked current', () => {
+    const links = [...render().querySelectorAll('.langs__link')];
+    expect(links.map((a) => [a.getAttribute('href'), a.getAttribute('aria-current')])).toEqual([
+      ['/en/', 'true'],
+      ['/fr/', null],
+    ]);
+  });
+
+  it('uses the French copy and marks French current in the fr build', () => {
+    const el = render('fr');
+    expect(el.querySelector('nav')?.getAttribute('aria-label')).toBe('Principale');
+    expect([...el.querySelectorAll('.header__link')].map((a) => a.textContent)).toEqual([
+      './projets',
+      './parcours',
+      './contact',
+    ]);
+    expect(el.querySelector('[aria-current="true"]')?.getAttribute('href')).toBe('/fr/');
   });
 });

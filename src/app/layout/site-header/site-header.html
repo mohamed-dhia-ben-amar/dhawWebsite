@@ -13,5 +13,12 @@
         }
       </ul>
     </nav>
+    <app-language-switch
+      class="header__langs"
+      [options]="content.languages.options"
+      [current]="locale"
+      [label]="content.languages.label"
+      [path]="path()"
+    />
   </div>
 </header>
