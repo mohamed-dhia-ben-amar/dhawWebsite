@@ -38,7 +38,8 @@ E2E serves the built output in `dist/` with the redirects and rewrites from `ver
 
 ## Project structure
 
-- `src/styles/`: `_tokens.scss` (every color, type, spacing and radius token), `_fonts.scss`
+- `src/styles/`: `_tokens.scss` (every color, type, spacing and radius token), `_breakpoints.scss`
+  (Sass breakpoints, mirrored in `src/app/core/breakpoints.ts`), `_fonts.scss`
   (self-hosted variable fonts and metric-matched fallbacks), `_base.scss` (reset, focus, `.container`,
   `.visually-hidden`, reduced motion).
 - `src/content/`: typed copy per locale (`en/`, `fr/`): `site.ts` (shell) and
@@ -47,7 +48,9 @@ E2E serves the built output in `dist/` with the redirects and rewrites from `ver
   FileExplorer, CodeView, StatStrip, ProjectCard, StatusBar).
 - `src/app/layout/`: app shell (SkipLink, SiteHeader, SiteFooter, LanguageSwitch).
 - `src/app/pages/`: routed pages. The homepage is composed of `pages/home/sections/*`, which take
-  their content slice as an input. `/styleguide` is an internal noindex showcase of the components;
+  their content slice as an input. The experience section is `ExperienceTabs`: `FileExplorer` is a
+  WAI-ARIA tab list (roving tabindex, arrows/Home/End, automatic activation) and every panel is
+  prerendered, only the open one visible. `/styleguide` is an internal noindex showcase of the components;
   keep it out of the sitemap.
 
 ## i18n
