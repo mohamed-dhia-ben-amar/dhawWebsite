@@ -3,14 +3,16 @@ import { provideRouter } from '@angular/router';
 import { ProjectCard } from './project-card';
 
 describe('ProjectCard', () => {
-  function render() {
+  function render(withLink = true) {
     TestBed.configureTestingModule({ providers: [provideRouter([])] });
     const fixture = TestBed.createComponent(ProjectCard);
     const ref = fixture.componentRef;
     ref.setInput('title', 'Shared widget library for market finance');
     ref.setInput('summary', 'Accessible, reactive widgets shared across 8 projects.');
-    ref.setInput('href', '/work/widget-library');
-    ref.setInput('linkLabel', 'Read case study');
+    if (withLink) {
+      ref.setInput('href', '/work/widget-library');
+      ref.setInput('linkLabel', 'Read case study');
+    }
     ref.setInput('file', 'widget-library/README.md');
     ref.setInput('stack', 'Angular · Nx · Vitest');
     ref.setInput('stats', [
@@ -46,6 +48,10 @@ describe('ProjectCard', () => {
       .trim();
     expect(accessibleText).toBe('Read case study: Shared widget library for market finance');
     expect(link?.querySelector('[aria-hidden="true"]')?.textContent).toBe('→');
+  });
+
+  it('renders no link without an href', () => {
+    expect(render(false).querySelector('a')).toBeNull();
   });
 
   it('renders stats as a description list', () => {

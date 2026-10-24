@@ -4,10 +4,12 @@
       <div class="card__text">
         <h3 class="card__title">{{ title() }}</h3>
         <p class="card__summary">{{ summary() }}</p>
-        <a class="card__link" [routerLink]="href()">
-          {{ linkLabel() }}<span class="visually-hidden">: {{ title() }}</span>
-          <span aria-hidden="true">→</span>
-        </a>
+        @if (href(); as href) {
+          <a class="card__link" [routerLink]="href">
+            {{ linkLabel() }}<span class="visually-hidden">: {{ title() }}</span>
+            <span aria-hidden="true">→</span>
+          </a>
+        }
       </div>
       <dl class="card__stats">
         @for (stat of stats(); track stat.label) {

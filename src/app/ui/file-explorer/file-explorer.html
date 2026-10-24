@@ -1,0 +1,15 @@
+<nav class="explorer" [attr.aria-label]="label()">
+  <p class="explorer__heading" aria-hidden="true">{{ heading() }}</p>
+  <ul class="explorer__files" role="list">
+    @for (file of files(); track file) {
+      <li
+        class="explorer__file"
+        [class.explorer__file--active]="file === active()"
+        [attr.aria-current]="file === active() ? 'true' : null"
+      >
+        <span class="explorer__icon" aria-hidden="true">{{ '{}' }}</span
+        >{{ file }}
+      </li>
+    }
+  </ul>
+</nav>

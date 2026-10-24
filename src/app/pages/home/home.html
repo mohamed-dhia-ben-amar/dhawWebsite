@@ -1,3 +1,9 @@
-<div class="home container">
-  <h1 class="home__prompt">mdba:~$ coming soon</h1>
+<div class="container">
+  <app-hero-section [content]="content.hero" />
+  <section [attr.aria-label]="content.highlights.label">
+    <app-stat-strip [stats]="content.highlights.stats" />
+  </section>
+  <app-projects-section [content]="content.work" />
+  <app-experience-section [content]="content.experience" />
+  <app-contact-section [content]="content.contact" />
 </div>

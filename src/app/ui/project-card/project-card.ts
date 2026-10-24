@@ -19,9 +19,9 @@ export interface ProjectStat {
 export class ProjectCard {
   readonly title = input.required<string>();
   readonly summary = input.required<string>();
-  /** Router path of the case study. */
-  readonly href = input.required<string>();
-  readonly linkLabel = input.required<string>();
+  /** Router path of the case study. No link is rendered without it. */
+  readonly href = input<string>();
+  readonly linkLabel = input<string>('');
   /** Active tab, e.g. `widget-library/README.md`. */
   readonly file = input.required<string>();
   /** Secondary tab with the stack, e.g. `Angular · Nx · Vitest`. */

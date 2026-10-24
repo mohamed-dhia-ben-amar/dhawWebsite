@@ -1,0 +1,46 @@
+// Link and button styles shared across pages (primary pill, outline pill, quiet link).
+
+.button {
+  display: inline-flex;
+  gap: var(--space-2);
+  align-items: center;
+  justify-content: center;
+  min-height: var(--button-height);
+  padding: 0 var(--space-6);
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  font-weight: 600;
+  text-decoration: none;
+  border: 1px solid transparent;
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+}
+
+.button--primary {
+  background: var(--accent);
+  color: var(--on-accent);
+
+  &:hover {
+    background: var(--text-strong);
+  }
+}
+
+.button--outline {
+  color: var(--text-strong);
+  font-weight: 500;
+  border-color: var(--border-strong);
+
+  &:hover {
+    border-color: var(--text-muted);
+  }
+}
+
+.button--quiet {
+  padding-inline: var(--space-3);
+  color: var(--text-muted);
+  font-weight: 500;
+
+  &:hover {
+    color: var(--text-strong);
+  }
+}

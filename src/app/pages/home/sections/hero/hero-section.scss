@@ -1,0 +1,86 @@
+.hero {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-12);
+  align-items: center;
+  padding-block: clamp(var(--space-12), 7vw, 88px) var(--space-16);
+}
+
+.hero__text {
+  display: flex;
+  flex: 3 1 480px;
+  flex-direction: column;
+  gap: 26px;
+  min-width: 0;
+}
+
+.hero__terminal {
+  flex: 2 1 340px;
+}
+
+.hero__badge {
+  display: inline-flex;
+  gap: 10px;
+  align-items: center;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  font-weight: 500;
+}
+
+.hero__dot {
+  flex: none;
+  width: 8px;
+  height: 8px;
+  background: var(--accent);
+  border-radius: 50%;
+}
+
+.hero__title {
+  font-size: var(--text-hero);
+  font-weight: 700;
+  line-height: var(--leading-hero);
+  letter-spacing: var(--tracking-hero);
+}
+
+.hero__accent {
+  color: var(--accent);
+}
+
+.hero__intro {
+  max-width: 600px;
+  color: var(--text-muted);
+  font-size: var(--text-lg);
+}
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3) var(--space-2);
+}
+
+// One outlined pill holding two download links (EN / FR), each a full-height touch target.
+.hero__cv {
+  gap: 0;
+  padding-right: var(--space-1);
+}
+
+.hero__cv-link {
+  display: inline-grid;
+  place-items: center;
+  min-width: var(--touch-target);
+  min-height: var(--touch-target);
+  color: var(--text-strong);
+  font-family: var(--font-mono);
+  font-size: var(--text-md);
+  text-decoration: none;
+  border-radius: var(--radius-pill);
+
+  &:hover {
+    color: var(--accent);
+  }
+}
+
+.hero__cv-sep {
+  color: var(--text-muted);
+}

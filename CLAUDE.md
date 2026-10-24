@@ -33,12 +33,13 @@ E2E serves the built output in `dist/` as static files, so always build first.
 - `src/styles/`: `_tokens.scss` (every color, type, spacing and radius token), `_fonts.scss`
   (self-hosted variable fonts and metric-matched fallbacks), `_base.scss` (reset, focus, `.container`,
   `.visually-hidden`, reduced motion).
-- `src/content/`: typed copy per locale (`en/` now, `fr/` in milestone 4). The shell reads it through
-  the `SITE_CONTENT` token (`src/app/core/site-content.ts`).
-- `src/app/ui/`: signature components (TerminalWindow, PromptLabel, EditorPane, CodeView, StatStrip,
-  ProjectCard, StatusBar).
+- `src/content/`: typed copy per locale (`en/` now, `fr/` in milestone 4): `site.ts` (shell) and
+  `home.ts` (homepage), read through the `SITE_CONTENT` / `HOME_CONTENT` tokens in `src/app/core/`.
+- `src/app/ui/`: signature components (TerminalWindow, TerminalSession, PromptLabel, EditorPane,
+  FileExplorer, CodeView, StatStrip, ProjectCard, StatusBar).
 - `src/app/layout/`: app shell (SkipLink, SiteHeader, SiteFooter, LanguageSwitch).
-- `src/app/pages/`: routed pages. `/styleguide` is an internal noindex showcase of the components;
+- `src/app/pages/`: routed pages. The homepage is composed of `pages/home/sections/*`, which take
+  their content slice as an input. `/styleguide` is an internal noindex showcase of the components;
   keep it out of the sitemap.
 
 ## Conventions

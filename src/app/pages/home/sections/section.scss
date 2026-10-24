@@ -1,0 +1,14 @@
+// Shared layout for homepage sections: prompt label, title, then content.
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  padding-top: var(--space-section);
+  scroll-margin-top: var(--space-6);
+}
+
+.section__title {
+  font-size: var(--text-h2);
+  font-weight: 700;
+}
