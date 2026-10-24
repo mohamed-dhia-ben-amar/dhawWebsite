@@ -1,4 +1,3 @@
-import { provideHttpClient, withFetch } from '@angular/common/http';
 import { ApplicationConfig, provideBrowserGlobalErrorListeners } from '@angular/core';
 import { provideClientHydration } from '@angular/platform-browser';
 import { provideRouter, withComponentInputBinding, withInMemoryScrolling } from '@angular/router';
@@ -13,6 +12,5 @@ export const appConfig: ApplicationConfig = {
       withComponentInputBinding(),
     ),
     provideClientHydration(),
-    provideHttpClient(withFetch()),
   ],
 };
