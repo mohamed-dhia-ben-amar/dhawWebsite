@@ -1,0 +1,62 @@
+// Self-hosted variable fonts (no runtime Google Fonts, GDPR). The woff2 files are copied from
+// @fontsource-variable/* into /fonts by angular.json; only latin and latin-ext are shipped.
+// The latin files are preloaded in index.html.
+
+@use 'sass:list';
+@use 'sass:string';
+
+// Kept as strings: unquoted, Sass would parse `U+0000-00FF` as arithmetic.
+$latin: 'U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD';
+$latin-ext: 'U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF';
+
+// family → [file prefix, weight range]
+$families: (
+  'Inter Variable': 'inter' '100 900',
+  'Space Grotesk Variable': 'space-grotesk' '300 700',
+  'JetBrains Mono Variable': 'jetbrains-mono' '100 800',
+);
+
+@each $family, $spec in $families {
+  $file: list.nth($spec, 1);
+  $weight: string.unquote(list.nth($spec, 2));
+
+  @each $subset, $range in ('latin': $latin, 'latin-ext': $latin-ext) {
+    @font-face {
+      font-family: $family;
+      font-style: normal;
+      font-weight: $weight;
+      font-display: swap;
+      src: url('/fonts/#{$file}-#{$subset}-wght-normal.woff2') format('woff2');
+      unicode-range: string.unquote($range);
+    }
+  }
+}
+
+// Metric-matched fallbacks so the swap does not shift layout. Values computed with
+// @capsizecss from the latin woff2 files (size-adjust = avg char width ratio).
+@font-face {
+  font-family: 'Inter Fallback';
+  src: local('Arial'), local('ArialMT');
+  size-adjust: 107.12%;
+  ascent-override: 90.44%;
+  descent-override: 22.52%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: 'Space Grotesk Fallback';
+  src: local('Arial'), local('ArialMT');
+  size-adjust: 109.47%;
+  ascent-override: 89.89%;
+  descent-override: 26.67%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: 'JetBrains Mono Fallback';
+  src: local('Courier New'), local('CourierNewPSMT');
+  size-adjust: 99.98%;
+  ascent-override: 102.02%;
+  descent-override: 30%;
+  line-gap-override: 0%;
+}

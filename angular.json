@@ -29,6 +29,21 @@
               {
                 "glob": "**/*",
                 "input": "public"
+              },
+              {
+                "glob": "*-latin*-wght-normal.woff2",
+                "input": "node_modules/@fontsource-variable/inter/files",
+                "output": "fonts"
+              },
+              {
+                "glob": "*-latin*-wght-normal.woff2",
+                "input": "node_modules/@fontsource-variable/space-grotesk/files",
+                "output": "fonts"
+              },
+              {
+                "glob": "*-latin*-wght-normal.woff2",
+                "input": "node_modules/@fontsource-variable/jetbrains-mono/files",
+                "output": "fonts"
               }
             ],
             "styles": ["src/styles.scss"],
