@@ -1,1 +1,14 @@
-/* You can add global styles to this file, and also import other style files */
+// Placeholder globals for milestone 1. The full token set arrives with the design system (milestone 2).
+:root {
+  --bg: #0a0a0b;
+  --text: #d4d4d8;
+  --font-mono: ui-monospace, 'SFMono-Regular', Menlo, Consolas, 'Liberation Mono', monospace;
+
+  color-scheme: dark;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+}
