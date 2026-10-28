@@ -42,7 +42,7 @@ test.describe('internationalisation', () => {
       'Ingénieur full-stack : bibliothèques de widgets configurables et workflows assistés par IA.',
     );
     await expect(page.getByRole('link', { name: 'Me contacter' })).toBeVisible();
-    await expect(page.getByRole('navigation', { name: 'Principale' })).toContainText('./parcours');
+    await expect(page.getByRole('navigation', { name: 'Principale' })).toContainText('Expérience');
     await expect(page.getByRole('region', { name: 'Chiffres clés' })).toBeVisible();
   });
 
@@ -71,7 +71,7 @@ test.describe('internationalisation', () => {
     await page.goto('/fr/');
     await page
       .getByRole('navigation', { name: 'Principale' })
-      .getByRole('link', { name: './parcours' })
+      .getByRole('link', { name: 'Expérience' })
       .click();
     await expect(page).toHaveURL(/\/fr\/#experience$/);
     await expect(page.locator('#experience')).toBeInViewport();

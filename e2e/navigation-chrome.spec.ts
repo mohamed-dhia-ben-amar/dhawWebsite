@@ -27,9 +27,9 @@ test.describe('sticky header', () => {
       await page.goto('/en/');
       const header = page.getByRole('banner');
       for (const [label, id] of [
-        ['./experience', 'experience'],
-        ['./contact', 'contact'],
-        ['./work', 'work'],
+        ['Experience', 'experience'],
+        ['Contact', 'contact'],
+        ['Work', 'work'],
       ]) {
         await page
           .getByRole('navigation', { name: 'Main' })

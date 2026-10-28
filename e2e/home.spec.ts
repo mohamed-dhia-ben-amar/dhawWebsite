@@ -23,9 +23,9 @@ test.describe('home page', () => {
     await page.goto('/en/');
     const nav = page.getByRole('navigation', { name: 'Main' });
     for (const [label, id] of [
-      ['./work', 'work'],
-      ['./experience', 'experience'],
-      ['./contact', 'contact'],
+      ['Work', 'work'],
+      ['Experience', 'experience'],
+      ['Contact', 'contact'],
     ]) {
       await nav.getByRole('link', { name: label }).click();
       await expect(page).toHaveURL(new RegExp(`#${id}$`));
