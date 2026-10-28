@@ -1,10 +1,13 @@
 export type Locale = 'en' | 'fr';
 
+export type NavIcon = 'home' | 'work' | 'experience' | 'journey' | 'contact';
+
 export interface NavLink {
-  /** Visible label, e.g. `./work`. */
+  /** Visible label, e.g. `Work`. */
   readonly label: string;
-  /** Homepage section id the link scrolls to. */
+  /** Homepage section id the link scrolls to (also the scroll-spy id). */
   readonly fragment: string;
+  readonly icon: NavIcon;
 }
 
 export interface LanguageOption {
@@ -43,6 +46,8 @@ export interface SiteContent {
   };
   readonly nav: {
     readonly label: string;
+    /** Accessible name of the homepage section stepper. */
+    readonly sectionsLabel: string;
     readonly links: readonly NavLink[];
   };
   readonly languages: {

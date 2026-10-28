@@ -38,10 +38,12 @@ export const site: SiteContent = {
   },
   nav: {
     label: 'Main',
+    sectionsLabel: 'Page sections',
     links: [
-      { label: './work', fragment: 'work' },
-      { label: './experience', fragment: 'experience' },
-      { label: './contact', fragment: 'contact' },
+      { label: 'Home', fragment: 'home', icon: 'home' },
+      { label: 'Work', fragment: 'work', icon: 'work' },
+      { label: 'Experience', fragment: 'experience', icon: 'experience' },
+      { label: 'Contact', fragment: 'contact', icon: 'contact' },
     ],
   },
   languages: {

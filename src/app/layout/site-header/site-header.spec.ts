@@ -1,6 +1,7 @@
 import { LOCALE_ID } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
+import { SectionSpy } from '../../core/section-spy';
 import { SiteHeader } from './site-header';
 
 describe('SiteHeader', () => {
@@ -25,14 +26,35 @@ describe('SiteHeader', () => {
     const nav = render().querySelector('nav');
     expect(nav?.getAttribute('aria-label')).toBe('Main');
     const links = [...(nav?.querySelectorAll('a') ?? [])].map((a) => [
-      a.textContent,
+      a.textContent?.trim(),
       a.getAttribute('href'),
     ]);
     expect(links).toEqual([
-      ['./work', '/#work'],
-      ['./experience', '/#experience'],
-      ['./contact', '/#contact'],
+      ['Home', '/#home'],
+      ['Work', '/#work'],
+      ['Experience', '/#experience'],
+      ['Contact', '/#contact'],
     ]);
+  });
+
+  it('gives every link a decorative icon and marks Home active on the homepage', () => {
+    const el = render();
+    const links = [...el.querySelectorAll<HTMLAnchorElement>('.nav__link')];
+    links.forEach((a) => expect(a.querySelector('svg')?.getAttribute('aria-hidden')).toBe('true'));
+    expect(links.map((a) => a.getAttribute('aria-current'))).toEqual(['true', null, null, null]);
+    expect(links[0].classList).toContain('nav__link--active');
+  });
+
+  it('follows the section being read', () => {
+    TestBed.configureTestingModule({ providers: [provideRouter([])] });
+    const fixture = TestBed.createComponent(SiteHeader);
+    fixture.detectChanges();
+    TestBed.inject(SectionSpy).active.set('experience');
+    fixture.detectChanges();
+    const active = (fixture.nativeElement as HTMLElement).querySelector(
+      '[aria-current="true"].nav__link',
+    );
+    expect(active?.textContent?.trim()).toBe('Experience');
   });
 
   it('renders the language switch for the current page with English marked current', () => {
@@ -46,11 +68,14 @@ describe('SiteHeader', () => {
   it('uses the French copy and marks French current in the fr build', () => {
     const el = render('fr');
     expect(el.querySelector('nav')?.getAttribute('aria-label')).toBe('Principale');
-    expect([...el.querySelectorAll('.header__link')].map((a) => a.textContent)).toEqual([
-      './projets',
-      './parcours',
-      './contact',
+    expect([...el.querySelectorAll('.nav__label')].map((a) => a.textContent)).toEqual([
+      'Accueil',
+      'Projets',
+      'Expérience',
+      'Contact',
     ]);
-    expect(el.querySelector('[aria-current="true"]')?.getAttribute('href')).toBe('/fr/');
+    expect(el.querySelector('.langs__link[aria-current="true"]')?.getAttribute('href')).toBe(
+      '/fr/',
+    );
   });
 });

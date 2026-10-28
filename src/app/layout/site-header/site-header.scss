@@ -1,3 +1,5 @@
+@use '../../../styles/breakpoints' as bp;
+
 :host {
   position: sticky;
   z-index: 20;
@@ -12,8 +14,7 @@
 
 .header__inner {
   display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-2) var(--space-4);
+  gap: var(--space-4);
   align-items: center;
   justify-content: space-between;
   padding-block: var(--space-2);
@@ -33,50 +34,107 @@
   color: var(--accent);
 }
 
-// Narrow: logo and language switch on the first row, navigation below.
-// From 640px: logo, navigation and language switch on one row.
-.header__langs {
-  order: 2;
-  margin-left: auto;
+// Narrow: the nav is a tab bar fixed to the bottom of the screen (thumb reach).
+.nav {
+  position: fixed;
+  z-index: 25;
+  right: var(--container-padding);
+  bottom: calc(var(--space-3) + env(safe-area-inset-bottom));
+  left: var(--container-padding);
 }
 
-.header__nav {
-  flex-basis: 100%;
-  order: 3;
-}
-
-@media (width >= 640px) {
-  .header__nav {
-    flex-basis: auto;
-    order: 2;
-    margin-left: auto;
-  }
-
-  .header__langs {
-    order: 3;
-    margin-left: 0;
-  }
-}
-
-.header__links {
+.nav__list {
   display: flex;
-  flex-wrap: wrap;
-  column-gap: var(--space-6);
+  justify-content: space-around;
   margin: 0;
-  padding: 0;
+  padding: var(--space-1);
   list-style: none;
-  font-family: var(--font-mono);
-  font-size: var(--text-md);
+  background: var(--surface);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-pill);
 }
 
-.header__link {
-  display: inline-flex;
+.nav__item {
+  flex: 1 1 0;
+  display: flex;
+  justify-content: center;
+}
+
+.nav__link {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
   align-items: center;
-  min-height: var(--touch-target);
+  justify-content: flex-end;
+  min-width: 64px;
+  min-height: 56px;
+  padding: var(--space-1) var(--space-2);
   color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
   text-decoration: none;
+  border-radius: var(--radius-pill);
 
   &:hover {
     color: var(--text-strong);
+  }
+
+  &:focus-visible {
+    outline-offset: -2px;
+  }
+}
+
+.nav__icon {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border: 1px solid transparent;
+  border-radius: 50%;
+  transition:
+    transform 380ms cubic-bezier(0.34, 1.56, 0.64, 1),
+    color 200ms ease,
+    background-color 200ms ease,
+    border-color 200ms ease;
+}
+
+.nav__link:hover .nav__icon {
+  transform: translateY(-3px);
+}
+
+// The active item pops out of the bar as a raised circle.
+.nav__link--active {
+  color: var(--accent);
+
+  .nav__icon,
+  &:hover .nav__icon {
+    color: var(--accent);
+    background: var(--surface-2);
+    border-color: var(--accent);
+    transform: translateY(-14px) scale(1.06);
+  }
+}
+
+// Wide: the same pill sits in the header, centred between the logo and the language switch.
+@media (width >= bp.$nav-wide) {
+  .header__inner {
+    padding-block: var(--space-4) var(--space-2);
+  }
+
+  .nav {
+    position: static;
+  }
+
+  .nav__list {
+    gap: var(--space-1);
+    padding-inline: var(--space-2);
+  }
+
+  .nav__item {
+    flex: none;
+  }
+
+  .nav__link {
+    min-width: 84px;
   }
 }
