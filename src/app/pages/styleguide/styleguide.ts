@@ -7,6 +7,7 @@ import { WORK_CONTENT } from '../../core/work-content';
 import { ExperienceTabs } from '../home/sections/experience/experience-tabs';
 import { LanguageSwitch } from '../../layout/language-switch/language-switch';
 import { FlowDiagram } from '../../ui/flow-diagram/flow-diagram';
+import { NavIcon } from '../../ui/nav-icon/nav-icon';
 import { OwnerNote } from '../../ui/owner-note/owner-note';
 import { ProjectCard } from '../../ui/project-card/project-card';
 import { PromptLabel } from '../../ui/prompt-label/prompt-label';
@@ -22,6 +23,7 @@ import * as data from './styleguide.data';
     ExperienceTabs,
     FlowDiagram,
     LanguageSwitch,
+    NavIcon,
     OwnerNote,
     ProjectCard,
     PromptLabel,
@@ -37,6 +39,7 @@ export class Styleguide {
   protected readonly data = data;
   protected readonly site = inject(SITE_CONTENT);
   protected readonly home = inject(HOME_CONTENT);
+  protected readonly icons = ['home', 'work', 'experience', 'journey', 'contact'] as const;
   /** The NOVA diagram, as a real example. */
   protected readonly flowDemo = (() => {
     const diagram = inject(WORK_CONTENT).caseStudies[1].diagram;

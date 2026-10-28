@@ -113,6 +113,27 @@
     </app-terminal-window>
   </section>
 
+  <section class="guide__section" aria-labelledby="sg-icons">
+    <app-prompt-label command="ls icons/" />
+    <h2 id="sg-icons">NavIcon</h2>
+    <ul class="icons" role="list">
+      @for (icon of icons; track icon) {
+        <li class="icons__item">
+          <app-nav-icon [name]="icon" /><code>{{ icon }}</code>
+        </li>
+      }
+    </ul>
+  </section>
+
+  <section class="guide__section" aria-labelledby="sg-motion">
+    <app-prompt-label command="cat motion.md" />
+    <h2 id="sg-motion">SectionStepper and Reveal</h2>
+    <p class="guide__lede">
+      Page-level: on the homepage, wide screens show the section stepper on the right edge, and
+      content below the fold fades in as it scrolls into view (never with reduced motion).
+    </p>
+  </section>
+
   <section class="guide__section" aria-labelledby="sg-to-top">
     <app-prompt-label command="./back-to-top" />
     <h2 id="sg-to-top">BackToTop</h2>
