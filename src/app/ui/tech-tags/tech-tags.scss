@@ -1,0 +1,68 @@
+:host {
+  display: block;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tag {
+  display: inline-flex;
+  gap: var(--space-2);
+  align-items: center;
+  min-height: 36px;
+  padding: var(--space-1) var(--space-3) var(--space-1) 10px;
+  color: var(--text-strong);
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  background: var(--surface);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-pill);
+  transition:
+    border-color 200ms ease,
+    transform 260ms cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  &:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+  }
+}
+
+.tag__icon {
+  flex: none;
+  width: 16px;
+  height: 16px;
+  color: var(--accent);
+}
+
+.tag__mark {
+  display: inline-grid;
+  place-items: center;
+  width: 16px;
+  color: var(--accent);
+  font-weight: 700;
+}
+
+// Staggered pop-in on load (hero). Opacity/transform only: no layout shift.
+:host(.tags--animate) .tag {
+  animation: tag-in 420ms cubic-bezier(0.34, 1.56, 0.64, 1) backwards;
+  animation-delay: calc(300ms + var(--i, 0) * 70ms);
+}
+
+@keyframes tag-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.92);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :host(.tags--animate) .tag {
+    animation: none;
+  }
+}

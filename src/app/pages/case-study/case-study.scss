@@ -71,7 +71,6 @@
   }
 }
 
-.study__stack,
 .study__link-list {
   display: flex;
   flex-wrap: wrap;
@@ -79,16 +78,6 @@
   margin: 0;
   padding: 0;
   list-style: none;
-}
-
-.study__chip {
-  padding: var(--space-1) var(--space-3);
-  color: var(--text-strong);
-  font-family: var(--font-mono);
-  font-size: var(--text-sm);
-  background: var(--surface);
-  border: 1px solid var(--border-strong);
-  border-radius: var(--radius-pill);
 }
 
 .study__metrics {

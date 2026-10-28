@@ -58,11 +58,7 @@
     <h2 id="study-stack" class="study__heading">
       <span class="study__hash" aria-hidden="true">##</span> {{ ui.sections.stack }}
     </h2>
-    <ul class="study__stack" role="list">
-      @for (tech of s.stack; track tech) {
-        <li class="study__chip">{{ tech }}</li>
-      }
-    </ul>
+    <app-tech-tags [items]="s.stack" />
   </section>
 
   <section appReveal class="study__section" aria-labelledby="study-results">
