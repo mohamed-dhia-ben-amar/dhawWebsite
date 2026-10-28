@@ -33,6 +33,7 @@ describe('SiteHeader', () => {
       ['Home', '/#home'],
       ['Work', '/#work'],
       ['Experience', '/#experience'],
+      ['Journey', '/#journey'],
       ['Contact', '/#contact'],
     ]);
   });
@@ -41,7 +42,13 @@ describe('SiteHeader', () => {
     const el = render();
     const links = [...el.querySelectorAll<HTMLAnchorElement>('.nav__link')];
     links.forEach((a) => expect(a.querySelector('svg')?.getAttribute('aria-hidden')).toBe('true'));
-    expect(links.map((a) => a.getAttribute('aria-current'))).toEqual(['true', null, null, null]);
+    expect(links.map((a) => a.getAttribute('aria-current'))).toEqual([
+      'true',
+      null,
+      null,
+      null,
+      null,
+    ]);
     expect(links[0].classList).toContain('nav__link--active');
   });
 
@@ -72,6 +79,7 @@ describe('SiteHeader', () => {
       'Accueil',
       'Projets',
       'Expérience',
+      'Parcours',
       'Contact',
     ]);
     expect(el.querySelector('.langs__link[aria-current="true"]')?.getAttribute('href')).toBe(

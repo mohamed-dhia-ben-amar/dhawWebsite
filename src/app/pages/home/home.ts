@@ -17,6 +17,7 @@ import { StatStrip } from '../../ui/stat-strip/stat-strip';
 import { ContactSection } from './sections/contact/contact-section';
 import { ExperienceSection } from './sections/experience/experience-section';
 import { HeroSection } from './sections/hero/hero-section';
+import { JourneySection } from './sections/journey/journey-section';
 import { ProjectsSection } from './sections/projects/projects-section';
 
 const PERSON_ID = 'person-jsonld';
@@ -27,6 +28,7 @@ const PERSON_ID = 'person-jsonld';
     ContactSection,
     ExperienceSection,
     HeroSection,
+    JourneySection,
     ProjectsSection,
     SectionStepper,
     StatStrip,

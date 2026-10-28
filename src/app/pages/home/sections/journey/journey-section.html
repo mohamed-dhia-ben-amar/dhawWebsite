@@ -1,0 +1,23 @@
+@let c = content();
+<section id="journey" class="section" aria-labelledby="journey-title">
+  <app-prompt-label [command]="c.prompt" />
+  <h2 id="journey-title" class="section__title">{{ c.title }}</h2>
+  <ol class="journey" role="list">
+    @for (entry of c.entries; track entry.period + entry.org; let i = $index) {
+      <li class="journey__step" [class]="'journey__step--' + entry.kind" [appReveal]="i">
+        <span class="journey__node" aria-hidden="true"></span>
+        <div class="journey__card">
+          <p class="journey__meta">
+            <span class="journey__period">{{ entry.period }}</span>
+            <span class="journey__kind">type: {{ c.kinds[entry.kind] }}</span>
+          </p>
+          <h3 class="journey__title">{{ entry.title }}</h3>
+          <p class="journey__org">{{ entry.org }}</p>
+          @if (entry.note) {
+            <p class="journey__note">{{ entry.note }}</p>
+          }
+        </div>
+      </li>
+    }
+  </ol>
+</section>

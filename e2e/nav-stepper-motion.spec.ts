@@ -14,8 +14,8 @@ test.describe('icon navigation', () => {
     await page.setViewportSize({ width: 1280, height: 900 });
     await gotoApp(page, '/en/');
     const links = mainNav(page).getByRole('link');
-    await expect(links).toHaveText(['Home', 'Work', 'Experience', 'Contact']);
-    await expect(mainNav(page).locator('svg[aria-hidden="true"]')).toHaveCount(4);
+    await expect(links).toHaveText(['Home', 'Work', 'Experience', 'Journey', 'Contact']);
+    await expect(mainNav(page).locator('svg[aria-hidden="true"]')).toHaveCount(5);
     await expect(mainNav(page).getByRole('link', { name: 'Home' })).toHaveAttribute(
       'aria-current',
       'true',
@@ -65,6 +65,17 @@ test.describe('icon navigation', () => {
   });
 });
 
+test('on a 320px phone every tab is fully on screen and still named', async ({ page }) => {
+  await page.setViewportSize({ width: 320, height: 700 });
+  await gotoApp(page, '/fr/');
+  const links = page.getByRole('navigation', { name: 'Principale' }).getByRole('link');
+  await expect(links).toHaveText(['Accueil', 'Projets', 'Expérience', 'Parcours', 'Contact']);
+  for (const link of await links.all()) {
+    const box = await link.boundingBox();
+    expect(box && box.x >= 0 && box.x + box.width <= 320).toBe(true);
+  }
+});
+
 test.describe('section stepper', () => {
   test('shows on wide homepages only', async ({ page }) => {
     await page.setViewportSize({ width: 1440, height: 900 });
@@ -74,6 +85,7 @@ test.describe('section stepper', () => {
       'Home',
       'Work',
       'Experience',
+      'Journey',
       'Contact',
     ]);
 
