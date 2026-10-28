@@ -68,6 +68,7 @@ export class ExperienceTabs {
   constructor() {
     const destroyRef = inject(DestroyRef);
     afterNextRender(() => {
+      if (typeof window.matchMedia !== 'function') return;
       const query = window.matchMedia(EDITOR_WIDE_QUERY);
       const update = () => this.orientation.set(query.matches ? 'vertical' : 'horizontal');
       update();
