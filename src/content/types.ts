@@ -122,6 +122,17 @@ export interface ContactFormContent {
   readonly failure: { readonly generic: string; readonly rateLimited: string };
 }
 
+export type JourneyKind = 'work' | 'education' | 'community';
+
+/** One step of the "My journey so far" timeline (facts from the CV only). */
+export interface JourneyEntry {
+  readonly kind: JourneyKind;
+  readonly period: string;
+  readonly title: string;
+  readonly org: string;
+  readonly note?: string;
+}
+
 export interface HomeContent {
   readonly meta: { readonly title: string; readonly description: string };
   readonly hero: {
@@ -146,6 +157,8 @@ export interface HomeContent {
       readonly label: string;
       readonly entries: readonly TerminalEntry[];
     };
+    /** Icon tags under the hero; names must exist in the tech-icon registry or get the › mark. */
+    readonly stack: { readonly label: string; readonly items: readonly string[] };
   };
   readonly highlights: { readonly label: string; readonly stats: readonly StatContent[] };
   readonly work: SectionHeading & {
@@ -156,6 +169,11 @@ export interface HomeContent {
     readonly explorerLabel: string;
     readonly explorerHeading: string;
     readonly items: readonly ExperienceContent[];
+  };
+  readonly journey: SectionHeading & {
+    /** Labels of the entry kinds, shown as `type: …`. */
+    readonly kinds: Readonly<Record<JourneyKind, string>>;
+    readonly entries: readonly JourneyEntry[];
   };
   readonly contact: SectionHeading & {
     readonly windowTitle: string;
