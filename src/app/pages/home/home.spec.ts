@@ -17,7 +17,7 @@ describe('Home', () => {
     const order = [...el.querySelectorAll('section')].map(
       (s) => s.id || s.getAttribute('aria-label') || s.getAttribute('aria-labelledby'),
     );
-    expect(order).toEqual(['home', 'Highlights', 'work', 'experience', 'contact']);
+    expect(order).toEqual(['home', 'Highlights', 'work', 'experience', 'journey', 'contact']);
   });
 
   it('has exactly one h1 and an h2 per titled section', () => {
@@ -26,6 +26,7 @@ describe('Home', () => {
     expect([...el.querySelectorAll('h2')].map((h) => h.textContent)).toEqual([
       'Selected projects',
       "Where I've worked",
+      'My journey so far',
       "Let's build something.",
     ]);
   });

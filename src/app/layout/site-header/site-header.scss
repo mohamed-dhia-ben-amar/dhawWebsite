@@ -66,7 +66,7 @@
   gap: 2px;
   align-items: center;
   justify-content: flex-end;
-  min-width: 64px;
+  min-width: 56px;
   min-height: 56px;
   padding: var(--space-1) var(--space-2);
   color: var(--text-muted);
@@ -112,6 +112,25 @@
     background: var(--surface-2);
     border-color: var(--accent);
     transform: translateY(-14px) scale(1.06);
+  }
+}
+
+// Very narrow: five labels do not fit, so inactive items show their icon only. The label stays
+// in the accessibility tree (visually hidden), so every link keeps its name.
+@media (width < 420px) {
+  .nav__link {
+    min-width: 0;
+    width: 100%;
+    padding-inline: 0;
+  }
+
+  .nav__link:not(.nav__link--active) .nav__label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
   }
 }
 
