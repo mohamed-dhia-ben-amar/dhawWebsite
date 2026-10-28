@@ -54,6 +54,11 @@ E2E serves the built output in `dist/` with the redirects and rewrites from `ver
   (`--bottom-nav-space` keeps the page clear of it). Nav items come from `site.ts` → `nav.links`
   (label, fragment, icon); the active item comes from `SectionSpy` (`src/app/core/section-spy.ts`),
   which the homepage starts and which also drives the right-side `SectionStepper` (≥1240px).
+- `ui/tech-tags`: stack tags with Simple Icons logos (named imports, registry in `tech-icons.ts`;
+  add a tech there to give it a logo, otherwise it gets a `›` mark). Used in the hero
+  (`home.ts` → `hero.stack`) and the case-study Stack sections.
+- The homepage journey timeline (`sections/journey`, `home.ts` → `journey`) is newest first and
+  uses CV facts only, like the case studies.
 - Motion: the `appReveal` directive (`ui/reveal`, styles in `src/styles/_motion.scss`) fades
   below-the-fold content in once; never hides what is on screen at load or under reduced motion.
   Animate only opacity/transform.
