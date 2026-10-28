@@ -18,7 +18,7 @@
     </app-editor-pane>
   </header>
 
-  <section class="study__section" aria-labelledby="study-context">
+  <section appReveal class="study__section" aria-labelledby="study-context">
     <h2 id="study-context" class="study__heading">
       <span class="study__hash" aria-hidden="true">##</span> {{ ui.sections.context }}
     </h2>
@@ -28,7 +28,7 @@
   </section>
 
   @if (s.problem.length) {
-    <section class="study__section" aria-labelledby="study-problem">
+    <section appReveal class="study__section" aria-labelledby="study-problem">
       <h2 id="study-problem" class="study__heading">
         <span class="study__hash" aria-hidden="true">##</span> {{ ui.sections.problem }}
       </h2>
@@ -38,7 +38,7 @@
     </section>
   }
 
-  <section class="study__section" aria-labelledby="study-approach">
+  <section appReveal class="study__section" aria-labelledby="study-approach">
     <h2 id="study-approach" class="study__heading">
       <span class="study__hash" aria-hidden="true">##</span> {{ ui.sections.approach }}
     </h2>
@@ -54,7 +54,7 @@
     }
   </section>
 
-  <section class="study__section" aria-labelledby="study-stack">
+  <section appReveal class="study__section" aria-labelledby="study-stack">
     <h2 id="study-stack" class="study__heading">
       <span class="study__hash" aria-hidden="true">##</span> {{ ui.sections.stack }}
     </h2>
@@ -65,7 +65,7 @@
     </ul>
   </section>
 
-  <section class="study__section" aria-labelledby="study-results">
+  <section appReveal class="study__section" aria-labelledby="study-results">
     <h2 id="study-results" class="study__heading">
       <span class="study__hash" aria-hidden="true">##</span> {{ ui.sections.results }}
     </h2>
@@ -97,7 +97,7 @@
   </section>
 
   @if (s.next.length) {
-    <section class="study__section" aria-labelledby="study-next">
+    <section appReveal class="study__section" aria-labelledby="study-next">
       <h2 id="study-next" class="study__heading">
         <span class="study__hash" aria-hidden="true">##</span> {{ ui.sections.next }}
       </h2>

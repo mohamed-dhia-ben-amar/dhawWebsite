@@ -39,10 +39,12 @@ export const site: SiteContent = {
   },
   nav: {
     label: 'Principale',
+    sectionsLabel: 'Sections de la page',
     links: [
-      { label: './projets', fragment: 'work' },
-      { label: './parcours', fragment: 'experience' },
-      { label: './contact', fragment: 'contact' },
+      { label: 'Accueil', fragment: 'home', icon: 'home' },
+      { label: 'Projets', fragment: 'work', icon: 'work' },
+      { label: 'Expérience', fragment: 'experience', icon: 'experience' },
+      { label: 'Contact', fragment: 'contact', icon: 'contact' },
     ],
   },
   languages: {

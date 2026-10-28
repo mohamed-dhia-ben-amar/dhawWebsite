@@ -50,6 +50,13 @@ E2E serves the built output in `dist/` with the redirects and rewrites from `ver
 - `src/app/layout/`: app shell (SkipLink, SiteHeader, SiteFooter, LanguageSwitch, BackToTop).
   The header is sticky and publishes its live height as `--header-height` (drives
   `scroll-padding-top`) and as the router's anchor-scroll offset; don't hard-code header offsets.
+  Its icon nav is a pill in the header from 840px and a bottom tab bar below
+  (`--bottom-nav-space` keeps the page clear of it). Nav items come from `site.ts` → `nav.links`
+  (label, fragment, icon); the active item comes from `SectionSpy` (`src/app/core/section-spy.ts`),
+  which the homepage starts and which also drives the right-side `SectionStepper` (≥1240px).
+- Motion: the `appReveal` directive (`ui/reveal`, styles in `src/styles/_motion.scss`) fades
+  below-the-fold content in once; never hides what is on screen at load or under reduced motion.
+  Animate only opacity/transform.
 - `src/app/pages/`: routed pages. The homepage is composed of `pages/home/sections/*`, which take
   their content slice as an input. The experience section is `ExperienceTabs`: `FileExplorer` is a
   WAI-ARIA tab list (roving tabindex, arrows/Home/End, automatic activation) and every panel is

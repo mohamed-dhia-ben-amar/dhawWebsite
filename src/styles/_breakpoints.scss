@@ -3,3 +3,9 @@
 
 // Editor panes put the explorer beside the code from this width; below it, above.
 $editor-wide: 840px;
+
+// The header nav is a pill in the header from this width; below it, a bottom tab bar.
+$nav-wide: 840px;
+
+// The homepage section stepper (right edge) needs the margin beside the 1160px container.
+$stepper-wide: 1240px;

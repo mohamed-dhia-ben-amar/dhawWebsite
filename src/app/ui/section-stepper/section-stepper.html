@@ -1,0 +1,23 @@
+<nav class="stepper" [attr.aria-label]="label()">
+  <span class="stepper__prompt" aria-hidden="true">$</span>
+  <div class="stepper__rail">
+    <span class="stepper__fill" aria-hidden="true" [style.--progress]="spy.progress()"></span>
+    <ul class="stepper__list" role="list">
+      @for (step of steps(); track step.id) {
+        <li class="stepper__item" [style.--at]="step.at">
+          <a
+            class="stepper__dot"
+            [class.stepper__dot--passed]="step.passed"
+            [class.stepper__dot--active]="step.active"
+            routerLink="/"
+            [fragment]="step.id"
+            [attr.aria-current]="step.active ? 'true' : null"
+          >
+            <span class="stepper__label">{{ step.label }}</span>
+          </a>
+        </li>
+      }
+    </ul>
+  </div>
+  <span class="stepper__cursor" aria-hidden="true"></span>
+</nav>

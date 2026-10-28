@@ -76,7 +76,10 @@
   --container-max: 1160px;
 
   // Sticky header height; measured and updated by SiteHeader, these are prerender defaults.
-  --header-height: 113px;
+  --header-height: 61px;
+
+  // Room kept at the bottom of the page for the narrow-screen tab bar (0 when it sits in the header).
+  --bottom-nav-space: 92px;
   --container-padding: 1.5rem;
   --touch-target: 44px;
   --button-height: 48px;
@@ -86,8 +89,9 @@
   --focus-offset: 3px;
 }
 
-@media (width >= 640px) {
+@media (width >= 840px) {
   :root {
-    --header-height: 61px;
+    --header-height: 99px;
+    --bottom-nav-space: 0px;
   }
 }

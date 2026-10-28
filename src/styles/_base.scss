@@ -28,6 +28,9 @@ body {
   line-height: var(--leading-body);
   -webkit-font-smoothing: antialiased;
   overflow-x: clip;
+
+  // Keeps the footer clear of the narrow-screen bottom tab bar.
+  padding-bottom: calc(var(--bottom-nav-space) + env(safe-area-inset-bottom));
 }
 
 h1,

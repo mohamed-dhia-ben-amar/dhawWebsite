@@ -30,6 +30,28 @@
   max-width: 480px;
 }
 
+.icons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-6);
+  margin: 0;
+  padding: 0;
+  color: var(--accent);
+  list-style: none;
+}
+
+.icons__item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  align-items: center;
+
+  code {
+    color: var(--text-muted);
+    font-size: var(--text-xs);
+  }
+}
+
 .swatches {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));

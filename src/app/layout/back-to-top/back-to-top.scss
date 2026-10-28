@@ -1,8 +1,11 @@
 .to-top {
+  // Above the narrow-screen tab bar, or above the footer once it scrolls into view.
+  --to-top-lift: max(var(--bottom-nav-space, 0px), var(--footer-overlap, 0px));
+
   position: fixed;
   z-index: 30;
   right: max(var(--space-4), env(safe-area-inset-right));
-  bottom: calc(var(--space-4) + var(--footer-overlap, 0px) + env(safe-area-inset-bottom));
+  bottom: calc(var(--to-top-lift) + var(--space-4) + env(safe-area-inset-bottom));
   display: grid;
   place-items: center;
   width: var(--button-height);
