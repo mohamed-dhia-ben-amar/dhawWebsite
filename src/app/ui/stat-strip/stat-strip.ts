@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import { Reveal } from '../reveal/reveal';
 
 export interface Stat {
   readonly value: string;
@@ -8,6 +9,7 @@ export interface Stat {
 /** Row of big numbers with captions (four on the homepage). Wraps to fewer columns when narrow. */
 @Component({
   selector: 'app-stat-strip',
+  imports: [Reveal],
   templateUrl: './stat-strip.html',
   styleUrl: './stat-strip.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

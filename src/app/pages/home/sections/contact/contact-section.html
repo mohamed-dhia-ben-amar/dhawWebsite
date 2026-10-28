@@ -1,6 +1,6 @@
 @let c = content();
 <section id="contact" class="contact" aria-labelledby="contact-title">
-  <app-terminal-window [title]="c.windowTitle" variant="contact">
+  <app-terminal-window appReveal [title]="c.windowTitle" variant="contact">
     <div class="contact__layout">
       <div class="contact__text">
         <app-prompt-label [command]="c.prompt" />

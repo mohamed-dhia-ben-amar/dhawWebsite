@@ -9,6 +9,7 @@ import { FactText } from '../../ui/fact-text/fact-text';
 import { FlowDiagram } from '../../ui/flow-diagram/flow-diagram';
 import { OwnerNote } from '../../ui/owner-note/owner-note';
 import { PromptLabel } from '../../ui/prompt-label/prompt-label';
+import { Reveal } from '../../ui/reveal/reveal';
 
 /**
  * Case study at /work/:slug. Structure from the brief: Context → Problem → What I did → Stack →
@@ -16,7 +17,7 @@ import { PromptLabel } from '../../ui/prompt-label/prompt-label';
  */
 @Component({
   selector: 'app-case-study',
-  imports: [EditorPane, FactText, FlowDiagram, OwnerNote, PromptLabel, RouterLink],
+  imports: [EditorPane, FactText, FlowDiagram, OwnerNote, PromptLabel, Reveal, RouterLink],
   templateUrl: './case-study.html',
   styleUrl: './case-study.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
