@@ -125,6 +125,16 @@
     </ul>
   </section>
 
+  <section class="guide__section" aria-labelledby="sg-tags">
+    <app-prompt-label command="cat stack.txt" />
+    <h2 id="sg-tags">TechTags</h2>
+    <p class="guide__lede">
+      Logos from Simple Icons in the accent colour; a tech without a logo gets a › mark. Used in the
+      hero and in case-study Stack sections. The journey timeline is on the homepage.
+    </p>
+    <app-tech-tags [items]="techDemo" label="Stack demo" />
+  </section>
+
   <section class="guide__section" aria-labelledby="sg-motion">
     <app-prompt-label command="cat motion.md" />
     <h2 id="sg-motion">SectionStepper and Reveal</h2>

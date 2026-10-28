@@ -30,6 +30,12 @@
         }
       </div>
     </div>
+    <app-tech-tags
+      class="hero__stack"
+      [items]="c.stack.items"
+      [label]="c.stack.label"
+      [animate]="true"
+    />
   </div>
   <app-terminal-window class="hero__terminal" [title]="c.terminal.title" [label]="c.terminal.label">
     <app-terminal-session [entries]="c.terminal.entries" [animate]="true" />

@@ -14,9 +14,11 @@ test.describe('home page', () => {
     await expect(page.getByRole('heading', { level: 2 })).toHaveText([
       'Selected projects',
       "Where I've worked",
+      'My journey so far',
       "Let's build something.",
     ]);
-    await expect(page.getByRole('heading', { level: 3 })).toHaveCount(3);
+    // 3 project cards + 6 journey steps.
+    await expect(page.getByRole('heading', { level: 3 })).toHaveCount(9);
   });
 
   test('header navigation scrolls to each section', async ({ page }) => {

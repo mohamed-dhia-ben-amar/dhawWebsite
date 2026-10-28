@@ -52,6 +52,10 @@ export const home: HomeContent = {
         { command: 'status', output: 'disponible pour un nouveau poste', status: true },
       ],
     },
+    stack: {
+      label: 'Stack principale',
+      items: ['Angular', 'Nx', 'TypeScript', 'RxJS', 'Node.js', 'React', 'Golang', 'Claude Code'],
+    },
   },
   highlights: {
     label: 'Chiffres clés',
@@ -113,7 +117,7 @@ export const home: HomeContent = {
   },
   experience: {
     prompt: 'code experience.json',
-    title: 'Mon parcours',
+    title: 'Où j’ai travaillé',
     explorerLabel: 'Fichiers d’expérience',
     explorerHeading: 'Explorateur',
     items: [
@@ -166,6 +170,55 @@ export const home: HomeContent = {
           'Front end Flutter d’une DApp d’échange de véhicules',
           'Solidity, ERC-20 et MetaMask, déployée sur testnet',
         ],
+      },
+    ],
+  },
+  journey: {
+    prompt: 'git log --oneline ~/journey',
+    title: 'Mon parcours jusqu’ici',
+    kinds: { work: 'emploi', education: 'formation', community: 'communauté' },
+    entries: [
+      {
+        kind: 'work',
+        period: 'déc. 2024 – aujourd’hui',
+        title: 'Développeur frontend',
+        org: 'Minotore',
+        note: 'Widgets Angular configurables pour le page builder d’un CMS\u00a0; lead technique de NOVA.',
+      },
+      {
+        kind: 'work',
+        period: 'févr. – août 2024',
+        title: 'Ingénieur full-stack (stage)',
+        org: 'Converty',
+        note: 'Co-développement de l’app marchande Converty Shop (React Native, Expo).',
+      },
+      {
+        kind: 'work',
+        period: 'juil. – sept. 2023',
+        title: 'Ingénieur logiciel (stage)',
+        org: 'IBSpace',
+        note: 'Dashboards Angular d’administration et d’analyse en temps réel sur Firestore.',
+      },
+      {
+        kind: 'community',
+        period: 'sept. 2022 – déc. 2024',
+        title: 'Responsable de département, puis mentor',
+        org: 'Google Developer Student Clubs (GDSC), ESPRIT',
+        note: 'Responsable du département Blockchain, puis du département Développement\u00a0; ateliers et hackathon organisés avec GDSC Budapest.',
+      },
+      {
+        kind: 'work',
+        period: 'août – sept. 2022',
+        title: 'Développeur mobile front-end (stage)',
+        org: 'Inoteqia',
+        note: 'Front end Flutter d’une DApp d’échange de véhicules, déployée sur testnet.',
+      },
+      {
+        kind: 'education',
+        period: '2019 – 2024',
+        title: 'Diplôme d’ingénieur en génie logiciel full-stack',
+        org: 'ESPRIT',
+        note: 'Spécialité développement mobile.',
       },
     ],
   },
