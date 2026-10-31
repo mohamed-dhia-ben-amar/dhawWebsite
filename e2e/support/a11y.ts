@@ -5,16 +5,21 @@ import { expect, type Page } from '@playwright/test';
 const TAGS = ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa', 'best-practice'];
 
 export async function expectNoA11yViolations(page: Page): Promise<void> {
-  // Let fade-ins finish first: half-faded text fails contrast. Looping animations (the cursor
-  // blink) never finish, so only finite ones are awaited.
-  await page.evaluate(() =>
-    Promise.all(
-      document
+  // Let fade-ins finish first: half-faded text fails contrast. Some start a frame or two late
+  // (scroll reveal), so wait until nothing finite is running. Looping animations (the cursor
+  // blink) never finish and are ignored.
+  await page.evaluate(async () => {
+    const frames = () =>
+      new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+    for (let round = 0; round < 10; round++) {
+      await frames();
+      const running = document
         .getAnimations()
-        .filter((a) => a.effect?.getTiming().iterations !== Infinity)
-        .map((a) => a.finished.catch(() => undefined)),
-    ),
-  );
+        .filter((a) => a.playState === 'running' && a.effect?.getTiming().iterations !== Infinity);
+      if (!running.length) return;
+      await Promise.all(running.map((a) => a.finished.catch(() => undefined)));
+    }
+  });
   const { violations } = await new AxeBuilder({ page }).withTags(TAGS).analyze();
   const summary = violations.map((v) => ({
     id: v.id,
