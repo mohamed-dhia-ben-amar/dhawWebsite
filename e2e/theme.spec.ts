@@ -72,16 +72,6 @@ test.describe('theme', () => {
     await gotoApp(page, '/en/');
     await toggle(page).click();
     await expect.poll(() => background(page)).toBe(LIGHT_BG);
-    // Let the hero's staggered fade-ins finish (half-faded text fails contrast); the cursor
-    // blink loops forever, so only finite animations are awaited.
-    await page.evaluate(() =>
-      Promise.all(
-        document
-          .getAnimations()
-          .filter((a) => a.effect?.getTiming().iterations !== Infinity)
-          .map((a) => a.finished),
-      ),
-    );
     await expectNoA11yViolations(page);
   });
 });
