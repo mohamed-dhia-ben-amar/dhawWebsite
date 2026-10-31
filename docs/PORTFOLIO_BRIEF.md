@@ -71,7 +71,7 @@ Layout and components come from `design-reference.html`. The palette and type we
 ## 5. Homepage sections (in order)
 
 1. **Header:** `mdba:~$` logo, nav `./work`, `./experience`, `./contact`, EN/FR switch (links to the same page in the other locale, `aria-current` on the active one).
-2. **Hero:** availability badge, headline, intro paragraph, CTAs (Get in touch, Download CV EN/FR, GitHub, LinkedIn); terminal window on the right (stacks below on mobile).
+2. **Hero:** availability badge, headline, intro paragraph, CTAs (Get in touch, Download CV EN/FR, GitHub, LinkedIn), stack tags; on the right (below on mobile) a live `hero.widget.json` config whose values restyle the hero: accent (amber/sky), alignment, headline focus (widgets / AI-assisted development / full-stack, facts only) and which stack tags show. Prerendered with the defaults; it types itself in on load after the headline slides in.
 3. **Stat strip:** 21 widgets authored (of 81 in the team library) / ~9,000 tests / 4 days / 10k+ downloads.
 4. **Selected projects:** 3 project cards linking to case studies.
 5. **Experience:** editor pane with an explorer of 4 files (`minotore.json`, `converty.json`, `ibspace.json`, `inoteqia.json`). Clicking a file opens it in the pane. Implement as an accessible **tabs** pattern (roving tabindex, arrow keys, `role="tablist"`/`tab`/`tabpanel`), state in a signal. On mobile the explorer becomes a horizontal scrollable list above the pane.
