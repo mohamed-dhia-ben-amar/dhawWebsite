@@ -1,19 +1,20 @@
 // Token reference for the internal styleguide. Component demos use the real homepage content.
 
-export const swatches: readonly { token: string; value: string }[] = [
-  { token: '--bg', value: '#0A0A0B' },
-  { token: '--surface', value: '#111113' },
-  { token: '--surface-2', value: '#141416' },
-  { token: '--surface-sunken', value: '#0D0D0F' },
-  { token: '--surface-raised', value: '#18181B' },
-  { token: '--border', value: '#1C1C20' },
-  { token: '--border-strong', value: '#27272A' },
-  { token: '--decor', value: '#3F3F46' },
-  { token: '--text', value: '#D4D4D8' },
-  { token: '--text-strong', value: '#F4F4F5' },
-  { token: '--text-muted', value: '#A1A1AA' },
-  { token: '--text-faint', value: '#82828B' },
-  { token: '--line-number', value: '#52525B' },
-  { token: '--accent', value: '#C6F432' },
-  { token: '--warm', value: '#FDBA74' },
+/** Token values per theme (src/styles/_tokens.scss); the chips show the theme on screen. */
+export const swatches: readonly { token: string; dark: string; light: string }[] = [
+  { token: '--bg', dark: '#0E1A2B', light: '#F4F6F9' },
+  { token: '--surface', dark: '#14233A', light: '#FFFFFF' },
+  { token: '--surface-2', dark: '#172840', light: '#F9FAFC' },
+  { token: '--surface-sunken', dark: '#0B1624', light: '#EDF1F6' },
+  { token: '--surface-raised', dark: '#1B2D47', light: '#E3E9F1' },
+  { token: '--border', dark: '#22354F', light: '#D5DDE7' },
+  { token: '--border-strong', dark: '#2C4260', light: '#C3CFDD' },
+  { token: '--decor', dark: '#3A5070', light: '#A9B6C7' },
+  { token: '--text', dark: '#D9E1EC', light: '#1B2A3F' },
+  { token: '--text-strong', dark: '#F1F5FA', light: '#0E1A2B' },
+  { token: '--text-muted', dark: '#A3B2C6', light: '#3E4F67' },
+  { token: '--text-faint', dark: '#8696AD', light: '#56677F' },
+  { token: '--line-number', dark: '#4E6380', light: '#8A98AB' },
+  { token: '--accent', dark: '#F2B640', light: '#8F5B00' },
+  { token: '--accent-2', dark: '#86C8E8', light: '#1D5F8A' },
 ];
