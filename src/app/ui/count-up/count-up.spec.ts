@@ -76,10 +76,13 @@ describe('CountUp', () => {
     return { fixture, el };
   }
 
-  it('leaves values that are on screen at load as they are', async () => {
-    const { el } = await render(100);
+  it('also counts values that are on screen at load (stats just under the hero)', async () => {
+    const { fixture, el } = await render(100);
+    expect(el.textContent).toBe('~0');
+    callback?.([{ isIntersecting: true } as IntersectionObserverEntry], {} as IntersectionObserver);
+    frame?.(1200);
+    fixture.detectChanges();
     expect(el.textContent).toBe('~9,000');
-    expect(callback).toBeUndefined();
   });
 
   it('does nothing with reduced motion', async () => {
