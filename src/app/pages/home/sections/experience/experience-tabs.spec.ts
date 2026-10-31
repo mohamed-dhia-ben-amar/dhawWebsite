@@ -1,10 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 import { home } from '../../../../../content/en/home';
-import { ExperienceTabs, experienceJson } from './experience-tabs';
+import { ExperienceTabs, experienceJson, experienceSlug } from './experience-tabs';
 
 describe('ExperienceTabs', () => {
-  function render() {
+  afterEach(() => history.replaceState(null, '', '/'));
+
+  function render(urlParam?: string) {
     const fixture = TestBed.createComponent(ExperienceTabs);
+    if (urlParam) fixture.componentRef.setInput('urlParam', urlParam);
     fixture.componentRef.setInput('items', home.experience.items);
     fixture.componentRef.setInput('explorerLabel', home.experience.explorerLabel);
     fixture.componentRef.setInput('explorerHeading', home.experience.explorerHeading);
@@ -45,6 +48,32 @@ describe('ExperienceTabs', () => {
     expect(visible()[0].textContent).toContain('"Full-Stack Engineer Intern"');
     expect(el.querySelector('.pane__tab--active')?.textContent).toBe('converty.json');
     expect(fixture.componentInstance.active()).toBe('converty.json');
+  });
+
+  it('names files in the URL without the extension', () => {
+    expect(experienceSlug('converty.json')).toBe('converty');
+  });
+
+  it('with urlParam, keeps the open file in the query string', () => {
+    const { fixture, el } = render('experience');
+    el.querySelector<HTMLButtonElement>('#experience-tab-ibspace')?.click();
+    fixture.detectChanges();
+    expect(new URLSearchParams(location.search).get('experience')).toBe('ibspace');
+  });
+
+  it('with urlParam, opens the file named in the URL after hydration', async () => {
+    history.replaceState(null, '', '/?experience=inoteqia');
+    const { fixture, visible } = render('experience');
+    await fixture.whenStable();
+    fixture.detectChanges();
+    expect(visible().map((p) => p.id)).toEqual(['experience-panel-inoteqia']);
+  });
+
+  it('without urlParam, leaves the URL alone', () => {
+    const { fixture, el } = render();
+    el.querySelector<HTMLButtonElement>('#experience-tab-ibspace')?.click();
+    fixture.detectChanges();
+    expect(location.search).toBe('');
   });
 
   it('highlights the period of every experience as a date', () => {
