@@ -33,22 +33,24 @@ This file is the source of truth for Claude Code. `design-reference.html` (same 
 CV downloads served as static files:
 `/cv/Mohamed_Dhia_Ben_Amar_CV_2026_EN.pdf` and `/cv/Mohamed_Dhia_Ben_Amar_CV_2026_FR.pdf`.
 
-## 4. Design system (from `design-reference.html`)
+## 4. Design system
 
-Dark only for v1. Define everything as CSS custom properties in one tokens file; components never hard-code colors.
+Layout and components come from `design-reference.html`. The palette and type were redesigned in October 2026 (owner-approved): midnight ink and phosphor amber instead of near-black and lime, Martian Mono and Instrument Sans instead of three families. Define everything as CSS custom properties in one tokens file; components never hard-code colors.
 
-**Colors**
-- `--bg` `#0A0A0B` · `--surface` `#111113` · `--surface-2` `#141416` (window/title bars) · `--surface-sunken` `#0D0D0F` (tab bars, explorer)
-- `--border` `#1C1C20` · `--border-strong` `#27272A`
-- `--text` `#D4D4D8` · `--text-strong` `#F4F4F5` · `--text-muted` `#A1A1AA` · `--text-faint` `#71717A` (only for decorative/secondary tab labels) · `--line-number` `#52525B` (decorative, `aria-hidden`)
-- `--accent` `#C6F432` (actions, prompts, string values) · `--on-accent` `#0A0A0B`
-- `--warm` `#FDBA74` (dates and file icons only)
-- Keep the rule: accent and warm are the only two colors; everything else is neutral.
+**Themes:** dark (default, also in the prerendered HTML) and light. The visitor's system setting picks one; a header toggle overrides it, is remembered, and is applied before first paint. Switching spreads the new theme from the toggle as a wave (instant with reduced motion).
+
+**Colors** (dark / light). Every text color reaches 4.5:1 on every surface in both themes.
+- Surfaces: `--bg` `#0E1A2B` / `#F4F6F9` · `--surface` `#14233A` / `#FFFFFF` · `--surface-2` `#172840` / `#F9FAFC` (window/title bars) · `--surface-sunken` `#0B1624` / `#EDF1F6` (tab bars, explorer) · `--surface-raised` `#1B2D47` / `#E3E9F1`
+- Borders: `--border` `#22354F` / `#D5DDE7` · `--border-strong` `#2C4260` / `#C3CFDD`
+- Text: `--text` `#D9E1EC` / `#1B2A3F` · `--text-strong` `#F1F5FA` / `#0E1A2B` · `--text-muted` `#A3B2C6` / `#3E4F67` · `--text-faint` `#8696AD` / `#56677F` · `--line-number` `#4E6380` / `#8A98AB` (decorative, `aria-hidden`)
+- `--accent` `#F2B640` / `#8F5B00` (phosphor amber: actions, prompts, focus) · `--on-accent` `#0E1A2B` / `#FFFFFF`
+- `--accent-2` `#86C8E8` / `#1D5F8A` (sky: code strings, journey dates, file icons)
+- Keep the rule: accent and accent-2 are the only two hues; everything else is neutral.
 
 **Type**
-- Headings: Space Grotesk 600–700, tight letter-spacing (`-0.02em` to `-0.035em`). Hero: `clamp(42px, 6.4vw, 80px)`.
-- Body: Inter 400–600, 16px, line-height 1.6.
-- Anything "machine" (nav, prompts, labels, code, terminal, status bar): JetBrains Mono.
+- Headings: Martian Mono 700 at its widest setting, tight letter-spacing (`-0.03em` to `-0.04em`). Hero: `clamp(30px, …, 44px)`.
+- Body: Instrument Sans 400–700, 16px, line-height 1.6.
+- Anything "machine" (nav, prompts, labels, code, terminal, status bar): Martian Mono at a narrower width.
 
 **Shape and spacing**
 - Radius: cards 14px, contact block 20px, inputs 10px, primary buttons pill (999px).
@@ -64,7 +66,7 @@ Dark only for v1. Define everything as CSS custom properties in one tokens file;
 - `ProjectCard`: an `EditorPane` with title, summary, case-study link and 2 code-style stats (`size_cut`, `features_per_sprint`).
 
 **Motion**
-- Terminal cursor blink and a subtle typing effect on the hero terminal only. Disable all motion under `prefers-reduced-motion`.
+- Terminal cursor blink and a subtle typing effect on the hero terminal, scroll reveal, the theme wave. Disable all motion under `prefers-reduced-motion`.
 
 ## 5. Homepage sections (in order)
 
