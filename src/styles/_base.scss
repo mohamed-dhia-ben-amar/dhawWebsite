@@ -33,6 +33,18 @@ body {
   padding-bottom: calc(var(--bottom-nav-space) + env(safe-area-inset-bottom));
 }
 
+// No double-tap zoom delay on controls, and a tap flash in the theme instead of the OS grey.
+a,
+button,
+input,
+textarea,
+label,
+summary,
+[role='tab'] {
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: color-mix(in srgb, var(--accent) 18%, transparent);
+}
+
 h1,
 h2,
 h3,

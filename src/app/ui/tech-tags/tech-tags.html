@@ -1,6 +1,6 @@
 <ul class="tags" role="list" [attr.aria-label]="label() ?? null">
   @for (tag of tags(); track tag.name; let i = $index) {
-    <li class="tag" [style.--i]="i">
+    <li class="tag" translate="no" [style.--i]="i">
       @if (tag.path; as path) {
         <svg class="tag__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
           <path [attr.d]="path" fill="currentColor" />
