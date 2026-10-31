@@ -11,12 +11,12 @@ import {
   viewChild,
 } from '@angular/core';
 import {
-  type AbstractControl,
-  FormControl,
-  FormGroup,
-  ReactiveFormsModule,
-  type ValidationErrors,
-} from '@angular/forms';
+  FormField,
+  FormRoot,
+  type TreeValidationResult,
+  form,
+  validate,
+} from '@angular/forms/signals';
 import type { ContactFormContent } from '../../../../../content/types';
 import {
   CONTACT_LIMITS,
@@ -27,32 +27,29 @@ import {
 import { ContactApi } from '../../../../core/contact-api';
 
 const FIELDS: readonly ContactField[] = ['name', 'email', 'message'];
-const ERROR_ORDER: readonly ContactFieldError[] = ['required', 'too_short', 'too_long', 'invalid'];
 
-/** Same rules as the API (src/shared/contact.ts), on trimmed values; error keys = API codes. */
-export function contactFieldValidator(field: ContactField) {
-  return (control: AbstractControl<string | null>): ValidationErrors | null => {
-    const value = (control.value ?? '').trim();
-    if (!value) return { required: true };
-    if (field === 'email') {
-      return value.length > 254 || !EMAIL_PATTERN.test(value) ? { invalid: true } : null;
-    }
-    const { min, max } = CONTACT_LIMITS[field];
-    if (value.length < min) return { too_short: true };
-    if (value.length > max) return { too_long: true };
-    return null;
-  };
+/** Same rules as the API (src/shared/contact.ts), on trimmed values; codes = API codes. */
+export function contactFieldError(field: ContactField, raw: string): ContactFieldError | undefined {
+  const value = raw.trim();
+  if (!value) return 'required';
+  if (field === 'email') {
+    return value.length > 254 || !EMAIL_PATTERN.test(value) ? 'invalid' : undefined;
+  }
+  const { min, max } = CONTACT_LIMITS[field];
+  if (value.length < min) return 'too_short';
+  if (value.length > max) return 'too_long';
+  return undefined;
 }
 
 type Status = 'idle' | 'submitting' | 'success';
 
 /**
- * Contact form (brief §7): typed reactive form, inline messages, an error summary that takes
+ * Contact form (brief §7): a Signal Form, inline messages, an error summary that takes
  * focus, loading and success states, and a honeypot. Posts to /api/contact through ContactApi.
  */
 @Component({
   selector: 'app-contact-form',
-  imports: [ReactiveFormsModule],
+  imports: [FormField, FormRoot],
   templateUrl: './contact-form.html',
   styleUrl: './contact-form.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -65,15 +62,19 @@ export class ContactForm {
   private readonly summary = viewChild<ElementRef<HTMLElement>>('summary');
   private readonly successTitle = viewChild<ElementRef<HTMLElement>>('successTitle');
 
-  protected readonly form = new FormGroup({
-    name: new FormControl('', { nonNullable: true, validators: contactFieldValidator('name') }),
-    email: new FormControl('', { nonNullable: true, validators: contactFieldValidator('email') }),
-    message: new FormControl('', {
-      nonNullable: true,
-      validators: contactFieldValidator('message'),
-    }),
-    website: new FormControl('', { nonNullable: true }),
-  });
+  private readonly model = signal({ name: '', email: '', message: '', website: '' });
+  protected readonly form = form(
+    this.model,
+    (path) => {
+      for (const field of FIELDS) {
+        validate(path[field], ({ value }) => {
+          const kind = contactFieldError(field, value());
+          return kind ? { kind } : undefined;
+        });
+      }
+    },
+    { submission: { action: () => this.send(), onInvalid: () => this.onInvalid() } },
+  );
 
   protected readonly fields = FIELDS;
   protected readonly status = signal<Status>('idle');
@@ -88,13 +89,12 @@ export class ContactForm {
 
   /** First error code on a field, or null. */
   protected errorCode(field: ContactField): ContactFieldError | null {
-    const errors = this.form.controls[field].errors;
-    return errors ? (ERROR_ORDER.find((code) => errors[code]) ?? 'invalid') : null;
+    return (this.form[field]().errors()[0]?.kind as ContactFieldError | undefined) ?? null;
   }
 
   protected showError(field: ContactField): boolean {
-    const control = this.form.controls[field];
-    return control.invalid && (control.touched || this.attempted());
+    const state = this.form[field]();
+    return state.invalid() && (state.touched() || this.attempted());
   }
 
   protected errorMessage(field: ContactField): string {
@@ -102,7 +102,7 @@ export class ContactForm {
   }
 
   protected invalidFields(): ContactField[] {
-    return this.attempted() ? FIELDS.filter((field) => this.form.controls[field].invalid) : [];
+    return this.attempted() ? FIELDS.filter((field) => this.form[field]().invalid()) : [];
   }
 
   protected focusField(event: Event, field: ContactField): void {
@@ -110,18 +110,18 @@ export class ContactForm {
     document.getElementById(this.fieldId(field))?.focus();
   }
 
-  protected async submit(): Promise<void> {
-    if (this.submitting()) return;
+  private onInvalid(): void {
     this.failure.set(null);
     this.attempted.set(true);
-    this.form.markAllAsTouched();
-    if (this.form.invalid) {
-      this.focusAfterRender(() => this.summary());
-      return;
-    }
+    this.focusAfterRender(() => this.summary());
+  }
 
+  /** Runs only when the form is valid; field errors it returns are shown on those fields. */
+  private async send(): Promise<TreeValidationResult> {
+    this.failure.set(null);
+    this.attempted.set(true);
     this.status.set('submitting');
-    const { name, email, message, website } = this.form.getRawValue();
+    const { name, email, message, website } = this.model();
     const result = await this.api.send({
       name: name.trim(),
       email: email.trim(),
@@ -131,22 +131,23 @@ export class ContactForm {
 
     if (result.ok) {
       this.status.set('success');
-      this.form.reset();
+      this.form().reset({ name: '', email: '', message: '', website: '' });
       this.attempted.set(false);
       this.focusAfterRender(() => this.successTitle());
-      return;
+      return undefined;
     }
 
     this.status.set('idle');
     if (result.error === 'validation' && result.fields) {
-      for (const [field, code] of Object.entries(result.fields)) {
-        this.form.controls[field as ContactField].setErrors({ [code]: true });
-      }
       this.focusAfterRender(() => this.summary());
-    } else {
-      const { failure } = this.content();
-      this.failure.set(result.error === 'rate_limited' ? failure.rateLimited : failure.generic);
+      return Object.entries(result.fields).map(([field, kind]) => ({
+        kind,
+        fieldTree: this.form[field as ContactField],
+      }));
     }
+    const { failure } = this.content();
+    this.failure.set(result.error === 'rate_limited' ? failure.rateLimited : failure.generic);
+    return undefined;
   }
 
   protected sendAnother(): void {

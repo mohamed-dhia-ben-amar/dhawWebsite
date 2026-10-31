@@ -3,7 +3,8 @@
     paneExplorer
     [idPrefix]="idPrefix()"
     [files]="files()"
-    [(active)]="active"
+    [active]="active()"
+    (activeChange)="open($event)"
     [label]="explorerLabel()"
     [heading]="explorerHeading()"
     [orientation]="orientation()"

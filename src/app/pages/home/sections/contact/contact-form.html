@@ -8,7 +8,7 @@
     </button>
   </div>
 } @else {
-  <form class="cf" [formGroup]="form" (ngSubmit)="submit()" [attr.aria-label]="c.label" novalidate>
+  <form class="cf" [formRoot]="form" [attr.aria-label]="c.label">
     @let invalid = invalidFields();
     @if (invalid.length) {
       <div #summary class="cf__summary" tabindex="-1" aria-labelledby="contact-summary-title">
@@ -38,7 +38,7 @@
             rows="5"
             aria-required="true"
             [id]="id"
-            [formControlName]="field"
+            [formField]="form[field]"
             [attr.aria-invalid]="hasError"
             [attr.aria-describedby]="hasError ? id + '-error' : null"
           ></textarea>
@@ -50,7 +50,7 @@
             [type]="field === 'email' ? 'email' : 'text'"
             [attr.autocomplete]="field"
             [attr.spellcheck]="field === 'email' ? 'false' : null"
-            [formControlName]="field"
+            [formField]="form[field]"
             [attr.aria-invalid]="hasError"
             [attr.aria-describedby]="hasError ? id + '-error' : null"
           />
@@ -71,7 +71,7 @@
         type="text"
         tabindex="-1"
         autocomplete="off"
-        formControlName="website"
+        [formField]="form.website"
       />
     </div>
 

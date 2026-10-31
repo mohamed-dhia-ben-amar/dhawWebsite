@@ -1,25 +1,25 @@
 import { TestBed } from '@angular/core/testing';
 import { home } from '../../../../../content/en/home';
 import { ContactApi, type ContactResult } from '../../../../core/contact-api';
-import { ContactForm, contactFieldValidator } from './contact-form';
+import { ContactForm, contactFieldError } from './contact-form';
 
-describe('contactFieldValidator', () => {
+describe('contactFieldError', () => {
   const check = (field: 'name' | 'email' | 'message', value: string) =>
-    contactFieldValidator(field)({ value } as never);
+    contactFieldError(field, value);
 
   it('uses the limits from the brief on trimmed values', () => {
-    expect(check('name', '   ')).toEqual({ required: true });
-    expect(check('name', ' A ')).toEqual({ too_short: true });
-    expect(check('name', 'Ada')).toBeNull();
-    expect(check('name', 'x'.repeat(101))).toEqual({ too_long: true });
-    expect(check('message', 'too short')).toEqual({ too_short: true });
-    expect(check('message', 'x'.repeat(5001))).toEqual({ too_long: true });
+    expect(check('name', '   ')).toBe('required');
+    expect(check('name', ' A ')).toBe('too_short');
+    expect(check('name', 'Ada')).toBeUndefined();
+    expect(check('name', 'x'.repeat(101))).toBe('too_long');
+    expect(check('message', 'too short')).toBe('too_short');
+    expect(check('message', 'x'.repeat(5001))).toBe('too_long');
   });
 
   it('checks the email format', () => {
-    expect(check('email', 'nope')).toEqual({ invalid: true });
-    expect(check('email', 'a b@c.de')).toEqual({ invalid: true });
-    expect(check('email', ' ada@example.com ')).toBeNull();
+    expect(check('email', 'nope')).toBe('invalid');
+    expect(check('email', 'a b@c.de')).toBe('invalid');
+    expect(check('email', ' ada@example.com ')).toBeUndefined();
   });
 });
 
@@ -183,5 +183,16 @@ describe('ContactForm', () => {
     expect(field('email').getAttribute('aria-invalid')).toBe('true');
     expect(el.querySelectorAll('.cf__summary li')).toHaveLength(1);
     expect(document.activeElement).toBe(el.querySelector('.cf__summary'));
+  });
+
+  it('clears a server field error once that field is edited', async () => {
+    const { el, fixture, field, type, submit, fillValid } = await render();
+    send.mockResolvedValue({ ok: false, error: 'validation', fields: { email: 'invalid' } });
+    fillValid();
+    await submit();
+    type('email', 'ada.lovelace@example.com');
+    fixture.detectChanges();
+    expect(field('email').getAttribute('aria-invalid')).toBe('false');
+    expect(el.querySelector('.cf__summary')).toBeNull();
   });
 });

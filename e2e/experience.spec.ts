@@ -35,6 +35,23 @@ test.describe('experience tabs', () => {
     await expect(page.locator('#experience .pane__tab--active')).toHaveText('ibspace.json');
   });
 
+  test('the open file is kept in the URL and can be linked to', async ({ page }) => {
+    await page.goto('/en/');
+    await page.waitForFunction(() =>
+      document.querySelector('app-root')?.hasAttribute('ng-version'),
+    );
+    const { tab } = experience(page);
+    await tab('converty.json').scrollIntoViewIfNeeded();
+    const before = await page.evaluate(() => window.scrollY);
+    await tab('converty.json').click();
+    await expect(page).toHaveURL(/[?&]experience=converty\b/);
+    // Updating the URL must not jump the page.
+    expect(await page.evaluate(() => window.scrollY)).toBe(before);
+
+    await page.goto('/en/?experience=ibspace#experience');
+    await expect(experience(page).tab('ibspace.json')).toHaveAttribute('aria-selected', 'true');
+  });
+
   test('the keyboard follows the tabs pattern', async ({ page }) => {
     await page.goto('/en/');
     const { tablist, tab, panel } = experience(page);

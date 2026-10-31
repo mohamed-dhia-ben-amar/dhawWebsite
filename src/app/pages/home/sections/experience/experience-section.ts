@@ -18,6 +18,7 @@ export { experienceJson } from './experience-tabs';
         [items]="c.items"
         [explorerLabel]="c.explorerLabel"
         [explorerHeading]="c.explorerHeading"
+        urlParam="experience"
       />
     </section>`,
   styleUrl: '../section.scss',
