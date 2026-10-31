@@ -29,6 +29,7 @@ export const site: SiteContent = {
       ],
     },
   },
+  theme: { toLight: 'Switch to light theme', toDark: 'Switch to dark theme' },
   backToTop: 'Back to top',
   skipLink: 'Skip to content',
   logo: {

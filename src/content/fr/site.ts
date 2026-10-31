@@ -30,6 +30,7 @@ export const site: SiteContent = {
       ],
     },
   },
+  theme: { toLight: 'Passer au thème clair', toDark: 'Passer au thème sombre' },
   backToTop: 'Retour en haut de page',
   skipLink: 'Aller au contenu',
   logo: {

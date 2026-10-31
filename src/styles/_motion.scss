@@ -21,3 +21,16 @@
     transform: none;
   }
 }
+
+// Theme wave (src/app/core/theme.ts): the new theme is a snapshot clipped to a growing circle,
+// drawn over the old one without the default cross-fade. Scoped to the theme switch so other
+// view transitions keep their own animation.
+:root.theme-wave::view-transition-old(root),
+:root.theme-wave::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+:root.theme-wave::view-transition-new(root) {
+  z-index: 1;
+}

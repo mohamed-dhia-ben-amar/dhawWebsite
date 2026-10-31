@@ -15,6 +15,7 @@ import { SectionSpy } from '../../core/section-spy';
 import { SITE_CONTENT } from '../../core/site-content';
 import { NavIcon } from '../../ui/nav-icon/nav-icon';
 import { LanguageSwitch } from '../language-switch/language-switch';
+import { ThemeToggle } from '../theme-toggle/theme-toggle';
 
 /** Gap kept between the sticky header and an anchor target scrolled into view. */
 const ANCHOR_GAP = 16;
@@ -28,7 +29,7 @@ const ANCHOR_GAP = 16;
  */
 @Component({
   selector: 'app-site-header',
-  imports: [LanguageSwitch, NavIcon, RouterLink],
+  imports: [LanguageSwitch, NavIcon, RouterLink, ThemeToggle],
   templateUrl: './site-header.html',
   styleUrl: './site-header.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

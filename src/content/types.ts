@@ -38,6 +38,8 @@ export interface SiteContent {
   readonly skipLink: string;
   /** Accessible name of the floating back-to-top button. */
   readonly backToTop: string;
+  /** Names of the header theme toggle: what pressing it does. */
+  readonly theme: { readonly toLight: string; readonly toDark: string };
   readonly logo: {
     readonly text: string;
     readonly prompt: string;

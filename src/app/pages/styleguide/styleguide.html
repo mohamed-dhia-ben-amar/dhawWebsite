@@ -8,6 +8,9 @@
   <section class="guide__section" aria-labelledby="sg-colors">
     <app-prompt-label command="cat tokens/colors.scss" />
     <h2 id="sg-colors">Colors</h2>
+    <p class="guide__lede">
+      Dark / light values. Switch the theme in the header to see the other set.
+    </p>
     <ul class="swatches" role="list">
       @for (swatch of data.swatches; track swatch.token) {
         <li class="swatch">
@@ -17,7 +20,7 @@
             [style.background]="'var(' + swatch.token + ')'"
           ></span>
           <code class="swatch__token">{{ swatch.token }}</code>
-          <span class="swatch__value">{{ swatch.value }}</span>
+          <span class="swatch__value">{{ swatch.dark }} / {{ swatch.light }}</span>
         </li>
       }
     </ul>
@@ -30,12 +33,12 @@
       Full-stack engineer building
       <span class="type-hero__accent">configurable widget libraries</span>.
     </p>
-    <p class="type-h3">Space Grotesk 600 · section and card titles</p>
+    <p class="type-h3">Martian Mono, wide, 700: headings</p>
     <p>
-      Inter 400, 16px / 1.6 for body copy. I build configurable Angular widgets that power a CMS
-      page builder.
+      Instrument Sans 400, 16px / 1.6 for body copy. I build configurable Angular widgets that power
+      a CMS page builder.
     </p>
-    <p class="type-mono">JetBrains Mono · nav, prompts, labels, code</p>
+    <p class="type-mono">Martian Mono, narrow: nav, prompts, labels, code</p>
   </section>
 
   <section class="guide__section" aria-labelledby="sg-terminal">
@@ -142,6 +145,16 @@
       Page-level: on the homepage, wide screens show the section stepper on the right edge, and
       content below the fold fades in as it scrolls into view (never with reduced motion).
     </p>
+  </section>
+
+  <section class="guide__section" aria-labelledby="sg-theme">
+    <app-prompt-label command="./theme-toggle" />
+    <h2 id="sg-theme">ThemeToggle</h2>
+    <p class="guide__lede">
+      Switches between dark and light; the new theme spreads from the button as a wave (instant with
+      reduced motion). The choice is remembered; until then the system setting applies.
+    </p>
+    <app-theme-toggle [toLight]="site.theme.toLight" [toDark]="site.theme.toDark" />
   </section>
 
   <section class="guide__section" aria-labelledby="sg-to-top">
