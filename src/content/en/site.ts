@@ -30,6 +30,7 @@ export const site: SiteContent = {
     },
   },
   theme: { toLight: 'Switch to light theme', toDark: 'Switch to dark theme' },
+  sound: 'Sound effects',
   backToTop: 'Back to top',
   skipLink: 'Skip to content',
   logo: {

@@ -40,6 +40,8 @@ export interface SiteContent {
   readonly backToTop: string;
   /** Names of the header theme toggle: what pressing it does. */
   readonly theme: { readonly toLight: string; readonly toDark: string };
+  /** Name of the header sound toggle (a toggle button: aria-pressed says whether sound is on). */
+  readonly sound: string;
   readonly logo: {
     readonly text: string;
     readonly prompt: string;

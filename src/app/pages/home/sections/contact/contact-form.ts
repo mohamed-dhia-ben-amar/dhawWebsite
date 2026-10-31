@@ -25,6 +25,7 @@ import {
   EMAIL_PATTERN,
 } from '../../../../../shared/contact';
 import { ContactApi } from '../../../../core/contact-api';
+import { Sound } from '../../../../core/sound';
 
 const FIELDS: readonly ContactField[] = ['name', 'email', 'message'];
 
@@ -58,6 +59,7 @@ export class ContactForm {
   readonly content = input.required<ContactFormContent>();
 
   private readonly api = inject(ContactApi);
+  private readonly sound = inject(Sound);
   private readonly injector = inject(Injector);
   private readonly summary = viewChild<ElementRef<HTMLElement>>('summary');
   private readonly successTitle = viewChild<ElementRef<HTMLElement>>('successTitle');
@@ -131,6 +133,7 @@ export class ContactForm {
 
     if (result.ok) {
       this.status.set('success');
+      this.sound.play('success');
       this.form().reset({ name: '', email: '', message: '', website: '' });
       this.attempted.set(false);
       this.focusAfterRender(() => this.successTitle());
