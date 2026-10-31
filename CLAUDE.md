@@ -65,8 +65,9 @@ E2E serves the built output in `dist/` with the redirects and rewrites from `ver
 - `src/app/pages/`: routed pages. The homepage is composed of `pages/home/sections/*`, which take
   their content slice as an input. The experience section is `ExperienceTabs`: `FileExplorer` is a
   WAI-ARIA tab list (roving tabindex, arrows/Home/End, automatic activation) and every panel is
-  prerendered, only the open one visible. `/styleguide` is an internal noindex showcase of the components;
-  keep it out of the sitemap.
+  prerendered, only the open one visible. On the homepage the open file is kept in the URL
+  (`?experience=converty`, via `history.replaceState`: a router navigation would scroll to top).
+  `/styleguide` is an internal noindex showcase of the components; keep it out of the sitemap.
 
 ## Performance
 
@@ -106,8 +107,8 @@ E2E serves the built output in `dist/` with the redirects and rewrites from `ver
 
 - `src/shared/contact.ts` holds the rules both sides use (lengths, email pattern, honeypot field,
   error codes). Change limits there only.
-- Client: `pages/home/sections/contact/contact-form.ts` (typed reactive form, error summary that
-  takes focus, inline messages via `aria-describedby`, loading/success states, honeypot).
+- Client: `pages/home/sections/contact/contact-form.ts` (Signal Form from `@angular/forms/signals`,
+  whose submit action returns the server's field errors; error summary that takes focus, inline messages via `aria-describedby`, loading/success states, honeypot).
 - Server: `api/contact.ts` is the Vercel Function; the logic is in `server/contact-handler.ts`
   (method → same-origin → JSON → size → per-IP rate limit → honeypot → Zod → send via Resend as
   plain text). Errors are JSON codes; submitted values are never echoed.
