@@ -2,7 +2,10 @@
 <ul class="stats" role="list">
   @for (stat of stats(); track stat.caption; let i = $index) {
     <li class="stats__item" [appReveal]="i">
-      <span class="stats__value">{{ stat.value }}</span>
+      <span class="stats__value"
+        ><span class="visually-hidden">{{ stat.value }}</span
+        ><span aria-hidden="true" [appCountUp]="stat.value"></span
+      ></span>
       <span class="stats__caption">{{ stat.caption }}</span>
     </li>
   }

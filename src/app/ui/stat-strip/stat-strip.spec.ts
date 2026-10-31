@@ -13,12 +13,20 @@ describe('StatStrip', () => {
 
     expect(el.querySelector('ul')?.getAttribute('role')).toBe('list');
     const items = [...el.querySelectorAll('li')].map((li) => [
-      li.querySelector('.stats__value')?.textContent,
+      li.querySelector('.stats__value .visually-hidden')?.textContent,
       li.querySelector('.stats__caption')?.textContent,
     ]);
     expect(items).toEqual([
       ['21', 'widgets I authored, of 81 in our team library'],
       ['~9,000', 'unit tests, 80–96% coverage'],
     ]);
+  });
+
+  it('shows the counting number to sight only; screen readers get the value', () => {
+    const fixture = TestBed.createComponent(StatStrip);
+    fixture.componentRef.setInput('stats', [{ value: '4 days', caption: 'delivery' }]);
+    fixture.detectChanges();
+    const shown = (fixture.nativeElement as HTMLElement).querySelector('[aria-hidden="true"]');
+    expect(shown?.textContent).toBe('4 days');
   });
 });

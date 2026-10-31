@@ -67,7 +67,11 @@ E2E serves the built output in `dist/` with the redirects and rewrites from `ver
   uses CV facts only, like the case studies.
 - Motion: the `appReveal` directive (`ui/reveal`, styles in `src/styles/_motion.scss`) fades
   below-the-fold content in once; never hides what is on screen at load or under reduced motion.
-  Animate only opacity/transform.
+  Animate only opacity/transform. `appCountUp` (`ui/count-up`) counts a stat up from zero the
+  same way (prerendered text is the final value; pair it with a visually hidden copy).
+- Page transitions: router View Transitions (`withViewTransitions` in `app.config.ts`, rules in
+  `core/page-transitions.ts`, CSS in `_motion.scss`). Skipped for fragment-only navigations (the
+  homepage nav) and reduced motion; the header has its own `view-transition-name`.
 - `src/app/pages/`: routed pages. The homepage is composed of `pages/home/sections/*`, which take
   their content slice as an input. The experience section is `ExperienceTabs`: `FileExplorer` is a
   WAI-ARIA tab list (roving tabindex, arrows/Home/End, automatic activation) and every panel is
