@@ -150,6 +150,16 @@ E2E serves the built output in `dist/` with the redirects and rewrites from `ver
 - E2E runs every test in dark (`chromium` project) and every accessibility scan again in light
   (`chromium-light`, `colorScheme: 'light'`). Check contrast in both when adding a color pair.
 
+## Sound
+
+- Sound effects are off by default; `SoundToggle` (header) turns them on and `Sound`
+  (`src/app/core/sound.ts`) remembers the choice in `localStorage.sound`. One delegated click
+  listener plays a tick for every link, button and tab, so new components need no wiring.
+  `data-sound="wave" | "success" | "off"` on an element picks another sound or silences it;
+  `Sound.play()` is for sounds not tied to a click (the contact form's success chime).
+- Sounds are synthesised with Web Audio (no audio files). The AudioContext is created on the
+  first click that plays something, never on load. Keep them short and quiet.
+
 ## Conventions
 
 - Standalone components only (no NgModules). Zoneless change detection.
