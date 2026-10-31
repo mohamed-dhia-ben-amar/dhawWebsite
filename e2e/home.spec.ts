@@ -67,27 +67,30 @@ test.describe('home page', () => {
     );
   });
 
-  test('the hero terminal types out its lines and ends with every line visible', async ({
+  test('the hero config types itself in after the headline, ending fully visible', async ({
     page,
   }) => {
     await page.goto('/en/');
-    const terminal = page.getByRole('group', { name: 'Terminal summary' });
-    const lastOutput = terminal.locator('.session__out').last();
-    // Hidden while the sequence plays, then revealed.
-    await expect(lastOutput).toHaveCSS('opacity', '0');
-    await expect(lastOutput).toHaveCSS('opacity', '1', { timeout: 10_000 });
-    await expect(lastOutput).toHaveText(/available for new roles/);
+    const lastLine = page
+      .getByRole('group', { name: 'Hero settings' })
+      .locator('.cfg__line')
+      .last();
+    // Hidden behind a full clip while the sequence plays, then fully shown.
+    await expect(lastLine).toHaveCSS('clip-path', /100%/);
+    await expect(lastLine).toHaveCSS('clip-path', /^inset\(0px(?: 0%)?(?: 0px)*\)$/, {
+      timeout: 10_000,
+    });
   });
 
-  test('with reduced motion, the terminal is fully visible at once', async ({ page }) => {
+  test('with reduced motion, the hero config is fully visible at once', async ({ page }) => {
     await page.emulateMedia({ reducedMotion: 'reduce' });
     await page.goto('/en/');
-    const terminal = page.getByRole('group', { name: 'Terminal summary' });
-    for (const output of await terminal.locator('.session__out').all()) {
-      await expect(output).toHaveCSS('opacity', '1');
+    const editor = page.getByRole('group', { name: 'Hero settings' });
+    for (const line of await editor.locator('.cfg__line').all()) {
+      await expect(line).toHaveCSS('clip-path', 'none');
     }
-    await expect(terminal.locator('.session__typed').first()).toHaveCSS('clip-path', 'none');
-    await expect(terminal.locator('.session__cursor')).toHaveCSS('animation-name', 'none');
+    await expect(editor.locator('.cfg__cursor')).toHaveCSS('animation-name', 'none');
+    await expect(page.locator('.hero__title')).toHaveCSS('animation-name', 'none');
   });
 
   for (const viewport of [
@@ -95,7 +98,7 @@ test.describe('home page', () => {
     { name: 'mobile', width: 375, height: 800 },
   ]) {
     test(`has no detectable accessibility violations (${viewport.name})`, async ({ page }) => {
-      // Reduced motion so axe sees the final state rather than a half-typed terminal.
+      // Reduced motion so axe sees the final state rather than a half-typed config.
       await page.emulateMedia({ reducedMotion: 'reduce' });
       await page.setViewportSize(viewport);
       await page.goto('/en/');
