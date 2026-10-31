@@ -3,6 +3,8 @@ import { Sound } from '../../core/sound';
 import { SoundToggle } from './sound-toggle';
 
 describe('SoundToggle', () => {
+  // Test files can share storage: start and end without a stored choice.
+  beforeEach(() => localStorage.clear());
   afterEach(() => localStorage.clear());
 
   function render() {

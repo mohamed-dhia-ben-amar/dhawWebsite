@@ -60,6 +60,7 @@ describe('Sound', () => {
 
   afterEach(() => {
     host.remove();
+    localStorage.clear();
     vi.unstubAllGlobals();
   });
 

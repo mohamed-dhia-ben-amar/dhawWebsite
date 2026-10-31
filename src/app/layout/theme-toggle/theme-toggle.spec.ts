@@ -3,6 +3,11 @@ import { Theme } from '../../core/theme';
 import { ThemeToggle } from './theme-toggle';
 
 describe('ThemeToggle', () => {
+  // Test files can share storage and <html>: start and end without a picked theme.
+  beforeEach(() => {
+    localStorage.clear();
+    delete document.documentElement.dataset['theme'];
+  });
   afterEach(() => {
     localStorage.clear();
     delete document.documentElement.dataset['theme'];
