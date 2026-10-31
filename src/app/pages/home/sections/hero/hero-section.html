@@ -1,12 +1,19 @@
 @let c = content();
-<section id="home" class="hero" aria-labelledby="hero-title">
-  <div class="hero__text">
+@let h = headline();
+<section
+  id="home"
+  class="hero"
+  aria-labelledby="hero-title"
+  [class.hero--sky]="accent() === 'sky'"
+  [class.hero--center]="align() === 'center'"
+>
+  <div class="hero__text" [class.hero__text--changing]="changing()">
     <p class="hero__badge">
       <span class="hero__dot" aria-hidden="true"></span>{{ c.availability }}
     </p>
     <h1 id="hero-title" class="hero__title">
-      {{ c.headline.before }}<span class="hero__accent">{{ c.headline.accent }}</span
-      >{{ c.headline.after }}
+      {{ h.before }}<span class="hero__accent">{{ h.accent }}</span
+      >{{ h.after }}
     </h1>
     <p class="hero__intro">{{ c.intro }}</p>
     <div class="hero__actions">
@@ -30,14 +37,21 @@
         }
       </div>
     </div>
-    <app-tech-tags
-      class="hero__stack"
-      [items]="c.stack.items"
-      [label]="c.stack.label"
-      [animate]="true"
-    />
+    <app-tech-tags class="hero__stack" [items]="stack()" [label]="c.stack.label" [animate]="true" />
   </div>
-  <app-terminal-window class="hero__terminal" [title]="c.terminal.title" [label]="c.terminal.label">
-    <app-terminal-session [entries]="c.terminal.entries" [animate]="true" />
+  <app-terminal-window
+    class="hero__config"
+    variant="editor"
+    [title]="c.config.file"
+    [label]="c.config.label"
+  >
+    <app-hero-config
+      [content]="c.config"
+      [stack]="c.stack.items"
+      [(accent)]="accent"
+      [(align)]="align"
+      [(focus)]="focus"
+      [(hidden)]="hidden"
+    />
   </app-terminal-window>
 </section>

@@ -5,6 +5,7 @@ import { Seo } from '../../core/seo';
 import { SITE_CONTENT } from '../../core/site-content';
 import { WORK_CONTENT } from '../../core/work-content';
 import { ExperienceTabs } from '../home/sections/experience/experience-tabs';
+import { HeroConfig } from '../home/sections/hero/hero-config';
 import { LanguageSwitch } from '../../layout/language-switch/language-switch';
 import { SoundToggle } from '../../layout/sound-toggle/sound-toggle';
 import { ThemeToggle } from '../../layout/theme-toggle/theme-toggle';
@@ -25,6 +26,7 @@ import * as data from './styleguide.data';
   imports: [
     ExperienceTabs,
     FlowDiagram,
+    HeroConfig,
     LanguageSwitch,
     NavIcon,
     OwnerNote,

@@ -14,8 +14,26 @@
   min-width: 0;
 }
 
-.hero__terminal {
+.hero__config {
   flex: 2 1 340px;
+}
+
+// "accent": "sky" — the hero's own accent becomes the second hue (buttons, dot, headline, tags).
+.hero--sky {
+  --accent: var(--accent-2);
+}
+
+// "align": "center"
+.hero--center .hero__text {
+  align-items: center;
+  text-align: center;
+
+  --tags-justify: center;
+}
+
+.hero--center .hero__actions,
+.hero--center .hero__profiles {
+  justify-content: center;
 }
 
 .hero__badge {
@@ -37,6 +55,7 @@
 }
 
 .hero__title {
+  max-width: 22ch;
   font-size: var(--text-hero);
   font-weight: 700;
   line-height: var(--leading-hero);
@@ -89,4 +108,30 @@
 
 .hero__cv-sep {
   color: var(--text-muted);
+}
+
+// Load sequence, step 1: the headline slides into place (transform only: it is visible from the
+// first paint, so the largest paint is not delayed). The config types in after it.
+@keyframes hero-rise {
+  from {
+    transform: translateY(14px);
+  }
+}
+
+// After a config change the preview settles back in, showing what changed.
+@keyframes hero-settle {
+  from {
+    opacity: 0.35;
+    transform: translateY(4px);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .hero__title {
+    animation: hero-rise 600ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  }
+
+  .hero__text--changing > * {
+    animation: hero-settle 220ms ease-out;
+  }
 }

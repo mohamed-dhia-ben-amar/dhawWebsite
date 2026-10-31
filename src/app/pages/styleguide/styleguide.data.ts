@@ -1,5 +1,7 @@
 // Token reference for the internal styleguide. Component demos use the real homepage content.
 
+import type { TerminalEntry } from '../../../content/types';
+
 /** Token values per theme (src/styles/_tokens.scss); the chips show the theme on screen. */
 export const swatches: readonly { token: string; dark: string; light: string }[] = [
   { token: '--bg', dark: '#0E1A2B', light: '#F4F6F9' },
@@ -17,4 +19,12 @@ export const swatches: readonly { token: string; dark: string; light: string }[]
   { token: '--line-number', dark: '#4E6380', light: '#8A98AB' },
   { token: '--accent', dark: '#F2B640', light: '#8F5B00' },
   { token: '--accent-2', dark: '#86C8E8', light: '#1D5F8A' },
+];
+
+/** TerminalSession demo (the hero used it before its live config). */
+export const terminal: readonly TerminalEntry[] = [
+  { command: 'whoami', output: 'Mohamed Dhia Ben Amar' },
+  { command: 'cat role.txt', output: 'Full-Stack Software Engineer' },
+  { command: 'echo $STACK', output: 'Angular · Nx · TypeScript · Node.js · React' },
+  { command: 'status', output: 'available for new roles', status: true },
 ];

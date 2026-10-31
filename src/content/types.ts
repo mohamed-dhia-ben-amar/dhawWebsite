@@ -137,11 +137,24 @@ export interface JourneyEntry {
   readonly note?: string;
 }
 
+export interface Headline {
+  readonly before: string;
+  /** Shown in the accent colour. */
+  readonly accent: string;
+  readonly after: string;
+}
+
+/** Values of the hero's live config (code identifiers, the same in every locale). */
+export type HeroAccent = 'amber' | 'sky';
+export type HeroAlign = 'start' | 'center';
+export type HeroFocus = 'widgets' | 'ai' | 'fullstack';
+
 export interface HomeContent {
   readonly meta: { readonly title: string; readonly description: string };
   readonly hero: {
     readonly availability: string;
-    readonly headline: { readonly before: string; readonly accent: string; readonly after: string };
+    /** The prerendered headline (focus "widgets"); share images use it too. */
+    readonly headline: Headline;
     readonly intro: string;
     readonly cta: {
       readonly contact: string;
@@ -156,10 +169,24 @@ export interface HomeContent {
       };
       readonly profiles: readonly ExternalLink[];
     };
-    readonly terminal: {
-      readonly title: string;
+    /** The hero's live config: a JSON file whose values restyle the hero next to it. */
+    readonly config: {
+      readonly file: string;
+      /** Accessible name of the editor. */
       readonly label: string;
-      readonly entries: readonly TerminalEntry[];
+      readonly hint: string;
+      readonly reset: string;
+      /** Spoken names of the keys, e.g. "Accent colour". */
+      readonly keys: { readonly accent: string; readonly align: string; readonly focus: string };
+      /** Value button name, with `{key}` and `{value}`: "Accent colour: amber. Change". */
+      readonly valueLabel: string;
+      /** Announced after a change, with `{key}` and `{value}`: "Accent colour: sky". */
+      readonly announce: string;
+      /** Announced after a stack tag is toggled: "Golang hidden". */
+      readonly shown: string;
+      readonly hidden: string;
+      /** The other two headlines; "widgets" is `headline`. Facts from the brief only. */
+      readonly headlines: { readonly ai: Headline; readonly fullstack: Headline };
     };
     /** Icon tags under the hero; names must exist in the tech-icon registry or get the › mark. */
     readonly stack: { readonly label: string; readonly items: readonly string[] };
