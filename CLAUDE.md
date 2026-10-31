@@ -58,6 +58,11 @@ E2E serves the built output in `dist/` with the redirects and rewrites from `ver
 - `ui/tech-tags`: stack tags with Simple Icons logos (named imports, registry in `tech-icons.ts`;
   add a tech there to give it a logo, otherwise it gets a `›` mark). Used in the hero
   (`home.ts` → `hero.stack`) and the case-study Stack sections.
+- The hero (`sections/hero`) is a live preview of `HeroConfig`, the `hero.widget.json` editor next
+  to it: signals in `HeroSection`, two-way bound to the config's models. Prerendered with the
+  defaults. Its load sequence is CSS only (the headline slides in with transform only, so LCP is
+  not delayed; the config lines un-clip one after another). Headlines come from `home.ts` →
+  `hero.headline` and `hero.config.headlines`, facts only.
 - The homepage journey timeline (`sections/journey`, `home.ts` → `journey`) is newest first and
   uses CV facts only, like the case studies.
 - Motion: the `appReveal` directive (`ui/reveal`, styles in `src/styles/_motion.scss`) fades

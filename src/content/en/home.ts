@@ -40,15 +40,28 @@ export const home: HomeContent = {
         { label: 'LinkedIn', href: 'https://linkedin.com/in/mohameddhia-benamar' },
       ],
     },
-    terminal: {
-      title: 'mohamed@tunis — zsh',
-      label: 'Terminal summary',
-      entries: [
-        { command: 'whoami', output: 'Mohamed Dhia Ben Amar' },
-        { command: 'cat role.txt', output: 'Full-Stack Software Engineer' },
-        { command: 'echo $STACK', output: 'Angular · Nx · TypeScript · Node.js · React' },
-        { command: 'status', output: 'available for new roles', status: true },
-      ],
+    config: {
+      file: 'hero.widget.json',
+      label: 'Hero settings',
+      hint: 'Tap a value to change it.',
+      reset: 'Reset',
+      keys: { accent: 'Accent colour', align: 'Alignment', focus: 'Headline' },
+      valueLabel: '{key}: {value}. Change',
+      announce: '{key}: {value}',
+      shown: 'shown',
+      hidden: 'hidden',
+      headlines: {
+        ai: {
+          before: 'Full-stack engineer leading ',
+          accent: 'AI-assisted development',
+          after: ' with Claude Code agents.',
+        },
+        fullstack: {
+          before: 'Full-stack engineer shipping with ',
+          accent: 'Angular, React, Node.js and Golang',
+          after: '.',
+        },
+      },
     },
     stack: {
       label: 'Main stack',

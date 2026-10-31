@@ -44,6 +44,10 @@
   line-height: 1.75;
 }
 
+:host(.terminal--editor) .terminal__body {
+  padding: 0;
+}
+
 :host(.terminal--contact) {
   .terminal {
     border-radius: var(--radius-contact);

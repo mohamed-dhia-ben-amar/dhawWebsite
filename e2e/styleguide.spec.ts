@@ -19,10 +19,12 @@ test.describe('styleguide', () => {
       'ExperienceTabs',
       'FlowDiagram',
       'OwnerNote',
+      'HeroConfig',
     ]) {
       await expect(page.getByRole('heading', { level: 2, name, exact: true })).toBeVisible();
     }
-    await expect(page.getByRole('group', { name: 'Terminal summary' })).toBeVisible();
+    await expect(page.getByRole('group', { name: 'Terminal demo' })).toBeVisible();
+    await expect(page.getByRole('group', { name: 'Config demo' })).toBeVisible();
     await expect(page.getByRole('region', { name: 'minotore.json' })).toBeVisible();
   });
 

@@ -4,13 +4,23 @@ import { home } from '../../../../../content/en/home';
 import { HeroSection } from './hero-section';
 
 describe('HeroSection', () => {
-  function render() {
+  function setup() {
     TestBed.configureTestingModule({ providers: [provideRouter([])] });
     const fixture = TestBed.createComponent(HeroSection);
     fixture.componentRef.setInput('content', home.hero);
     fixture.detectChanges();
-    return fixture.nativeElement as HTMLElement;
+    const el = fixture.nativeElement as HTMLElement;
+    const value = (name: RegExp) =>
+      [...el.querySelectorAll<HTMLButtonElement>('.cfg__value')].find((b) =>
+        name.test(b.getAttribute('aria-label') ?? ''),
+      )!;
+    const press = (button: HTMLElement) => {
+      button.click();
+      fixture.detectChanges();
+    };
+    return { fixture, el, value, press };
   }
+  const render = () => setup().el;
 
   it('renders the headline with the accented phrase', () => {
     const h1 = render().querySelector('h1');
@@ -47,9 +57,44 @@ describe('HeroSection', () => {
     ]);
   });
 
-  it('shows the animated terminal summary', () => {
+  it('shows its live config next to it, in a labelled editor window', () => {
     const el = render();
-    expect(el.querySelector('[role="group"]')?.getAttribute('aria-label')).toBe('Terminal summary');
-    expect(el.querySelector('app-terminal-session')?.classList).toContain('session--animate');
+    const editor = el.querySelector('[role="group"]');
+    expect(editor?.getAttribute('aria-label')).toBe('Hero settings');
+    expect(el.querySelector('.terminal__title')?.textContent).toBe('hero.widget.json');
+  });
+
+  it('"focus" swaps the headline between the three statements', () => {
+    const { el, value, press } = setup();
+    const h1 = () => el.querySelector('h1')?.textContent?.trim();
+    press(value(/^Headline/));
+    expect(h1()).toBe(
+      'Full-stack engineer leading AI-assisted development with Claude Code agents.',
+    );
+    press(value(/^Headline/));
+    expect(h1()).toBe('Full-stack engineer shipping with Angular, React, Node.js and Golang.');
+    press(value(/^Headline/));
+    expect(h1()).toContain('configurable widget libraries');
+  });
+
+  it('"accent" and "align" restyle the hero', () => {
+    const { el, value, press } = setup();
+    const hero = el.querySelector('.hero')!;
+    press(value(/^Accent colour/));
+    expect(hero.classList).toContain('hero--sky');
+    press(value(/^Alignment/));
+    expect(hero.classList).toContain('hero--center');
+  });
+
+  it('stack items hide and show their tag', () => {
+    const { el, press } = setup();
+    const tags = () =>
+      [...el.querySelectorAll('.hero__stack .tag')].map((t) => t.textContent?.trim());
+    const golang = el.querySelector<HTMLButtonElement>('.cfg__item[aria-label="Golang"]')!;
+    press(golang);
+    expect(tags()).not.toContain('Golang');
+    expect(golang.getAttribute('aria-pressed')).toBe('false');
+    press(golang);
+    expect(tags()).toContain('Golang');
   });
 });

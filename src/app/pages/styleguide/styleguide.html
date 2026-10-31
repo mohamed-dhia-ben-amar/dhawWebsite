@@ -44,12 +44,25 @@
   <section class="guide__section" aria-labelledby="sg-terminal">
     <app-prompt-label command="./terminal-window --variant terminal" />
     <h2 id="sg-terminal">TerminalWindow</h2>
+    <app-terminal-window class="guide__narrow" title="mohamed@tunis — zsh" label="Terminal demo">
+      <app-terminal-session [entries]="data.terminal" />
+    </app-terminal-window>
+  </section>
+
+  <section class="guide__section" aria-labelledby="sg-config">
+    <app-prompt-label command="./terminal-window --variant editor" />
+    <h2 id="sg-config">HeroConfig</h2>
+    <p class="guide__lede">
+      The homepage hero's live config. Each value is a button; here it is unbound, on the homepage
+      it restyles the hero next to it. Types itself in on load.
+    </p>
     <app-terminal-window
       class="guide__narrow"
-      [title]="home.hero.terminal.title"
-      [label]="home.hero.terminal.label"
+      variant="editor"
+      [title]="home.hero.config.file"
+      label="Config demo"
     >
-      <app-terminal-session [entries]="home.hero.terminal.entries" />
+      <app-hero-config [content]="home.hero.config" [stack]="home.hero.stack.items" />
     </app-terminal-window>
   </section>
 

@@ -1,0 +1,73 @@
+@let c = content();
+<div class="cfg" translate="no">
+  <div class="cfg__code">
+    <p class="cfg__line" style="--i: 0">{{ '{' }}</p>
+    <p class="cfg__line cfg__line--in" style="--i: 1">
+      <span class="cfg__key">"accent"</span>:
+      <button
+        type="button"
+        class="cfg__value"
+        [attr.aria-label]="valueLabel('accent', accent())"
+        (click)="cycle('accent')"
+      >
+        "{{ accent() }}"</button
+      >,
+    </p>
+    <p class="cfg__line cfg__line--in" style="--i: 2">
+      <span class="cfg__key">"align"</span>:
+      <button
+        type="button"
+        class="cfg__value"
+        [attr.aria-label]="valueLabel('align', align())"
+        (click)="cycle('align')"
+      >
+        "{{ align() }}"</button
+      >,
+    </p>
+    <p class="cfg__line cfg__line--in" style="--i: 3">
+      <span class="cfg__key">"focus"</span>:
+      <button
+        type="button"
+        class="cfg__value"
+        [attr.aria-label]="valueLabel('focus', focus())"
+        (click)="cycle('focus')"
+      >
+        "{{ focus() }}"</button
+      >,
+    </p>
+    <p class="cfg__line cfg__line--in" style="--i: 4"><span class="cfg__key">"stack"</span>: [</p>
+    <ul class="cfg__line cfg__line--in2 cfg__stack" role="list" style="--i: 5">
+      @for (item of stack(); track item; let last = $last) {
+        <li>
+          <button
+            type="button"
+            class="cfg__value cfg__item"
+            [attr.aria-pressed]="isShown(item)"
+            [attr.aria-label]="item"
+            (click)="toggleItem(item)"
+          >
+            "{{ item }}"</button
+          >{{ last ? '' : ',' }}
+        </li>
+      }
+    </ul>
+    <p class="cfg__line cfg__line--in" style="--i: 6">]</p>
+    <p class="cfg__line" style="--i: 7">
+      {{ '}' }}<span class="cfg__cursor" aria-hidden="true"></span>
+    </p>
+  </div>
+  <div class="cfg__foot">
+    <span class="cfg__hint" translate="yes">{{ c.hint }}</span>
+    <!-- Always rendered (so focus is not lost when it resets); inert until something changed. -->
+    <button
+      type="button"
+      class="cfg__reset"
+      translate="yes"
+      [attr.aria-disabled]="!changed()"
+      (click)="reset()"
+    >
+      <span aria-hidden="true">↺</span> {{ c.reset }}
+    </button>
+  </div>
+  <p class="visually-hidden" aria-live="polite" translate="yes">{{ announcement() }}</p>
+</div>

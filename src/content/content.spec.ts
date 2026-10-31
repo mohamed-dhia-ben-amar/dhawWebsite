@@ -43,7 +43,8 @@ describe('content parity between locales', () => {
       projects: h.work.projects.map((p) => [p.slug, p.file, p.stack, p.stats.map((s) => s.label)]),
       files: h.experience.items.map((i) => [i.file, i.company]),
       email: h.contact.email,
-      commands: h.hero.terminal.entries.map((e) => e.command),
+      configFile: h.hero.config.file,
+      stack: h.hero.stack.items,
     });
     expect(pick(frHome)).toEqual(pick(enHome));
     expect(frSite.nav.links.map((l) => l.fragment)).toEqual(

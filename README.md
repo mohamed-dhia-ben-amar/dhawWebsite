@@ -12,7 +12,8 @@ Angular architecture, tests, CI and accessibility, not just the result.
 
 ## Features
 
-- Terminal / code-editor design: a typed-out hero terminal, editor panes, a status-bar footer,
+- Terminal / code-editor design: a hero you restyle by editing its own JSON config (like the
+  configurable widgets I build), editor panes, a status-bar footer,
   in dark and light themes (system setting, or a header toggle that switches with a wave).
 - Homepage with highlights, selected projects, an **accessible tabs** experience explorer
   (roving tabindex, arrow keys, Home/End) and a contact form.
