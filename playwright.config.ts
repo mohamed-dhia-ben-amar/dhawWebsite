@@ -18,7 +18,16 @@ export default defineConfig({
     baseURL: `http://localhost:${PORT}`,
     trace: 'on-first-retry',
   },
-  projects: [{ name: 'chromium', use: { ...devices['Desktop Chrome'] } }],
+  projects: [
+    // Dark is the default theme: every test runs in it.
+    { name: 'chromium', use: { ...devices['Desktop Chrome'], colorScheme: 'dark' } },
+    // Light theme (system setting): every accessibility scan runs again, contrast included.
+    {
+      name: 'chromium-light',
+      use: { ...devices['Desktop Chrome'], colorScheme: 'light' },
+      grep: /accessibility violations/,
+    },
+  ],
   webServer: {
     command: `node scripts/serve-dist.mjs ${PORT}`,
     url: `http://localhost:${PORT}/en/`,

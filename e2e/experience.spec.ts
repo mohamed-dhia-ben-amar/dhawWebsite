@@ -41,12 +41,15 @@ test.describe('experience tabs', () => {
       document.querySelector('app-root')?.hasAttribute('ng-version'),
     );
     const { tab } = experience(page);
+    await page.evaluate(() => document.fonts.ready);
     await tab('converty.json').scrollIntoViewIfNeeded();
-    const before = await page.evaluate(() => window.scrollY);
+    const before = (await tab('converty.json').boundingBox())?.y;
     await tab('converty.json').click();
     await expect(page).toHaveURL(/[?&]experience=converty\b/);
-    // Updating the URL must not jump the page.
-    expect(await page.evaluate(() => window.scrollY)).toBe(before);
+    // Updating the URL must not jump the page: the tab stays where it was clicked (give or take
+    // the last pixels of the pane's reveal animation).
+    const after = (await tab('converty.json').boundingBox())?.y ?? 0;
+    expect(Math.abs(after - (before ?? 0))).toBeLessThan(40);
 
     await page.goto('/en/?experience=ibspace#experience');
     await expect(experience(page).tab('ibspace.json')).toHaveAttribute('aria-selected', 'true');
