@@ -1,37 +1,83 @@
 // Design tokens. Components read these custom properties and never hard-code colors.
-// Values come from docs/PORTFOLIO_BRIEF.md §4 and docs/design-reference.html. Dark only (v1).
+// Two themes: dark (the default, also in the prerendered HTML) and light. The visitor's system
+// setting picks one; the header toggle overrides it with `data-theme` on <html>, set before first
+// paint by the inline script in index.html. Every text color reaches 4.5:1 on every surface in
+// both themes, except --line-number and --decor, which are decorative and always aria-hidden.
 
-:root {
+@mixin dark-colors {
   color-scheme: dark;
 
-  // Color: surfaces
-  --bg: #0a0a0b;
-  --surface: #111113;
-  --surface-2: #141416; // window and title bars
-  --surface-sunken: #0d0d0f; // tab bars, explorer
-  --surface-raised: #18181b; // active explorer file, active language
-  --border: #1c1c20;
-  --border-strong: #27272a;
-  --decor: #3f3f46; // terminal title-bar dots (decorative, aria-hidden)
+  // Color: surfaces (midnight ink)
+  --bg: #0e1a2b;
+  --surface: #14233a;
+  --surface-2: #172840; // window and title bars
+  --surface-sunken: #0b1624; // tab bars, explorer
+  --surface-raised: #1b2d47; // active explorer file, active language
+  --border: #22354f;
+  --border-strong: #2c4260;
+  --decor: #3a5070; // terminal title-bar dots (decorative, aria-hidden)
 
-  // Color: text. Every pair is ≥ 4.5:1 on every surface above, except --line-number,
-  // which is decorative and always aria-hidden.
-  --text: #d4d4d8;
-  --text-strong: #f4f4f5;
-  --text-muted: #a1a1aa;
-  --text-faint: #82828b; // brief value #71717a fails 4.5:1; lightened on the same scale
-  --line-number: #52525b;
+  // Color: text
+  --text: #d9e1ec;
+  --text-strong: #f1f5fa;
+  --text-muted: #a3b2c6;
+  --text-faint: #8696ad;
+  --line-number: #4e6380;
 
   // Color: the only two non-neutral hues
-  --accent: #c6f432; // actions, prompts, string values, focus
-  --on-accent: #0a0a0b;
-  --warm: #fdba74; // dates and file icons only
+  --accent: #f2b640; // phosphor amber: actions, prompts, focus
+  --on-accent: #0e1a2b;
+  --accent-2: #86c8e8; // sky: code strings, journey dates and file icons
+}
 
+@mixin light-colors {
+  color-scheme: light;
+
+  // Color: surfaces (paper)
+  --bg: #f4f6f9;
+  --surface: #fff;
+  --surface-2: #f9fafc;
+  --surface-sunken: #edf1f6;
+  --surface-raised: #e3e9f1;
+  --border: #d5dde7;
+  --border-strong: #c3cfdd;
+  --decor: #a9b6c7;
+
+  // Color: text
+  --text: #1b2a3f;
+  --text-strong: #0e1a2b;
+  --text-muted: #3e4f67;
+  --text-faint: #56677f;
+  --line-number: #8a98ab;
+
+  // Color: the same two hues, darkened to keep 4.5:1 on paper
+  --accent: #8f5b00;
+  --on-accent: #fff;
+  --accent-2: #1d5f8a;
+}
+
+:root {
+  @include dark-colors;
+}
+
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme='dark']) {
+    @include light-colors;
+  }
+}
+
+:root[data-theme='light'] {
+  @include light-colors;
+}
+
+:root {
   // Type
-  --font-heading: 'Space Grotesk Variable', 'Space Grotesk Fallback', system-ui, sans-serif;
-  --font-body: 'Inter Variable', 'Inter Fallback', system-ui, sans-serif;
+  // Martian Mono wide for headings, narrower for code (fixed widths, see _fonts.scss).
+  --font-heading:
+    'Martian Mono Display', 'Martian Mono Display Fallback', ui-monospace, 'Menlo', monospace;
+  --font-body: 'Instrument Sans Variable', 'Instrument Sans Fallback', system-ui, sans-serif;
   --font-mono:
-    'JetBrains Mono Variable', 'JetBrains Mono Fallback', ui-monospace, 'SFMono-Regular', 'Menlo',
+    'Martian Mono Code', 'Martian Mono Code Fallback', ui-monospace, 'SFMono-Regular', 'Menlo',
     'Consolas', monospace;
 
   --text-xs: 0.75rem; // 12
@@ -39,17 +85,17 @@
   --text-md: 0.875rem; // 14
   --text-base: 1rem; // 16
   --text-lg: 1.125rem; // 18
-  --text-h3: 1.625rem; // 26
-  --text-h2: clamp(2rem, 1.6rem + 1.6vw, 2.5rem); // 32 → 40
-  --text-stat: 2.5rem; // 40
-  --text-hero: clamp(2.625rem, 6.4vw, 5rem); // 42 → 80
+  --text-h3: 1.25rem; // 20 (wide mono runs ~1.5× wider than a grotesk)
+  --text-h2: clamp(1.5rem, 1.25rem + 1vw, 1.875rem); // 24 → 30
+  --text-stat: 2rem; // 32
+  --text-hero: clamp(1.875rem, 1.3rem + 2.2vw, 2.75rem); // 30 → 44
 
   --leading-body: 1.6;
   --leading-tight: 1.1;
-  --leading-hero: 1.03;
+  --leading-hero: 1.12;
   --leading-code: 1.85;
-  --tracking-heading: -0.02em;
-  --tracking-hero: -0.035em;
+  --tracking-heading: -0.03em;
+  --tracking-hero: -0.04em;
 
   // Shape
   --radius-sm: 6px;

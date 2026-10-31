@@ -38,7 +38,8 @@ E2E serves the built output in `dist/` with the redirects and rewrites from `ver
 
 ## Project structure
 
-- `src/styles/`: `_tokens.scss` (every color, type, spacing and radius token), `_breakpoints.scss`
+- `src/styles/`: `_tokens.scss` (every color, type, spacing and radius token; dark and light
+  color sets), `_breakpoints.scss`
   (Sass breakpoints, mirrored in `src/app/core/breakpoints.ts`), `_fonts.scss`
   (self-hosted variable fonts and metric-matched fallbacks), `_base.scss` (reset, focus, `.container`,
   `.visually-hidden`, reduced motion).
@@ -73,9 +74,12 @@ E2E serves the built output in `dist/` with the redirects and rewrites from `ver
 
 - Incremental hydration (`@defer (hydrate on …)`) was tried and dropped: clicks and form submits
   made before a section hydrated were lost or submitted natively, for a small, noisy gain.
-- Fallback fonts are metric-matched (`_fonts.scss`) and list Arial plus its Linux/Android
-  equivalents (Liberation Sans, Arimo, Roboto); without a matching local font the text re-wraps
-  when the web font arrives and Lighthouse reports layout shift.
+- Fonts: Martian Mono (one variable file served as two families pinned to a width: wide
+  `Martian Mono Display` for headings, narrow `Martian Mono Code` for code) and Instrument Sans.
+  Fallbacks are metric-matched (`_fonts.scss`, widths measured in Chromium against Liberation
+  Sans/Mono) and list Arial/Courier New plus their Linux/Android equivalents; without a matching
+  local font the text re-wraps when the web font arrives and Lighthouse reports layout shift.
+  Re-measure if a font or weight changes.
 - Measure with mobile Lighthouse against production, or locally against `scripts/serve-dist.mjs`
   (gzips like Vercel).
 
@@ -97,7 +101,7 @@ E2E serves the built output in `dist/` with the redirects and rewrites from `ver
 - Every routed page calls `Seo.setPage()` (`src/app/core/seo.ts`): title, description, canonical
   (only when indexable), Open Graph, Twitter card, robots. Don't set title/meta tags elsewhere.
 - `pnpm build` runs `scripts/seo-assets.mts` (via tsx) after `ng build`: 1200×630 share images per
-  locale in `/{locale}/og/{home|slug}.png` (satori + resvg, site fonts from `@fontsource/*`), plus
+  locale in `/{locale}/og/{home|slug}.png` (satori + resvg, dark theme, site fonts from `@fontsource/*`), plus
   `sitemap.xml` (indexable prerendered pages only, with hreflang) and `robots.txt`.
 - The homepage adds Person JSON-LD (`StructuredData`, facts in `site.ts` → `seo.person`).
 - Vercel Web Analytics (cookieless) is injected in the browser only, never for automated
@@ -133,6 +137,18 @@ E2E serves the built output in `dist/` with the redirects and rewrites from `ver
 - `/` redirects to `/en/`; `/cv/*` and `/fonts/*` are rewritten to the `/en/` copies (`vercel.json`).
 - Every page gets `hreflang` alternates (en, fr, x-default) from `AlternateLinks`, built on
   `SITE_ORIGIN` in `src/app/core/site-config.ts` (`https://mohameddhia.dev`).
+
+## Themes
+
+- Dark is the default and what prerendered HTML shows; `prefers-color-scheme: light` switches to
+  light unless the visitor picked a theme. `ThemeToggle` (header) calls `Theme`
+  (`src/app/core/theme.ts`), which sets `data-theme` on <html>, stores the choice under
+  `localStorage.theme` and updates `<meta name="theme-color">`. The inline script in
+  `src/index.html` applies a stored choice before first paint; keep it in sync with `Theme`.
+- The wave is a View Transition whose new snapshot is clipped to a growing circle; the
+  `theme-wave` class scopes its CSS (`_motion.scss`) so other view transitions keep their own.
+- E2E runs every test in dark (`chromium` project) and every accessibility scan again in light
+  (`chromium-light`, `colorScheme: 'light'`). Check contrast in both when adding a color pair.
 
 ## Conventions
 

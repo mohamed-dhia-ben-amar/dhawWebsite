@@ -32,17 +32,12 @@
               },
               {
                 "glob": "*-latin*-wght-normal.woff2",
-                "input": "node_modules/@fontsource-variable/inter/files",
+                "input": "node_modules/@fontsource-variable/instrument-sans/files",
                 "output": "fonts"
               },
               {
-                "glob": "*-latin*-wght-normal.woff2",
-                "input": "node_modules/@fontsource-variable/space-grotesk/files",
-                "output": "fonts"
-              },
-              {
-                "glob": "*-latin*-wght-normal.woff2",
-                "input": "node_modules/@fontsource-variable/jetbrains-mono/files",
+                "glob": "*-latin*-standard-normal.woff2",
+                "input": "node_modules/@fontsource-variable/martian-mono/files",
                 "output": "fonts"
               }
             ],

@@ -6,6 +6,7 @@ import { SITE_CONTENT } from '../../core/site-content';
 import { WORK_CONTENT } from '../../core/work-content';
 import { ExperienceTabs } from '../home/sections/experience/experience-tabs';
 import { LanguageSwitch } from '../../layout/language-switch/language-switch';
+import { ThemeToggle } from '../../layout/theme-toggle/theme-toggle';
 import { FlowDiagram } from '../../ui/flow-diagram/flow-diagram';
 import { NavIcon } from '../../ui/nav-icon/nav-icon';
 import { OwnerNote } from '../../ui/owner-note/owner-note';
@@ -32,6 +33,7 @@ import * as data from './styleguide.data';
     TechTags,
     TerminalSession,
     TerminalWindow,
+    ThemeToggle,
   ],
   templateUrl: './styleguide.html',
   styleUrl: './styleguide.scss',

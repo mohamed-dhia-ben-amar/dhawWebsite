@@ -24,34 +24,35 @@ const outDir = join(root, vercel.outputDirectory);
 const require = createRequire(import.meta.url);
 
 // Values of the design tokens (src/styles/_tokens.scss); images cannot read CSS variables.
+// Share images use the dark theme.
 const C = {
-  bg: '#0A0A0B',
-  surface: '#111113',
-  border: '#27272A',
-  text: '#F4F4F5',
-  muted: '#A1A1AA',
-  accent: '#C6F432',
-  onAccent: '#0A0A0B',
+  bg: '#0E1A2B',
+  surface: '#14233A',
+  border: '#2C4260',
+  text: '#F1F5FA',
+  muted: '#A3B2C6',
+  accent: '#F2B640',
+  onAccent: '#0E1A2B',
 };
 
 const font = (pkg: string, file: string) => readFileSync(require.resolve(`${pkg}/files/${file}`));
 const fonts = [
   {
-    name: 'Space Grotesk',
-    data: font('@fontsource/space-grotesk', 'space-grotesk-latin-700-normal.woff'),
+    name: 'Martian Mono',
+    data: font('@fontsource/martian-mono', 'martian-mono-latin-700-normal.woff'),
     weight: 700 as const,
     style: 'normal' as const,
   },
   {
-    name: 'Inter',
-    data: font('@fontsource/inter', 'inter-latin-400-normal.woff'),
+    name: 'Martian Mono',
+    data: font('@fontsource/martian-mono', 'martian-mono-latin-400-normal.woff'),
     weight: 400 as const,
     style: 'normal' as const,
   },
   {
-    name: 'JetBrains Mono',
-    data: font('@fontsource/jetbrains-mono', 'jetbrains-mono-latin-500-normal.woff'),
-    weight: 500 as const,
+    name: 'Instrument Sans',
+    data: font('@fontsource/instrument-sans', 'instrument-sans-latin-400-normal.woff'),
+    weight: 400 as const,
     style: 'normal' as const,
   },
 ];
@@ -73,10 +74,11 @@ function title(parts: { text: string; accent?: boolean }[], size: number): Node 
   return h(
     {
       flexWrap: 'wrap',
-      fontFamily: 'Space Grotesk',
+      fontFamily: 'Martian Mono',
+      fontWeight: 700,
       fontSize: size,
-      lineHeight: 1.08,
-      letterSpacing: -size * 0.03,
+      lineHeight: 1.15,
+      letterSpacing: -size * 0.04,
     },
     words,
   );
@@ -90,13 +92,13 @@ function card(kicker: string, heading: Node, subtitle: string): Node {
       h(
         { flex: 1, flexDirection: 'column', justifyContent: 'space-between', padding: '64px 72px' },
         [
-          h({ justifyContent: 'space-between', fontFamily: 'JetBrains Mono', fontSize: 28 }, [
+          h({ justifyContent: 'space-between', fontFamily: 'Martian Mono', fontSize: 28 }, [
             h({}, [h({ color: C.text }, 'mdba'), h({ color: C.accent }, ':~$')]),
             h({ color: C.muted, fontSize: 24 }, kicker),
           ]),
           h({ flexDirection: 'column', gap: 28 }, [
             heading,
-            h({ fontFamily: 'Inter', fontSize: 30, color: C.muted }, subtitle),
+            h({ fontFamily: 'Instrument Sans', fontSize: 30, color: C.muted }, subtitle),
           ]),
         ],
       ),
@@ -106,7 +108,7 @@ function card(kicker: string, heading: Node, subtitle: string): Node {
           padding: '18px 72px',
           background: C.accent,
           color: C.onAccent,
-          fontFamily: 'JetBrains Mono',
+          fontFamily: 'Martian Mono',
           fontSize: 24,
         },
         [h({}, enSite.seo.siteName), h({}, host)],
@@ -129,7 +131,7 @@ async function writeImages(locale: Locale, home: typeof enHome, work: typeof enW
       'home',
       card(
         '$ whoami',
-        title([{ text: before }, { text: accent, accent: true }, { text: after }], 64),
+        title([{ text: before }, { text: accent, accent: true }, { text: after }], 50),
         home.hero.availability,
       ),
     ],
@@ -137,7 +139,7 @@ async function writeImages(locale: Locale, home: typeof enHome, work: typeof enW
       study.slug,
       card(
         `$ cat ~/work/${study.file}`,
-        title([{ text: study.title }], 68),
+        title([{ text: study.title }], 54),
         study.stack.join(' · '),
       ),
     ]),

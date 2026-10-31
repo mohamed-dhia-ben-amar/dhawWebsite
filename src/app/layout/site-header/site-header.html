@@ -23,12 +23,15 @@
         }
       </ul>
     </nav>
-    <app-language-switch
-      class="header__langs"
-      [options]="content.languages.options"
-      [current]="locale"
-      [label]="content.languages.label"
-      [path]="path()"
-    />
+    <div class="header__tools">
+      <app-theme-toggle [toLight]="content.theme.toLight" [toDark]="content.theme.toDark" />
+      <app-language-switch
+        class="header__langs"
+        [options]="content.languages.options"
+        [current]="locale"
+        [label]="content.languages.label"
+        [path]="path()"
+      />
+    </div>
   </div>
 </header>
