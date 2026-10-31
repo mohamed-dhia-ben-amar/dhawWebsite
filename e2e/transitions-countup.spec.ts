@@ -99,6 +99,35 @@ test.describe('counting stats', () => {
     await expect(page.locator('.stats__value .visually-hidden').nth(1)).toHaveText('~9,000');
   });
 
+  for (const viewport of [
+    { width: 1440, height: 900 },
+    { width: 1920, height: 1080 },
+  ]) {
+    test(`on a ${viewport.width}px desktop, stats on screen at load count up too`, async ({
+      page,
+    }) => {
+      // Record every text the second stat shows, to prove it counted rather than sat still.
+      await page.addInitScript(() => {
+        const seen = new Set<string>();
+        (window as unknown as { seen: Set<string> }).seen = seen;
+        new MutationObserver(() => {
+          const el = document.querySelectorAll('.stats__value [aria-hidden="true"]')[1];
+          if (el?.textContent) seen.add(el.textContent);
+        }).observe(document, { subtree: true, childList: true, characterData: true });
+      });
+      await page.setViewportSize(viewport);
+      await gotoApp(page, '/en/');
+      await expect(values(page)).toHaveText(['21', '~9,000', '4 days', '10k+'], {
+        timeout: 5000,
+      });
+      const seen = await page.evaluate(() => [
+        ...(window as unknown as { seen: Set<string> }).seen,
+      ]);
+      expect(seen).toContain('~0');
+      expect(seen.some((text) => text !== '~0' && text !== '~9,000')).toBe(true);
+    });
+  }
+
   test('French values keep their spacing', async ({ page }) => {
     await page.setViewportSize({ width: 375, height: 700 });
     await gotoApp(page, '/fr/');

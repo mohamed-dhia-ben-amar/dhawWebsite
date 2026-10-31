@@ -36,11 +36,12 @@ const DURATION_MS = 1200;
 const easeOut = (t: number) => 1 - (1 - t) ** 3;
 
 /**
- * Counts a stat's number up from zero the first time it scrolls into view (`21`, `~9,000`,
- * `4 days`, `10k+`). The prerendered text is the final value; like Reveal, nothing changes for
- * values already on screen at load, under reduced motion or without IntersectionObserver. The
- * host should be aria-hidden next to a visually hidden copy of the value, so screen readers never
- * hear the intermediate numbers.
+ * Counts a stat's number up from zero the first time it is in view (`21`, `~9,000`, `4 days`,
+ * `10k+`): straight away if it is on screen when the page loads (on most desktops the stats sit
+ * just under the hero), otherwise once it scrolls into view. The prerendered text is the final
+ * value, and nothing changes under reduced motion or without IntersectionObserver. The host
+ * should be aria-hidden next to a visually hidden copy of the value, so screen readers never hear
+ * the intermediate numbers.
  */
 @Directive({
   selector: '[appCountUp]',
@@ -60,9 +61,8 @@ export class CountUp {
       const parts = parseCount(this.appCountUp());
       if (!view || !parts || typeof IntersectionObserver === 'undefined') return;
       if (view.matchMedia?.('(prefers-reduced-motion: reduce)').matches) return;
-      const rect = element.getBoundingClientRect();
-      if (rect.top < view.innerHeight && rect.bottom > 0) return;
 
+      // Already on screen: the observer reports it at once and the count starts right away.
       this.display.set(formatCount(0, parts));
       let frame = 0;
       const observer = new IntersectionObserver(
@@ -79,7 +79,8 @@ export class CountUp {
           };
           frame = view.requestAnimationFrame(step);
         },
-        { rootMargin: '0px 0px -8% 0px' },
+        // Any visible pixel starts it: on a 900px-tall laptop the stats only peek in at load.
+        { threshold: 0 },
       );
       observer.observe(element);
       destroyRef.onDestroy(() => {
