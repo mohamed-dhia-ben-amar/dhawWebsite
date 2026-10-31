@@ -9,63 +9,70 @@
 $latin: 'U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD';
 $latin-ext: 'U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF';
 
-// family → [file prefix, weight range]
+// family → [file prefix, file axes, weight range, width]. Martian Mono is one variable file
+// served as two families, each pinned to one width: a single-value `font-stretch` descriptor
+// clamps the font's wdth axis, so headings are wide and code is narrow whatever the CSS says.
 $families: (
-  'Inter Variable': 'inter' '100 900',
-  'Space Grotesk Variable': 'space-grotesk' '300 700',
-  'JetBrains Mono Variable': 'jetbrains-mono' '100 800',
+  'Instrument Sans Variable': 'instrument-sans' 'wght' '400 700' normal,
+  'Martian Mono Display': 'martian-mono' 'standard' '100 800' 112.5%,
+  'Martian Mono Code': 'martian-mono' 'standard' '100 800' 87.5%,
 );
 
 @each $family, $spec in $families {
   $file: list.nth($spec, 1);
-  $weight: string.unquote(list.nth($spec, 2));
+  $axes: list.nth($spec, 2);
+  $weight: string.unquote(list.nth($spec, 3));
+  $stretch: list.nth($spec, 4);
 
   @each $subset, $range in ('latin': $latin, 'latin-ext': $latin-ext) {
     @font-face {
       font-family: $family;
       font-style: normal;
       font-weight: $weight;
+      font-stretch: $stretch;
       font-display: swap;
-      src: url('/fonts/#{$file}-#{$subset}-wght-normal.woff2') format('woff2');
+      src: url('/fonts/#{$file}-#{$subset}-#{$axes}-normal.woff2') format('woff2');
       unicode-range: string.unquote($range);
     }
   }
 }
 
-// Metric-matched fallbacks so the swap does not shift layout. Values computed with
-// @capsizecss from the latin woff2 files against Arial (size-adjust = avg char width ratio).
-// Liberation Sans and Arimo are Arial-metric clones (Linux, ChromeOS); Roboto (Android) is
-// within 0.3% of Arial for these values, so one face covers all of them. Without these, Linux
-// and Android fell through to an unmatched system font and the headline re-wrapped on swap.
+// Metric-matched fallbacks so the swap does not shift layout. size-adjust is the width ratio
+// of a sample sentence measured in Chromium against Liberation Sans / Liberation Mono (the
+// Arial / Courier New metric clones); the overrides are hhea ascent/descent ÷ size-adjust.
+// Martian Mono's advance widths do not change with weight, so one fallback per width is exact.
+// Liberation, Arimo/Cousine (ChromeOS) and Roboto (Android) are listed so Linux and Android
+// get a matched face too; without one, the headline re-wraps on swap.
+$sans-fallbacks:
+  local('Arial'), local('ArialMT'), local('Liberation Sans'), local('LiberationSans'),
+  local('Arimo'), local('Roboto');
+$mono-fallbacks:
+  local('Courier New'), local('CourierNewPSMT'), local('Liberation Mono'), local('LiberationMono'),
+  local('Cousine');
+
 @font-face {
-  font-family: 'Inter Fallback';
-  src:
-    local('Arial'), local('ArialMT'), local('Liberation Sans'), local('LiberationSans'),
-    local('Arimo'), local('Roboto');
-  size-adjust: 107.12%;
-  ascent-override: 90.44%;
-  descent-override: 22.52%;
+  font-family: 'Instrument Sans Fallback';
+  src: $sans-fallbacks;
+  size-adjust: 102.99%;
+  ascent-override: 94.18%;
+  descent-override: 24.27%;
   line-gap-override: 0%;
 }
 
 @font-face {
-  font-family: 'Space Grotesk Fallback';
-  src:
-    local('Arial'), local('ArialMT'), local('Liberation Sans'), local('LiberationSans'),
-    local('Arimo'), local('Roboto');
-  size-adjust: 109.47%;
-  ascent-override: 89.89%;
-  descent-override: 26.67%;
+  font-family: 'Martian Mono Display Fallback';
+  src: $mono-fallbacks;
+  size-adjust: 124.98%;
+  ascent-override: 80.01%;
+  descent-override: 16%;
   line-gap-override: 0%;
 }
 
 @font-face {
-  font-family: 'JetBrains Mono Fallback';
-  src:
-    local('Courier New'), local('CourierNewPSMT'), local('Liberation Mono'),
-    local('LiberationMono'), local('Cousine');
-  size-adjust: 99.98%;
-  ascent-override: 102.02%;
-  descent-override: 30%;
+  font-family: 'Martian Mono Code Fallback';
+  src: $mono-fallbacks;
+  size-adjust: 108.32%;
+  ascent-override: 92.32%;
+  descent-override: 18.46%;
   line-gap-override: 0%;
 }
