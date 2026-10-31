@@ -24,6 +24,7 @@
       </ul>
     </nav>
     <div class="header__tools">
+      <app-sound-toggle [label]="content.sound" />
       <app-theme-toggle [toLight]="content.theme.toLight" [toDark]="content.theme.toDark" />
       <app-language-switch
         class="header__langs"
