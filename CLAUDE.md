@@ -124,8 +124,9 @@ E2E serves the built output in `dist/` with the redirects and rewrites from `ver
   locale in `/{locale}/og/{home|slug}.png` (satori + resvg, dark theme, site fonts from `@fontsource/*`), plus
   `sitemap.xml` (indexable prerendered pages only, with hreflang) and `robots.txt`.
 - The homepage adds Person JSON-LD (`StructuredData`, facts in `site.ts` → `seo.person`).
-- Vercel Web Analytics (cookieless) is injected in the browser only, never for automated
-  browsers. It has to be enabled in the Vercel dashboard.
+- Vercel Web Analytics and Speed Insights (both cookieless; `core/analytics.ts`) are injected in
+  the browser only, never for automated browsers; Speed Insights not in development either. Both
+  have to be enabled in the Vercel dashboard.
 
 ## Contact form and /api/contact
 
