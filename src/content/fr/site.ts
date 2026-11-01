@@ -1,6 +1,6 @@
 import type { SiteContent } from '../types';
 
-// French typography: \u00a0 is a no-break space (before : ; ! ? and %).
+// French typography:   is a no-break space (before : ; ! ? and %).
 export const site: SiteContent = {
   locale: 'fr',
   seo: {
@@ -47,6 +47,7 @@ export const site: SiteContent = {
       { label: 'Projets', fragment: 'work', icon: 'work' },
       { label: 'Expérience', fragment: 'experience', icon: 'experience' },
       { label: 'Parcours', fragment: 'journey', icon: 'journey' },
+      { label: 'Certificats', fragment: 'documents', icon: 'documents' },
       { label: 'Contact', fragment: 'contact', icon: 'contact' },
     ],
   },

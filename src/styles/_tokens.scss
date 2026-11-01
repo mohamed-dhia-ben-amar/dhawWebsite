@@ -135,7 +135,8 @@
   --focus-offset: 3px;
 }
 
-@media (width >= 840px) {
+// From $nav-wide (src/styles/_breakpoints.scss) the nav sits in the header, not at the bottom.
+@media (width >= 960px) {
   :root {
     --header-height: 99px;
     --bottom-nav-space: 0px;

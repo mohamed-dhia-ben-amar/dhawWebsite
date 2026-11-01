@@ -41,6 +41,12 @@ import type { NavIcon as NavIconName } from '../../../content/types';
         <path d="M9 19h8.5a3.5 3.5 0 0 0 0-7h-11a3.5 3.5 0 0 1 0-7H15" />
         <circle cx="18" cy="5" r="3" />
       }
+      @case ('documents') {
+        <path
+          d="m15.477 12.89 1.515 8.526a.5.5 0 0 1-.81.47l-3.58-2.687a1 1 0 0 0-1.197 0l-3.586 2.686a.5.5 0 0 1-.81-.469l1.514-8.526"
+        />
+        <circle cx="12" cy="8" r="6" />
+      }
       @case ('contact') {
         <rect width="20" height="16" x="2" y="4" rx="2" />
         <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />

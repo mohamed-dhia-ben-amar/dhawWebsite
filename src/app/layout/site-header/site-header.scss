@@ -124,6 +124,12 @@
 // Very narrow: five labels do not fit, so inactive items show their icon only. The label stays
 // in the accessibility tree (visually hidden), so every link keeps its name.
 @media (width < 420px) {
+  // Narrower side margins so six tabs keep a 44px target on a 320px phone.
+  .nav {
+    right: var(--space-3);
+    left: var(--space-3);
+  }
+
   .nav__link {
     min-width: 0;
     width: 100%;

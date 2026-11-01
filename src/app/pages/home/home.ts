@@ -41,16 +41,11 @@ const PERSON_ID = 'person-jsonld';
 export class Home {
   protected readonly content = inject(HOME_CONTENT);
   protected readonly site = inject(SITE_CONTENT);
-  /**
-   * Sections followed by the header nav and the stepper, in page order. Certificates has a
-   * stepper dot but no nav tab (a sixth tab does not fit narrow phones).
-   */
-  protected readonly sections = this.site.nav.links.flatMap((link) => {
-    const section = { id: link.fragment, label: link.label };
-    return link.fragment === 'contact'
-      ? [{ id: 'documents', label: this.content.documents.navLabel }, section]
-      : [section];
-  });
+  /** Sections followed by the header nav and the stepper, in page order. */
+  protected readonly sections = this.site.nav.links.map((link) => ({
+    id: link.fragment,
+    label: link.label,
+  }));
 
   constructor() {
     const { title, description } = this.content.meta;
