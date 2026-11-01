@@ -86,6 +86,7 @@ test.describe('section stepper', () => {
       'Work',
       'Experience',
       'Journey',
+      'Certificates',
       'Contact',
     ]);
 

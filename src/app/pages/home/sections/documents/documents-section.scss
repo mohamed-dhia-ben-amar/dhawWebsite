@@ -1,0 +1,117 @@
+.docs__intro {
+  max-width: 62ch;
+  color: var(--text-muted);
+}
+
+.docs__group-title {
+  margin-bottom: var(--space-3);
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  letter-spacing: 0;
+}
+
+.docs__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
+  gap: var(--space-3);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+// A card is one button: thumbnail of the first page, then what the document is.
+.doc {
+  display: grid;
+  grid-template-columns: 88px minmax(0, 1fr);
+  gap: var(--space-4);
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  padding: var(--space-3);
+  color: inherit;
+  font: inherit;
+  text-align: start;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+  cursor: pointer;
+  transition:
+    border-color 160ms ease,
+    transform 200ms ease;
+
+  &:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+  }
+
+  &:focus-visible {
+    outline: var(--focus-ring);
+    outline-offset: var(--focus-offset);
+  }
+}
+
+.doc__thumb {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 1;
+  overflow: hidden;
+  background: var(--surface-sunken);
+  border-radius: var(--radius-md);
+
+  img {
+    width: auto;
+    max-width: 100%;
+    height: auto;
+    max-height: 100%;
+  }
+}
+
+.doc__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  min-width: 0;
+}
+
+.doc__title {
+  color: var(--text-strong);
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.doc__meta {
+  display: flex;
+  flex-direction: column;
+  color: var(--text-muted);
+  font-size: var(--text-sm);
+}
+
+.doc__facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 var(--space-3);
+  font-variant-numeric: tabular-nums;
+}
+
+.doc__view {
+  margin-top: var(--space-1);
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+}
+
+.docs__all {
+  align-self: flex-start;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .doc {
+    transition: none;
+
+    &:hover {
+      transform: none;
+    }
+  }
+}

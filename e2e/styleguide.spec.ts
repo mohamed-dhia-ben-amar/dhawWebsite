@@ -20,6 +20,7 @@ test.describe('styleguide', () => {
       'FlowDiagram',
       'OwnerNote',
       'HeroConfig',
+      'PdfViewer',
     ]) {
       await expect(page.getByRole('heading', { level: 2, name, exact: true })).toBeVisible();
     }

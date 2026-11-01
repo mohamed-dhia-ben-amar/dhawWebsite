@@ -149,6 +149,44 @@ export type HeroAccent = 'amber' | 'sky';
 export type HeroAlign = 'start' | 'center';
 export type HeroFocus = 'widgets' | 'ai' | 'fullstack';
 
+export type DocumentGroup = 'languages' | 'internships' | 'training' | 'activities';
+export type DocumentSlug =
+  | 'tcf-french-c1'
+  | 'japanese-levels-1-2'
+  | 'converty-internship'
+  | 'ibspace-internship'
+  | 'inoteqia-internship'
+  | 'azure-devops-training'
+  | 'emotional-coaching'
+  | 'gcc-esprit-membership'
+  | 'ismpt-study-day';
+
+/** What a document says, in the visitor's language. Facts read from the document itself. */
+export interface DocumentText {
+  readonly title: string;
+  readonly issuer: string;
+  /** Left out when the document has no date. */
+  readonly date?: string;
+  /** Also the text alternative of the scanned pages. */
+  readonly summary: string;
+}
+
+/** Labels of the PDF viewer. `{page}` and `{total}` are filled in. */
+export interface PdfViewerLabels {
+  readonly close: string;
+  readonly previous: string;
+  readonly next: string;
+  readonly zoomIn: string;
+  readonly zoomOut: string;
+  readonly fit: string;
+  readonly download: string;
+  readonly page: string;
+  readonly pageAlt: string;
+  readonly loading: string;
+  readonly error: string;
+  readonly openFile: string;
+}
+
 export interface HomeContent {
   readonly meta: { readonly title: string; readonly description: string };
   readonly hero: {
@@ -205,6 +243,19 @@ export interface HomeContent {
     /** Labels of the entry kinds, shown as `type: …`. */
     readonly kinds: Readonly<Record<JourneyKind, string>>;
     readonly entries: readonly JourneyEntry[];
+  };
+  /** Certificates section: the files are in src/content/documents.ts. */
+  readonly documents: SectionHeading & {
+    /** Short name in the section stepper. */
+    readonly navLabel: string;
+    readonly intro: string;
+    readonly groups: Readonly<Record<DocumentGroup, string>>;
+    /** `{pages}` is filled in: "1 page" / "2 pages". */
+    readonly pages: { readonly one: string; readonly other: string };
+    readonly view: string;
+    readonly downloadAll: string;
+    readonly items: Readonly<Record<DocumentSlug, DocumentText>>;
+    readonly viewer: PdfViewerLabels;
   };
   readonly contact: SectionHeading & {
     readonly windowTitle: string;
