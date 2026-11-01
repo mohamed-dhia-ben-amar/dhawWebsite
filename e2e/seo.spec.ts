@@ -114,10 +114,10 @@ test.describe('SEO', () => {
     expect(text).toContain(`Sitemap: ${ORIGIN}/sitemap.xml`);
   });
 
-  test('analytics is not loaded for automated browsers', async ({ page }) => {
+  test('analytics and speed insights are not loaded for automated browsers', async ({ page }) => {
     const insights: string[] = [];
     page.on('request', (req) => {
-      if (req.url().includes('/_vercel/insights')) insights.push(req.url());
+      if (/\/_vercel\/(insights|speed-insights)/.test(req.url())) insights.push(req.url());
     });
     await page.goto('/en/');
     await page.waitForLoadState('networkidle');

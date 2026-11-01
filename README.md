@@ -114,7 +114,7 @@ so tests exercise the production routing.
 Vercel builds every push: `main` goes to production, pull requests get preview URLs. Settings live
 in `vercel.json`. The contact form needs three environment variables in Vercel (see
 `.env.example`): `RESEND_API_KEY`, `CONTACT_TO_EMAIL`, `CONTACT_FROM_EMAIL`. Secrets are never
-committed. Web Analytics is enabled from the Vercel dashboard.
+committed. Web Analytics and Speed Insights are enabled from the Vercel dashboard.
 
 ## Working on it
 
