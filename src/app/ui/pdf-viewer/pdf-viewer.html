@@ -1,0 +1,132 @@
+@let l = labels();
+@let d = doc();
+<dialog
+  #dialog
+  class="viewer"
+  tabindex="-1"
+  aria-labelledby="viewer-title"
+  aria-describedby="viewer-summary"
+  (cancel)="onCancel($event)"
+  (keydown)="onKey($event)"
+>
+  <div class="viewer__bar">
+    <p class="viewer__tab">
+      <span class="viewer__file" id="viewer-title">{{ d?.title }}</span>
+    </p>
+    <div class="viewer__group viewer__group--pages">
+      <button
+        type="button"
+        class="viewer__tool"
+        [attr.aria-label]="l.previous"
+        [title]="l.previous"
+        [attr.aria-disabled]="page() <= 1"
+        (click)="previous()"
+      >
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <path d="m15 18-6-6 6-6" />
+        </svg>
+      </button>
+      <span class="viewer__page" aria-live="polite">{{ pageLabel() }}</span>
+      <button
+        type="button"
+        class="viewer__tool"
+        [attr.aria-label]="l.next"
+        [title]="l.next"
+        [attr.aria-disabled]="page() >= total()"
+        (click)="next()"
+      >
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <path d="m9 18 6-6-6-6" />
+        </svg>
+      </button>
+    </div>
+    <div class="viewer__group viewer__group--zoom">
+      <button
+        type="button"
+        class="viewer__tool"
+        [attr.aria-label]="l.zoomOut"
+        [title]="l.zoomOut"
+        [attr.aria-disabled]="zoom() <= zoomMin"
+        (click)="zoomOut()"
+      >
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <path d="M5 12h14" />
+        </svg>
+      </button>
+      <button
+        type="button"
+        class="viewer__tool"
+        [attr.aria-label]="l.fit"
+        [title]="l.fit"
+        [attr.aria-disabled]="zoom() <= zoomMin"
+        (click)="fit()"
+      >
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <path
+            d="M3 8V5a2 2 0 0 1 2-2h3M16 3h3a2 2 0 0 1 2 2v3M21 16v3a2 2 0 0 1-2 2h-3M8 21H5a2 2 0 0 1-2-2v-3"
+          />
+        </svg>
+      </button>
+      <button
+        type="button"
+        class="viewer__tool"
+        [attr.aria-label]="l.zoomIn"
+        [title]="l.zoomIn"
+        [attr.aria-disabled]="zoom() >= zoomMax"
+        (click)="zoomIn()"
+      >
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <path d="M5 12h14M12 5v14" />
+        </svg>
+      </button>
+    </div>
+    <div class="viewer__group viewer__group--actions">
+      <a
+        class="viewer__tool"
+        [href]="d?.href"
+        download
+        [attr.aria-label]="l.download"
+        [title]="l.download"
+      >
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <path d="M12 3v12m-5-5 5 5 5-5M5 21h14" />
+        </svg>
+      </a>
+      <button
+        type="button"
+        class="viewer__tool viewer__close"
+        autofocus
+        [attr.aria-label]="l.close"
+        [title]="l.close"
+        (click)="close()"
+      >
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <path d="M18 6 6 18M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
+  </div>
+  <p id="viewer-summary" class="visually-hidden">{{ d?.summary }}</p>
+  <div
+    #stage
+    class="viewer__stage"
+    [class.viewer__stage--zoomed]="zoom() > zoomMin"
+    (pointerdown)="onPointerDown($event)"
+    (pointerup)="onPointerUp($event)"
+  >
+    @if (status() === 'loading') {
+      <p class="viewer__state" role="status">{{ l.loading }}</p>
+    } @else if (status() === 'error') {
+      <p class="viewer__state" role="alert">
+        {{ l.error }} <a [href]="d?.href">{{ l.openFile }}</a>
+      </p>
+    }
+    <canvas
+      #canvas
+      class="viewer__canvas"
+      role="img"
+      [attr.aria-label]="pageAlt()"
+      [hidden]="status() !== 'ready'"
+    ></canvas>
+  </div>
+</dialog>
