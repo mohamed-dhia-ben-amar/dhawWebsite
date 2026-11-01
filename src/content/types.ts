@@ -1,6 +1,6 @@
 export type Locale = 'en' | 'fr';
 
-export type NavIcon = 'home' | 'work' | 'experience' | 'journey' | 'contact';
+export type NavIcon = 'home' | 'work' | 'experience' | 'journey' | 'documents' | 'contact';
 
 export interface NavLink {
   /** Visible label, e.g. `Work`. */
@@ -246,8 +246,6 @@ export interface HomeContent {
   };
   /** Certificates section: the files are in src/content/documents.ts. */
   readonly documents: SectionHeading & {
-    /** Short name in the section stepper. */
-    readonly navLabel: string;
     readonly intro: string;
     readonly groups: Readonly<Record<DocumentGroup, string>>;
     /** `{pages}` is filled in: "1 page" / "2 pages". */
