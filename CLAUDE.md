@@ -65,6 +65,16 @@ E2E serves the built output in `dist/` with the redirects and rewrites from `ver
   `hero.headline` and `hero.config.headlines`, facts only.
 - The homepage journey timeline (`sections/journey`, `home.ts` → `journey`) is newest first and
   uses CV facts only, like the case studies.
+- Certificates (`sections/documents`, `home.ts` → `documents`): scanned PDFs in `public/docs`,
+  listed in `src/content/documents.ts` (relative `docs/…` links, so each locale serves its own
+  copy; thumbnails in `public/docs/thumbs`). Card text is read from the documents themselves.
+  The owner redacted ID numbers etc. by burning boxes into the scans: check any new PDF the same
+  way (one image per page, no drawing over it, no EXIF/GPS) before committing it. The PDFs are
+  `noindex` (`vercel.json` headers). `?doc=<slug>` opens one, like `?experience=`.
+- `ui/pdf-viewer`: `PdfViewer`, a modal `<dialog>` drawing pages with pdf.js on a canvas. pdf.js
+  is a lazy chunk loaded through the `PDF_JS` token (fake it in unit tests); its worker is copied
+  to `pdfjs/` by angular.json. Controls use `aria-disabled`, not `disabled`, so focus never
+  drops out of the dialog.
 - Motion: the `appReveal` directive (`ui/reveal`, styles in `src/styles/_motion.scss`) fades
   below-the-fold content in once; never hides what is on screen at load or under reduced motion.
   Animate only opacity/transform. `appCountUp` (`ui/count-up`) counts a stat up from zero once it

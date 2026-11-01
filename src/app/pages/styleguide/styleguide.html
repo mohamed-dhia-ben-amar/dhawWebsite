@@ -151,6 +151,23 @@
     <app-tech-tags [items]="techDemo" label="Stack demo" />
   </section>
 
+  <section class="guide__section" aria-labelledby="sg-pdf">
+    <app-prompt-label command="./pdf-viewer docs/" />
+    <h2 id="sg-pdf">PdfViewer</h2>
+    <p class="guide__lede">
+      Opens a PDF in a modal editor window (pdf.js, loaded on first open): page and zoom controls,
+      download, close. Arrows turn pages, +/−/0 zoom, Esc closes, a swipe turns pages on phones.
+    </p>
+    <button type="button" class="button button--outline" (click)="pdfDemo.set(pdfSample)">
+      Open a sample certificate
+    </button>
+    <app-pdf-viewer
+      [labels]="home.documents.viewer"
+      [doc]="pdfDemo()"
+      (closed)="pdfDemo.set(null)"
+    />
+  </section>
+
   <section class="guide__section" aria-labelledby="sg-motion">
     <app-prompt-label command="cat motion.md" />
     <h2 id="sg-motion">SectionStepper, Reveal, CountUp and page transitions</h2>
