@@ -15,10 +15,11 @@ test.describe('home page', () => {
       'Selected projects',
       "Where I've worked",
       'My journey so far',
+      'Certificates',
       "Let's build something.",
     ]);
-    // 3 project cards + 6 journey steps.
-    await expect(page.getByRole('heading', { level: 3 })).toHaveCount(9);
+    // 3 project cards + 6 journey steps + 4 certificate groups.
+    await expect(page.getByRole('heading', { level: 3 })).toHaveCount(13);
   });
 
   test('header navigation scrolls to each section', async ({ page }) => {

@@ -70,6 +70,7 @@ test.describe('my journey so far', () => {
       'Projets sélectionnés',
       'Où j’ai travaillé',
       'Mon parcours jusqu’ici',
+      'Certificats et attestations',
       'Construisons quelque chose.',
     ]);
     await expect(page.locator('#journey').getByText('type: formation')).toBeAttached();
