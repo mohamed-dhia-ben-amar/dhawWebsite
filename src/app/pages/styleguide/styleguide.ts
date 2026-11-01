@@ -59,7 +59,14 @@ export class Styleguide {
     return { href: doc.href, title, summary, pages: doc.pages };
   })();
   protected readonly pdfDemo = signal<ViewerDocument | null>(null);
-  protected readonly icons = ['home', 'work', 'experience', 'journey', 'contact'] as const;
+  protected readonly icons = [
+    'home',
+    'work',
+    'experience',
+    'journey',
+    'documents',
+    'contact',
+  ] as const;
   /** The NOVA diagram, as a real example. */
   protected readonly flowDemo = (() => {
     const diagram = inject(WORK_CONTENT).caseStudies[1].diagram;

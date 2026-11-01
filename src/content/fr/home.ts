@@ -238,7 +238,6 @@ export const home: HomeContent = {
   documents: {
     prompt: 'ls ~/docs',
     title: 'Certificats et attestations',
-    navLabel: 'Certificats',
     intro:
       'Scans de mes attestations de stage, résultats de langue, formations et activités. Ouvrez-en un pour le lire ici, ou téléchargez le PDF.',
     groups: {

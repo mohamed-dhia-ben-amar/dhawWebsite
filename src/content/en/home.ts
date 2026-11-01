@@ -230,7 +230,6 @@ export const home: HomeContent = {
   documents: {
     prompt: 'ls ~/docs',
     title: 'Certificates',
-    navLabel: 'Certificates',
     intro:
       'Scans of my internship certificates, language results, training and activities. Open one to read it here, or download the PDF.',
     groups: {

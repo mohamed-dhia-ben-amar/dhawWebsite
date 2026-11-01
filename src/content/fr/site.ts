@@ -47,6 +47,7 @@ export const site: SiteContent = {
       { label: 'Projets', fragment: 'work', icon: 'work' },
       { label: 'Expérience', fragment: 'experience', icon: 'experience' },
       { label: 'Parcours', fragment: 'journey', icon: 'journey' },
+      { label: 'Certificats', fragment: 'documents', icon: 'documents' },
       { label: 'Contact', fragment: 'contact', icon: 'contact' },
     ],
   },
