@@ -235,6 +235,98 @@ export const home: HomeContent = {
       },
     ],
   },
+  documents: {
+    prompt: 'ls ~/docs',
+    title: 'Certificats et attestations',
+    navLabel: 'Certificats',
+    intro:
+      'Scans de mes attestations de stage, résultats de langue, formations et activités. Ouvrez-en un pour le lire ici, ou téléchargez le PDF.',
+    groups: {
+      languages: 'Langues',
+      internships: 'Stages',
+      training: 'Formations',
+      activities: 'Activités',
+    },
+    pages: { one: '1\u00a0page', other: '{pages}\u00a0pages' },
+    view: 'Voir',
+    downloadAll: 'Tout télécharger (PDF, 10\u00a0pages)',
+    items: {
+      'tcf-french-c1': {
+        title: 'TCF\u00a0: français, niveau C1',
+        issuer: 'France Éducation international',
+        date: 'nov. 2025',
+        summary:
+          'Test de connaissance du français, C1 global (compréhension orale C1, compréhension écrite C1, maîtrise des structures de la langue B2). Valable jusqu’en novembre 2027.',
+      },
+      'japanese-levels-1-2': {
+        title: 'Japonais, niveaux 1 et 2',
+        issuer: 'First Leaders Consulting',
+        date: 'oct. 2022 – mars 2023',
+        summary:
+          'Deux certificats de réussite\u00a0: niveau 1 (octobre à décembre 2022) et niveau 2 (janvier à mars 2023).',
+      },
+      'converty-internship': {
+        title: 'Stage ingénieur de fin d’études',
+        issuer: 'Converty',
+        date: 'févr. – août 2024',
+        summary: 'Attestation de fin de stage signée par le CTO, du 18 février au 18 août 2024.',
+      },
+      'ibspace-internship': {
+        title: 'Stage ingénieur',
+        issuer: 'IB Space',
+        date: 'juil. – sept. 2023',
+        summary: 'Attestation de stage signée par le gérant, du 11 juillet au 11 septembre 2023.',
+      },
+      'inoteqia-internship': {
+        title: 'Stage d’été',
+        issuer: 'Inoteqia',
+        date: 'juil. – août 2022',
+        summary:
+          'Attestation de stage signée par le Chief Innovation Officer, du 19 juillet au 31 août 2022.',
+      },
+      'azure-devops-training': {
+        title: 'Cloud Azure & DevOps',
+        issuer: 'ISAM Formation et le Bureau de l’Emploi de La Goulette',
+        date: 'oct. – déc. 2025',
+        summary:
+          'Certificat de formation\u00a0: concepts, outils et pratique de Cloud Azure et DevOps, du 27 octobre au 19 décembre 2025.',
+      },
+      'emotional-coaching': {
+        title: 'Coaching émotionnel et relationnel',
+        issuer: 'ISG Coach',
+        date: 'mars 2022',
+        summary:
+          'Certificat de formation en coaching émotionnel et relationnel, délivré le 10 mars 2022.',
+      },
+      'gcc-esprit-membership': {
+        title: 'Membre du Gaming Community Crib',
+        issuer: 'Club GCC ESPRIT',
+        summary:
+          'Certificat d’adhésion après les entretiens et tests du club, au département sponsoring.',
+      },
+      'ismpt-study-day': {
+        title: 'Organisation d’une journée d’études',
+        issuer: 'ISMPT et Les Amis des Oiseaux',
+        date: 'avr. 2026',
+        summary:
+          'Attestation de participation à l’organisation de la journée d’études «\u00a0Le vol et la trace\u00a0» à l’ISMPT le 22 avril 2026.',
+      },
+    },
+    viewer: {
+      close: 'Fermer',
+      previous: 'Page précédente',
+      next: 'Page suivante',
+      zoomIn: 'Zoom avant',
+      zoomOut: 'Zoom arrière',
+      fit: 'Ajuster à l’écran',
+      download: 'Télécharger le PDF',
+      page: '{page} / {total}',
+      pageAlt: 'Page scannée {page} sur {total}',
+      loading: 'Chargement du document…',
+      error: 'Le lecteur n’a pas pu ouvrir ce document.',
+      openFile: 'Ouvrir le PDF',
+    },
+  },
   contact: {
     prompt: './contact.sh',
     title: 'Construisons quelque chose.',

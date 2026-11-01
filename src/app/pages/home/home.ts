@@ -15,6 +15,7 @@ import { StructuredData, personSchema } from '../../core/structured-data';
 import { SectionStepper } from '../../ui/section-stepper/section-stepper';
 import { StatStrip } from '../../ui/stat-strip/stat-strip';
 import { ContactSection } from './sections/contact/contact-section';
+import { DocumentsSection } from './sections/documents/documents-section';
 import { ExperienceSection } from './sections/experience/experience-section';
 import { HeroSection } from './sections/hero/hero-section';
 import { JourneySection } from './sections/journey/journey-section';
@@ -26,6 +27,7 @@ const PERSON_ID = 'person-jsonld';
   selector: 'app-home',
   imports: [
     ContactSection,
+    DocumentsSection,
     ExperienceSection,
     HeroSection,
     JourneySection,
@@ -39,11 +41,16 @@ const PERSON_ID = 'person-jsonld';
 export class Home {
   protected readonly content = inject(HOME_CONTENT);
   protected readonly site = inject(SITE_CONTENT);
-  /** Sections followed by the header nav and the stepper, in page order. */
-  protected readonly sections = this.site.nav.links.map((link) => ({
-    id: link.fragment,
-    label: link.label,
-  }));
+  /**
+   * Sections followed by the header nav and the stepper, in page order. Certificates has a
+   * stepper dot but no nav tab (a sixth tab does not fit narrow phones).
+   */
+  protected readonly sections = this.site.nav.links.flatMap((link) => {
+    const section = { id: link.fragment, label: link.label };
+    return link.fragment === 'contact'
+      ? [{ id: 'documents', label: this.content.documents.navLabel }, section]
+      : [section];
+  });
 
   constructor() {
     const { title, description } = this.content.meta;

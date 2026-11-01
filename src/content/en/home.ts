@@ -227,6 +227,99 @@ export const home: HomeContent = {
       },
     ],
   },
+  documents: {
+    prompt: 'ls ~/docs',
+    title: 'Certificates',
+    navLabel: 'Certificates',
+    intro:
+      'Scans of my internship certificates, language results, training and activities. Open one to read it here, or download the PDF.',
+    groups: {
+      languages: 'Languages',
+      internships: 'Internships',
+      training: 'Training',
+      activities: 'Activities',
+    },
+    pages: { one: '1 page', other: '{pages} pages' },
+    view: 'View',
+    downloadAll: 'Download all (PDF, 10 pages)',
+    items: {
+      'tcf-french-c1': {
+        title: 'TCF: French, level C1',
+        issuer: 'France Éducation international',
+        date: 'Nov 2025',
+        summary:
+          'Test de connaissance du français, C1 overall (listening C1, reading C1, language structures B2). Valid until November 2027.',
+      },
+      'japanese-levels-1-2': {
+        title: 'Japanese language, levels 1 and 2',
+        issuer: 'First Leaders Consulting',
+        date: 'Oct 2022 – Mar 2023',
+        summary:
+          'Two certificates of achievement: level 1 (October to December 2022) and level 2 (January to March 2023).',
+      },
+      'converty-internship': {
+        title: 'End-of-studies engineering internship',
+        issuer: 'Converty',
+        date: 'Feb – Aug 2024',
+        summary:
+          'Certificate of internship completion signed by the CTO, 18 February to 18 August 2024.',
+      },
+      'ibspace-internship': {
+        title: 'Engineering internship',
+        issuer: 'IB Space',
+        date: 'Jul – Sep 2023',
+        summary: 'Internship certificate signed by the manager, 11 July to 11 September 2023.',
+      },
+      'inoteqia-internship': {
+        title: 'Summer internship',
+        issuer: 'Inoteqia',
+        date: 'Jul – Aug 2022',
+        summary:
+          'Internship certificate signed by the Chief Innovation Officer, 19 July to 31 August 2022.',
+      },
+      'azure-devops-training': {
+        title: 'Cloud Azure & DevOps',
+        issuer: 'ISAM Formation and the Bureau de l’Emploi de La Goulette',
+        date: 'Oct – Dec 2025',
+        summary:
+          'Certificate of training: Cloud Azure and DevOps concepts, tools and practice, 27 October to 19 December 2025.',
+      },
+      'emotional-coaching': {
+        title: 'Emotional and relational coaching',
+        issuer: 'ISG Coach',
+        date: 'Mar 2022',
+        summary:
+          'Training certificate in emotional and relational coaching, issued on 10 March 2022.',
+      },
+      'gcc-esprit-membership': {
+        title: 'Member, Gaming Community Crib',
+        issuer: 'Club GCC ESPRIT',
+        summary:
+          'Certificate of membership after the club’s interviews and tests, in the sponsoring department.',
+      },
+      'ismpt-study-day': {
+        title: 'Study day organisation',
+        issuer: 'ISMPT and Les Amis des Oiseaux',
+        date: 'Apr 2026',
+        summary:
+          'Certificate of participation in organising the study day “Le vol et la trace” at ISMPT on 22 April 2026.',
+      },
+    },
+    viewer: {
+      close: 'Close',
+      previous: 'Previous page',
+      next: 'Next page',
+      zoomIn: 'Zoom in',
+      zoomOut: 'Zoom out',
+      fit: 'Fit to screen',
+      download: 'Download PDF',
+      page: '{page} / {total}',
+      pageAlt: 'Scanned page {page} of {total}',
+      loading: 'Loading the document…',
+      error: 'The viewer could not open this document.',
+      openFile: 'Open the PDF',
+    },
+  },
   contact: {
     prompt: './contact.sh',
     title: "Let's build something.",

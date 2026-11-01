@@ -1,0 +1,58 @@
+@let c = content();
+<section id="documents" class="section" aria-labelledby="documents-title">
+  <app-prompt-label [command]="c.prompt" />
+  <h2 id="documents-title" class="section__title">{{ c.title }}</h2>
+  <p class="docs__intro">{{ c.intro }}</p>
+
+  @for (g of groups(); track g.group) {
+    <div class="docs__group">
+      <h3 class="docs__group-title">{{ g.label }}</h3>
+      <ul class="docs__grid" role="list">
+        @for (doc of g.docs; track doc.slug; let i = $index) {
+          @let id = cardId(doc.slug);
+          <li [appReveal]="i">
+            <button
+              type="button"
+              class="doc"
+              [id]="id"
+              [attr.aria-haspopup]="'dialog'"
+              (click)="show(doc.slug)"
+            >
+              <span class="doc__thumb">
+                <img
+                  [src]="doc.thumb.src"
+                  [width]="doc.thumb.width"
+                  [height]="doc.thumb.height"
+                  alt=""
+                  loading="lazy"
+                  decoding="async"
+                />
+              </span>
+              <!-- &ngsp; keeps a space between the pieces, which also make up the button's name. -->
+              <span class="doc__body">
+                <span class="doc__title">{{ doc.text.title }}</span
+                >&ngsp;
+                <span class="doc__meta">
+                  <span>{{ doc.text.issuer }}</span
+                  >&ngsp;
+                  <span class="doc__facts">
+                    @if (doc.text.date; as date) {
+                      <span>{{ date }}</span
+                      >&ngsp;
+                    }
+                    <span>{{ doc.pagesLabel }}</span>
+                  </span> </span
+                >&ngsp;
+                <span class="doc__view">{{ c.view }}</span>
+              </span>
+            </button>
+          </li>
+        }
+      </ul>
+    </div>
+  }
+
+  <a class="button button--outline docs__all" [href]="all.href" download>{{ c.downloadAll }}</a>
+
+  <app-pdf-viewer [labels]="c.viewer" [doc]="viewerDoc()" (closed)="hide()" />
+</section>
