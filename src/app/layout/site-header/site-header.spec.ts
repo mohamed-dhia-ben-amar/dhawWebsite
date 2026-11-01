@@ -17,7 +17,7 @@ describe('SiteHeader', () => {
   it('renders the logo as a home link with a descriptive accessible name', () => {
     const logo = render().querySelector('.header__logo');
     expect(logo?.getAttribute('href')).toBe('/');
-    expect(logo?.textContent?.replace(/\s+/g, ' ').trim()).toBe(
+    expect(logo?.textContent?.replace(/\\s+/g, ' ').trim()).toBe(
       'mdba:~$ Mohamed Dhia Ben Amar, home',
     );
   });
@@ -34,6 +34,7 @@ describe('SiteHeader', () => {
       ['Work', '/#work'],
       ['Experience', '/#experience'],
       ['Journey', '/#journey'],
+      ['Certificates', '/#documents'],
       ['Contact', '/#contact'],
     ]);
   });
@@ -44,6 +45,7 @@ describe('SiteHeader', () => {
     links.forEach((a) => expect(a.querySelector('svg')?.getAttribute('aria-hidden')).toBe('true'));
     expect(links.map((a) => a.getAttribute('aria-current'))).toEqual([
       'true',
+      null,
       null,
       null,
       null,
@@ -80,6 +82,7 @@ describe('SiteHeader', () => {
       'Projets',
       'Expérience',
       'Parcours',
+      'Certificats',
       'Contact',
     ]);
     expect(el.querySelector('.langs__link[aria-current="true"]')?.getAttribute('href')).toBe(

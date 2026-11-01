@@ -1,6 +1,6 @@
 import type { SiteContent } from '../types';
 
-// French typography:   is a no-break space (before : ; ! ? and %).
+// French typography: \\u00a0 is a no-break space (before : ; ! ? and %).
 export const site: SiteContent = {
   locale: 'fr',
   seo: {

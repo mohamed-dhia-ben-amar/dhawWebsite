@@ -43,9 +43,16 @@ test.describe('experience tabs', () => {
     const { tab } = experience(page);
     await page.evaluate(() => document.fonts.ready);
     await tab('converty.json').scrollIntoViewIfNeeded();
+    // Let the pane's scroll reveal finish: Playwright waits for a moving target to settle and
+    // then scrolls it into view again before clicking, which would look like a page jump.
+    await page.waitForFunction(() =>
+      document
+        .getAnimations()
+        .every((a) => a.playState !== 'running' || a.effect?.getTiming().iterations === Infinity),
+    );
     const before = (await tab('converty.json').boundingBox())?.y;
     await tab('converty.json').click();
-    await expect(page).toHaveURL(/[?&]experience=converty\b/);
+    await expect(page).toHaveURL(/[?&]experience=converty\\b/);
     // Updating the URL must not jump the page: the tab stays where it was clicked (give or take
     // the last pixels of the pane's reveal animation).
     const after = (await tab('converty.json').boundingBox())?.y ?? 0;
