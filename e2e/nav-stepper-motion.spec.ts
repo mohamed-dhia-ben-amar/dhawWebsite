@@ -145,7 +145,7 @@ test.describe('scroll reveal', () => {
     await page.setViewportSize({ width: 1280, height: 900 });
     await gotoApp(page, '/en/');
     const lastCard = page.locator('app-project-card').last();
-    await expect(lastCard).toHaveClass(/\\breveal\\b/);
+    await expect(lastCard).toHaveClass(/\breveal\b/);
     await lastCard.scrollIntoViewIfNeeded();
     await expect(lastCard).toHaveClass(/reveal--in/);
     await expect(lastCard).toHaveCSS('opacity', '1');

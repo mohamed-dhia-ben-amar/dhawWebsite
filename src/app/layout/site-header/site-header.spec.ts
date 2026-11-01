@@ -17,7 +17,7 @@ describe('SiteHeader', () => {
   it('renders the logo as a home link with a descriptive accessible name', () => {
     const logo = render().querySelector('.header__logo');
     expect(logo?.getAttribute('href')).toBe('/');
-    expect(logo?.textContent?.replace(/\\s+/g, ' ').trim()).toBe(
+    expect(logo?.textContent?.replace(/\s+/g, ' ').trim()).toBe(
       'mdba:~$ Mohamed Dhia Ben Amar, home',
     );
   });

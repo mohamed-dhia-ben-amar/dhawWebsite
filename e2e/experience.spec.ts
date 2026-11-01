@@ -52,7 +52,7 @@ test.describe('experience tabs', () => {
     );
     const before = (await tab('converty.json').boundingBox())?.y;
     await tab('converty.json').click();
-    await expect(page).toHaveURL(/[?&]experience=converty\\b/);
+    await expect(page).toHaveURL(/[?&]experience=converty\b/);
     // Updating the URL must not jump the page: the tab stays where it was clicked (give or take
     // the last pixels of the pane's reveal animation).
     const after = (await tab('converty.json').boundingBox())?.y ?? 0;
